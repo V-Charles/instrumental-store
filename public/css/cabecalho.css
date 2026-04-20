@@ -1,0 +1,78 @@
+/* Reset básico para o header */
+.main-header {
+    background-color: #ffffff;
+    border-bottom: 1px solid #f0f0f0; /* Linha sutil embaixo do cabeçalho */
+    padding: 0 2rem;
+    font-family: Arial, sans-serif; /* Mude para a fonte do projeto */
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 80px;
+}
+
+/* Esquerda: Logo */
+.logo a {
+    text-decoration: none;
+    color: #333;
+}
+
+/* Centro: Navegação */
+.nav-links ul {
+    list-style: none;
+    display: flex;
+    gap: 3rem; /* Espaço entre os links */
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #111;
+    font-weight: 500;
+    font-size: 1rem;
+    padding-bottom: 8px; /* Espaço entre o texto e a linha */
+    transition: all 0.3s ease;
+}
+
+/* A Mágica da Linha Vermelha Ativa */
+.nav-links a.active {
+    color: #000;
+    border-bottom: 2px solid #d81b60; /* Cor rosada/vermelha da sua imagem */
+}
+
+.nav-links a:hover {
+    color: #d81b60;
+}
+
+/* Direita: Ícones */
+.header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem; /* Espaço entre os ícones */
+}
+
+.header-actions a, .header-actions button {
+    color: #111;
+    text-decoration: none;
+    background: none;
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: color 0.3s;
+}
+
+.header-actions a:hover, .header-actions button:hover {
+    color: #d81b60;
+}
+
+/* Ajuste dos ícones do Google */
+.material-symbols-outlined {
+    font-variation-settings: 'FILL' 0, 'wght' 300, 'GRAD' 0, 'opsz' 24;
+    font-size: 26px; /* Tamanho dos ícones */
+}
