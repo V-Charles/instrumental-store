@@ -23,3 +23,12 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
 Route::get('/cadastro', [AuthController::class, 'registerForm'])->name('register');
 Route::post('/cadastro', [AuthController::class, 'register'])->name('register.submit');
+
+Route::get('/lang/{locale}', function ($locale) {
+    if (in_array($locale, ['pt', 'en'])) {
+        session(['locale' => $locale]);
+    }
+
+    return redirect()->back();
+})->name('lang.switch');
+
