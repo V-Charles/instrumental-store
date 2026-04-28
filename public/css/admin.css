@@ -1,0 +1,227 @@
+body.admin-body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background-color: #f4f6f9;
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    overflow: hidden;
+}
+
+#menu-toggle {
+    display: none;
+}
+
+.admin-header {
+    background-color: #ffffff;
+    height: 70px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 2rem;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    z-index: 100;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+}
+
+.admin-logo-container a {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+}
+
+.admin-logo {
+    width: 260px;
+    height: auto;
+    max-height: 55px;
+    object-fit: contain;
+    display: block;
+    transition: width 0.3s ease;
+}
+
+.admin-header-actions {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+}
+
+.admin-header-actions a {
+    color: #333;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+.admin-header-actions a:hover {
+    color: #b0003a;
+}
+
+.admin-breadcrumb-bar {
+    background-color: #a60a33;
+    color: #ffffff;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    padding: 0 2rem;
+    font-size: 0.85rem;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    z-index: 90;
+}
+
+.hamburger-label {
+    display: none;
+    cursor: pointer;
+    color: #ffffff;
+    margin-right: 1.5rem;
+    align-items: center;
+}
+
+.admin-breadcrumb-bar span.separator {
+    margin: 0 10px;
+}
+
+.admin-breadcrumb-bar span.vertical-line {
+    border-left: 2px solid #ffffff;
+    height: 20px;
+    margin: 0 15px;
+    opacity: 0.5;
+}
+
+.admin-main-container {
+    display: flex;
+    flex: 1;
+    overflow: hidden;
+    position: relative;
+}
+
+.admin-sidebar {
+    width: 260px;
+    background-color: #a60a33;
+    color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 1rem;
+    overflow-y: auto;
+    transition: transform 0.3s ease, width 0.3s ease;
+    z-index: 110;
+}
+
+.admin-user-profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 4rem;
+    padding-left: 0.5rem;
+}
+
+.user-avatar {
+    width: 55px;
+    height: 55px;
+    border-radius: 50%;
+    object-fit: cover;
+    background-color: #cf6b7e;
+    border: 2px solid #ffffff;
+}
+
+.admin-user-profile .user-name {
+    font-weight: bold;
+    font-size: 1.1rem;
+    line-height: 1.2;
+}
+
+.admin-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.admin-nav a {
+    color: #ffffff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 0.8rem 1rem;
+    border-radius: 25px;
+    font-size: 0.95rem;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.admin-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.admin-nav a.active {
+    background-color: #cf6b7e;
+    color: #ffffff;
+}
+
+.admin-nav a .material-symbols-outlined {
+    font-size: 22px;
+}
+
+.admin-content {
+    flex: 1;
+    background-color: #ffffff;
+    padding: 2rem;
+    overflow-y: auto;
+}
+
+@media (min-width: 1025px) {
+    .hamburger-label {
+        display: none !important;
+    }
+}
+
+@media (max-width: 1024px) {
+    .hamburger-label {
+        display: flex !important;
+    }
+
+    .admin-sidebar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        transform: translateX(-100%);
+        box-shadow: 5px 0 15px rgba(0,0,0,0.1);
+    }
+
+    #menu-toggle:checked ~ .admin-main-container .admin-sidebar {
+        transform: translateX(0);
+    }
+
+    #menu-toggle:checked ~ .admin-main-container .admin-content {
+        filter: brightness(0.7);
+        pointer-events: none;
+    }
+}
+
+@media (min-width: 1025px) and (max-width: 1300px) {
+    .admin-sidebar {
+        width: 220px;
+    }
+    .admin-logo {
+        width: 220px;
+    }
+    .admin-nav a {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 992px) {
+    .admin-logo {
+        width: 180px; 
+    }
+}
