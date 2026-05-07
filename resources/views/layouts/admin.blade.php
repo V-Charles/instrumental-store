@@ -15,7 +15,7 @@
         <div class="header-left">
             <div class="admin-logo-container">
                 <a href="/admin/dashboard">
-                    <img src="{{ asset('images/logotipo_Instrumental-Store2.svg') }}" alt="Logo Instrumental Store" class="admin-logo">
+                    <img src="{{ asset('images/Logotipo_Instrumental-Store2.svg') }}" alt="Logo Instrumental Store" class="admin-logo">
                 </a>
             </div>
         </div>

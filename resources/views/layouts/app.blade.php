@@ -15,7 +15,7 @@
         <div class="header-container">
             <div class="logo">
                 <a href="/">
-                    <h2>Instrumental</h2>
+                    <img src="{{ asset('images/Logotipo_Instrumental-Store2.svg') }}" alt="Instrumental Store" class="client-logo">
                 </a>
             </div>
 

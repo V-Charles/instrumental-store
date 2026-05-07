@@ -1,3 +1,7 @@
+.admin-body, .admin-body * {
+    box-sizing: border-box;
+}
+
 body.admin-body {
     margin: 0;
     padding: 0;
@@ -19,7 +23,7 @@ body.admin-body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 0 2rem;
+    padding: 0 2rem 0 0;
     box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     z-index: 100;
 }
@@ -27,21 +31,33 @@ body.admin-body {
 .header-left {
     display: flex;
     align-items: center;
+    justify-content: center;
+    width: 260px;
+    height: 100%;
+    transition: width 0.3s ease;
+}
+
+.admin-logo-container {
+    display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .admin-logo-container a {
     display: flex;
     align-items: center;
+    justify-content: center;
     text-decoration: none;
+    width: 100%;
 }
 
 .admin-logo {
-    width: 260px;
+    width: 100%;
+    max-width: 220px;
     height: auto;
-    max-height: 55px;
+    max-height: 55px; 
     object-fit: contain;
     display: block;
-    transition: width 0.3s ease;
 }
 
 .admin-header-actions {
@@ -79,7 +95,7 @@ body.admin-body {
 }
 
 .hamburger-label {
-    display: none;
+    display: none; 
     cursor: pointer;
     color: #ffffff;
     margin-right: 1.5rem;
@@ -120,7 +136,7 @@ body.admin-body {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 4rem;
+    margin-bottom: 4rem; 
     padding-left: 0.5rem;
 }
 
@@ -129,8 +145,8 @@ body.admin-body {
     height: 55px;
     border-radius: 50%;
     object-fit: cover;
-    background-color: #cf6b7e;
-    border: 2px solid #ffffff;
+    background-color: #cf6b7e; 
+    border: 2px solid #ffffff; 
 }
 
 .admin-user-profile .user-name {
@@ -185,6 +201,13 @@ body.admin-body {
 }
 
 @media (max-width: 1024px) {
+    .admin-header {
+        padding: 0 2rem;
+    }
+    .header-left {
+        width: auto;
+    }
+
     .hamburger-label {
         display: flex !important;
     }
@@ -212,8 +235,11 @@ body.admin-body {
     .admin-sidebar {
         width: 220px;
     }
-    .admin-logo {
+    .header-left {
         width: 220px;
+    }
+    .admin-logo {
+        max-width: 180px; 
     }
     .admin-nav a {
         font-size: 0.85rem;
@@ -221,7 +247,10 @@ body.admin-body {
 }
 
 @media (max-width: 992px) {
+    .admin-header {
+        padding: 0 1rem;
+    }
     .admin-logo {
-        width: 180px; 
+        max-width: 160px; 
     }
 }
