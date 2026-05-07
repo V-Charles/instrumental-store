@@ -4,6 +4,8 @@ return [
     'home' => 'Home',
     'products' => 'Products',
     'about' => 'About',
+    'favorites' => 'Favorites',
+    'search_placeholder' => 'Search products...',
 
     'quality' => 'QUALITY',
     'quality_text' => 'quality products',

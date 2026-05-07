@@ -4,6 +4,8 @@ return [
     'home' => 'Início',
     'products' => 'Produtos',
     'about' => 'Sobre',
+    'favorites' => 'Favoritos',
+    'search_placeholder' => 'Buscar produtos...',
 
     'quality' => 'QUALIDADE',
     'quality_text' => 'produtos de qualidade',
