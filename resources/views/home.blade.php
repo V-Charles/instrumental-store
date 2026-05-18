@@ -7,33 +7,53 @@
          HERO
     ========================================================== -->
     <section class="home-hero">
-        <div class="home-hero-banner">
-            <img src="{{ asset('images/banner-home.jpg') }}" alt="Banner principal">
+    <div class="home-hero-banner">
+    <img src="{{ asset('images/banner-home.jpg') }}" alt="Banner principal">
 
-            <div class="home-hero-categories">
-                <span>{{ __('messages.accessories') }}</span>
-                <span>{{ __('messages.strings') }}</span>
-                <span>{{ __('messages.amplifiers') }}</span>
-                <span>{{ __('messages.pedals') }}</span>
-                <span>{{ __('messages.percussion') }}</span>
-                <span>{{ __('messages.audio_tech') }}</span>
-                <span>{{ __('messages.wind') }}</span>
-            </div>
+<div class="home-hero-categories">
+    <a href="{{ route('products.index', ['categoria' => 'acessorios']) }}">
+    {{ __('messages.accessories') }}
+    </a>
 
-            <div class="home-hero-overlay">
-                <div class="home-hero-card">
-                    <h1>{!! __('messages.hero_title') !!}</h1>
+    <a href="{{ route('products.index', ['categoria' => 'cordas']) }}">
+    {{ __('messages.strings') }}
+    </a>
 
-                    <p class="home-hero-description">
-                        {{ __('messages.hero_description') }}
-                    </p>
+    <a href="{{ route('products.index', ['categoria' => 'amplificadores']) }}">
+    {{ __('messages.amplifiers') }}
+    </a>
 
-                    <a href="/produtos" class="home-hero-button">
-                        {{ __('messages.buy') }}
-                    </a>
-                </div>
-            </div>
-        </div>
+    <a href="{{ route('products.index', ['categoria' => 'pedais-pedaleiras']) }}">
+    {{ __('messages.pedals') }}
+    </a>
+
+    <a href="{{ route('products.index', ['categoria' => 'percussao']) }}">
+    {{ __('messages.percussion') }}
+    </a>
+
+    <a href="{{ route('products.index', ['categoria' => 'audio-tecnologia']) }}">
+    {{ __('messages.audio_tech') }}
+    </a>
+
+    <a href="{{ route('products.index', ['categoria' => 'sopro']) }}">
+    {{ __('messages.wind') }}
+    </a>
+</div>
+
+    <div class="home-hero-overlay">
+    <div class="home-hero-card">
+    <h1>{!! __('messages.hero_title') !!}</h1>
+
+    <p class="home-hero-description">
+    {{ __('messages.hero_description') }}
+    </p>
+
+    <a href="/produtos" class="home-hero-button">
+    {{ __('messages.buy') }}
+    </a>
+    </div>
+    </div>
+    </div>
     </section>
 
     <!-- =========================================================

@@ -38,3 +38,15 @@ Route::prefix('admin')->group(function () {
         return view('admin.dashboard');
     });
 });
+
+Route::get('/recuperar-senha', function () {
+    return view('auth.forgot-password');
+})->name('password.forgot');
+
+Route::get('/nova-senha', function () {
+    return view('auth.reset-password');
+})->name('password.reset');
+
+Route::get('/sobre', function () {
+    return view('about');
+})->name('about');

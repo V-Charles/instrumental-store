@@ -73,4 +73,36 @@ return [
     'other_products' => 'Outros produtos',
 
     'in_stock' => ':count em estoque',
+    
+    'forgot_password_title' => 'Recuperar senha',
+    'new_password_title' => 'Nova senha',
+    'new_password' => 'Nova senha',
+    'send' => 'Enviar',
+    'back' => 'Cancelar',
+
+    // SOBRE
+'about_title' => 'Sobre quem é a Instrumental Store',
+'about_text_1' => 'A Instrumental Store nasceu em 1998 com um sonho simples: democratizar o acesso a instrumentos musicais de qualidade no Brasil. Fundada por músicos apaixonados, nossa loja começou como um pequeno estabelecimento em São Paulo e cresceu para se tornar referência nacional.',
+'about_text_2' => 'Ao longo de mais de 25 anos de história, mantivemos nosso compromisso com a excelência, oferecendo produtos das melhores marcas mundiais e um atendimento especializado que só quem vive e respira música pode proporcionar.',
+'about_text_3' => 'Hoje, atendemos milhares de músicos em todo o país, desde iniciantes que estão comprando seu primeiro instrumento até profissionais que buscam equipamentos de alta performance. Nossa missão continua a mesma: inspirar e equipar músicos para que possam transformar suas paixões em realidade.',
+
+'timeline_title' => 'Nossa trajetória',
+'timeline_1968_title' => 'Fundação',
+'timeline_1968_text' => 'Início da nossa história com a paixão por instrumentos musicais.',
+'timeline_2005_title' => 'Expansão',
+'timeline_2005_text' => 'Ampliação do catálogo e atendimento para novos públicos.',
+'timeline_2020_title' => 'E-commerce',
+'timeline_2020_text' => 'Entrada no ambiente digital para facilitar a compra online.',
+'timeline_2025_title' => 'Presente',
+'timeline_2025_text' => 'Uma loja moderna, focada em qualidade, tecnologia e experiência do cliente.',
+
+'value_passion_title' => 'Paixão pela música',
+'value_passion_text' => 'A música inspira tudo o que fazemos.',
+'value_quality_title' => 'Qualidade',
+'value_quality_text' => 'Selecionamos produtos confiáveis para nossos clientes.',
+'value_service_title' => 'Atendimento',
+'value_service_text' => 'Valorizamos uma experiência simples, clara e segura.',
+
+'objective_title' => 'Nosso objetivo',
+'objective_text' => 'Nosso objetivo é claro: ser a melhor loja de instrumentos musicais do Brasil, oferecendo não apenas produtos de qualidade, mas uma experiência completa que inspire músicos de todos os níveis a alcançarem seu potencial máximo. Queremos estar ao seu lado em cada etapa da sua jornada musical, do primeiro acorde à performance profissional.',
 ];
