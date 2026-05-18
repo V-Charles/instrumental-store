@@ -4,30 +4,37 @@
 <div class="auth-container">
 
     <div class="auth-left">
-        <h2>Login</h2>
+        <h2>{{ __('messages.login') }}</h2>
 
         <form method="POST" action="{{ route('login.submit') }}">
             @csrf
 
-            <label>E-mail</label>
+            <label>{{ __('messages.email') }}</label>
             <input type="email" name="email" required>
 
-            <label>Senha</label>
+            <label>{{ __('messages.password') }}</label>
             <input type="password" name="password" required>
 
-            <a href="#" class="forgot">esqueceu sua senha?</a>
+            <a href="#" class="forgot">
+                {{ __('messages.forgot_password') }}
+            </a>
 
-            <button type="submit">Entrar</button>
+            <button type="submit">
+                {{ __('messages.login') }}
+            </button>
 
             <p class="divider">ou</p>
 
             <button type="button" class="google-btn">
-                Login com Google
+                {{ __('messages.login_google') }}
             </button>
 
             <p class="register">
-                Não possui conta?
-                <a href="{{ route('register') }}">Cadastre-se aqui!</a>
+                {{ __('messages.dont_have_account') }}
+
+                <a href="{{ route('register') }}">
+                    {{ __('messages.register_here') }}
+                </a>
             </p>
         </form>
     </div>

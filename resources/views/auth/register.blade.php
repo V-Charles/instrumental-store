@@ -4,24 +4,24 @@
 <div class="auth-container">
 
     <div class="auth-left">
-        <h2>Criar conta</h2>
+        <h2>{{ __('messages.create_account') }}</h2>
 
         <form method="POST" action="{{ route('register.submit') }}">
             @csrf
 
-            <label>E-mail</label>
+            <label>{{ __('messages.email') }}</label>
             <input type="email" name="email" required>
 
-            <label>Usuário</label>
+            <label>{{ __('messages.username') }}</label>
             <input type="text" name="username" required>
 
-            <label>Senha</label>
+            <label>{{ __('messages.password') }}</label>
             <input type="password" name="password" required>
 
-            <label>Confirme sua senha</label>
+            <label>{{ __('messages.confirm_password') }}</label>
             <input type="password" name="password_confirmation" required>
 
-            <button type="submit">Criar conta</button>
+            <button type="submit">{{ __('messages.create_account') }}</button>
         </form>
     </div>
 
