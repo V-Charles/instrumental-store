@@ -970,6 +970,233 @@ RESPONSIVO
         width: 100%;
     }
 }
+
+/* =========================================================
+   DETALHES DO PRODUTO
+========================================================= */
+
+.product-detail-page {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 16px 60px;
+    box-sizing: border-box;
+}
+
+.product-detail-breadcrumb {
+    background: #b0003a;
+    color: #fff;
+    padding: 14px 36px;
+    font-size: 12px;
+    font-weight: 600;
+    display: flex;
+    gap: 8px;
+    align-items: center;
+}
+
+.product-detail-breadcrumb a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.product-detail-main {
+    background: #f3eeee;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 56px;
+    padding: 70px 95px;
+    align-items: center;
+}
+
+.product-detail-gallery {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.product-detail-thumbs {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.product-thumb {
+    border: none;
+    background: transparent;
+    padding: 0;
+    cursor: pointer;
+}
+
+.product-thumb img {
+    width: 38px;
+    height: 58px;
+    object-fit: cover;
+    display: block;
+}
+
+.product-thumb.active img {
+    border-left: 2px solid #b0003a;
+}
+
+.product-detail-image img {
+    width: 360px;
+    height: 300px;
+    object-fit: cover;
+    display: block;
+}
+
+.product-detail-info h1 {
+    margin: 0 0 10px;
+    font-size: 24px;
+    color: #222;
+    font-weight: 500;
+}
+
+.product-detail-brand {
+    display: none;
+}
+
+.product-detail-description {
+    font-size: 11px;
+    line-height: 1.7;
+    color: #333;
+    margin: 18px 0 20px;
+    max-width: 390px;
+}
+
+.product-detail-price {
+    color: #555;
+    font-size: 15px;
+    margin: 0 0 18px;
+}
+
+.product-detail-stock {
+    font-size: 11px;
+    color: #777;
+    margin: 0 0 18px;
+}
+
+.product-detail-colors {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 18px;
+}
+
+.product-color {
+    width: 14px;
+    height: 14px;
+    border-radius: 50%;
+    border: none;
+    cursor: pointer;
+    padding: 0;
+}
+
+.product-color.active {
+    outline: 1px solid #b0003a;
+    outline-offset: 3px;
+}
+
+.product-detail-quantity {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 18px;
+}
+
+.product-detail-quantity button,
+.product-detail-quantity span {
+    width: 32px;
+    height: 30px;
+    border: 1px solid #ddd;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+}
+
+.product-detail-actions {
+    display: flex;
+    gap: 14px;
+}
+
+.product-detail-add,
+.product-detail-buy {
+    width: 190px;
+    height: 34px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 500;
+    cursor: pointer;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-detail-add {
+    background: #fff;
+    color: #222;
+    border: 1px solid #222;
+    gap: 6px;
+}
+
+.product-detail-buy {
+    background: #fff;
+    color: #222;
+    border: 1px solid #222;
+}
+
+.product-detail-add .material-symbols-outlined {
+    font-size: 14px;
+}
+
+.product-detail-related {
+    background: #f3eeee;
+    padding: 35px 40px 55px;
+}
+
+.product-detail-related h2 {
+    text-align: center;
+    font-size: 16px;
+    margin: 0 0 24px;
+    color: #222;
+}
+
+.product-detail-back {
+    text-align: center;
+    margin-top: 30px;
+}
+
+.product-detail-back a {
+    border: 1px solid #b0003a;
+    color: #b0003a;
+    padding: 8px 30px;
+    text-decoration: none;
+    font-size: 12px;
+    border-radius: 4px;
+    background: white;
+}
+
+@media (max-width: 900px) {
+    .product-detail-main {
+        grid-template-columns: 1fr;
+        padding: 40px 24px;
+    }
+
+    .product-detail-gallery {
+        justify-content: center;
+    }
+
+    .product-detail-actions {
+        flex-direction: column;
+    }
+
+    .product-detail-add,
+    .product-detail-buy {
+        width: 100%;
+    }
+}
 /* =========================================================
    FOOTER (FIGMA)
 ========================================================= */

@@ -235,3 +235,65 @@ if (categoryFilter && productsCount && productsPagination && productCards.length
 
     categoryFilter.addEventListener("change", filterProducts);
 }
+
+/* =========================================================
+   DETALHES DO PRODUTO - GALERIA, CORES E QUANTIDADE
+========================================================= */
+
+const productThumbs = document.querySelectorAll(".product-thumb");
+const mainProductImage = document.getElementById("mainProductImage");
+const productColors = document.querySelectorAll(".product-color");
+
+const decreaseQuantity = document.getElementById("decreaseQuantity");
+const increaseQuantity = document.getElementById("increaseQuantity");
+const productQuantity = document.getElementById("productQuantity");
+
+if (productThumbs.length > 0 && mainProductImage) {
+    productThumbs.forEach((thumb) => {
+        thumb.addEventListener("click", () => {
+            const newImage = thumb.dataset.image;
+
+            mainProductImage.src = newImage;
+
+            productThumbs.forEach((item) => item.classList.remove("active"));
+            thumb.classList.add("active");
+
+            productColors.forEach((color) => {
+                color.classList.toggle("active", color.dataset.image === newImage);
+            });
+        });
+    });
+}
+
+if (productColors.length > 0 && mainProductImage) {
+    productColors.forEach((color) => {
+        color.addEventListener("click", () => {
+            const newImage = color.dataset.image;
+
+            mainProductImage.src = newImage;
+
+            productColors.forEach((item) => item.classList.remove("active"));
+            color.classList.add("active");
+
+            productThumbs.forEach((thumb) => {
+                thumb.classList.toggle("active", thumb.dataset.image === newImage);
+            });
+        });
+    });
+}
+
+if (decreaseQuantity && increaseQuantity && productQuantity) {
+    let quantity = 1;
+
+    increaseQuantity.addEventListener("click", () => {
+        quantity++;
+        productQuantity.textContent = quantity;
+    });
+
+    decreaseQuantity.addEventListener("click", () => {
+        if (quantity > 1) {
+            quantity--;
+            productQuantity.textContent = quantity;
+        }
+    });
+}

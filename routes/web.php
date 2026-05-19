@@ -54,3 +54,7 @@ Route::get('/sobre', function () {
 Route::get('/produtos', function () {
     return view('products');
 })->name('products.index');
+
+Route::get('/produto/{slug}', function ($slug) {
+    return view('product-detail', compact('slug'));
+})->name('product.detail');

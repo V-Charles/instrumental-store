@@ -3,16 +3,12 @@
 @section('content')
 <div class="home-page">
 
-    <!-- =========================================================
-         HERO
-    ========================================================== -->
     <section class="home-hero">
 
         <div class="home-hero-banner">
 
             <img src="{{ asset('images/banner-home.jpg') }}" alt="Banner principal">
 
-            <!-- CATEGORIAS -->
             <div class="home-hero-categories">
 
                 <a href="{{ route('products.index', ['categoria' => 'acessorios']) }}">
@@ -45,7 +41,6 @@
 
             </div>
 
-            <!-- OVERLAY -->
             <div class="home-hero-overlay">
 
                 <div class="home-hero-card">
@@ -68,9 +63,6 @@
 
     </section>
 
-    <!-- =========================================================
-         PRODUTOS MAIS VENDIDOS
-    ========================================================== -->
     <section class="home-section">
 
         <h2 class="home-section-title">
@@ -128,7 +120,6 @@
 
             </article>
 
-            <!-- PRODUTO -->
             <article class="home-product-card">
 
                 <img src="{{ asset('images/guitarra-les-paul.jpg') }}" alt="Produto">
@@ -173,7 +164,6 @@
 
             </article>
 
-            <!-- PRODUTO -->
             <article class="home-product-card">
 
                 <img src="{{ asset('images/violoncelo-4-4.jpg') }}" alt="Produto">
@@ -218,7 +208,6 @@
 
             </article>
 
-            <!-- PRODUTO -->
             <article class="home-product-card">
 
                 <img src="{{ asset('images/violao-classico-nylon.jpg') }}" alt="Produto">
@@ -263,7 +252,6 @@
 
             </article>
 
-            <!-- PRODUTO -->
             <article class="home-product-card">
 
                 <img src="{{ asset('images/bateria-acustica.jpg') }}" alt="Produto">
@@ -308,7 +296,6 @@
 
             </article>
 
-            <!-- PRODUTO -->
             <article class="home-product-card">
 
                 <img src="{{ asset('images/bateria-eletronica.jpg') }}" alt="Produto">
@@ -357,9 +344,6 @@
 
     </section>
 
-    <!-- =========================================================
-         BANNER FRETE
-    ========================================================== -->
     <section class="home-shipping">
 
         <div class="home-shipping-wrapper">
@@ -380,9 +364,6 @@
 
     </section>
 
-    <!-- =========================================================
-         OUTROS PRODUTOS
-    ========================================================== -->
     <section class="home-other">
 
         <h2>
@@ -436,7 +417,6 @@
 
             </article>
 
-            <!-- PRODUTO -->
             <article class="home-other-card">
 
                 <img src="{{ asset('images/contrabaixo-5-cordas.jpg') }}" alt="Produto">
@@ -481,7 +461,6 @@
 
             </article>
 
-            <!-- PRODUTO -->
             <article class="home-other-card">
 
                 <img src="{{ asset('images/teclado-61-teclas.jpg') }}" alt="Produto">

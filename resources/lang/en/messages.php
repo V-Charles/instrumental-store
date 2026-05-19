@@ -117,4 +117,7 @@ return [
 'results' => 'results',
 'no_products' => 'No products found',
 'next' => 'Next',
+
+'product_detail_description' => 'The perfect guitar for those looking for quality, comfort and a remarkable sound. Ideal for studying, performing and recording.',
+'similar_products' => 'Similar products',
 ];

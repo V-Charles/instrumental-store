@@ -7,6 +7,7 @@
     <div class="home-hero-banner">
         <img src="{{ asset('images/banner-home.jpg') }}" alt="Banner principal">
 
+
         <div class="home-hero-overlay">
             <div class="home-hero-card">
                 <h1>{!! __('messages.hero_title') !!}</h1>

@@ -4,7 +4,6 @@
 
 <div class="products-page">
 
-    <!-- BANNER -->
     <section class="products-hero">
         <img src="{{ asset('images/banner-produtos.jpg') }}" alt="Produtos">
 
@@ -43,7 +42,6 @@
         </p>
     </section>
 
-    <!-- LISTA DE PRODUTOS -->
     <section class="products-list">
         <div class="products-grid-page">
 
@@ -335,7 +333,6 @@
 
         </div>
 
-        <!-- PAGINAÇÃO -->
         <div 
             class="products-pagination"
             id="productsPagination"

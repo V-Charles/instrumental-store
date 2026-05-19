@@ -117,4 +117,7 @@ return [
 'results' => 'resultados',
 'no_products' => 'Nenhum produto encontrado',
 'next' => 'Próx',
+
+'product_detail_description' => 'A guitarra perfeita para quem busca qualidade, conforto e um som marcante. Ideal para estudos, apresentações e gravações.',
+'similar_products' => 'Produtos similares',
 ];
