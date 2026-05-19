@@ -743,6 +743,233 @@ RESPONSIVO
         gap: 6px;
     }
 }
+
+/* =========================================================
+   PÁGINA DE PRODUTOS
+========================================================= */
+
+.products-page {
+    width: 100%;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 0 16px 60px;
+    box-sizing: border-box;
+}
+
+.products-hero {
+    position: relative;
+    width: 100%;
+    height: 210px;
+    overflow: hidden;
+    margin-bottom: 16px;
+}
+
+.products-hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    filter: brightness(70%);
+}
+
+.products-hero-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.products-hero-content h1 {
+    margin: 0;
+    color: #ffffff;
+    font-size: 26px;
+    font-weight: 700;
+}
+
+.products-filter-bar {
+    background: #b0003a;
+    color: #ffffff;
+    padding: 14px 24px;
+    margin-bottom: 28px;
+
+    display: flex;
+    align-items: center;
+    gap: 24px;
+}
+
+.products-filter-left {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.products-filter-left .material-symbols-outlined {
+    font-size: 16px;
+}
+
+.products-filter-left strong {
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.products-category-input {
+    width: 150px;
+    height: 30px;
+    border: none;
+    outline: none;
+    background: #ffffff;
+    color: #777;
+    font-size: 12px;
+    padding: 0 12px;
+    box-sizing: border-box;
+}
+
+.products-filter-divider {
+    width: 1px;
+    height: 28px;
+    background: rgba(255, 255, 255, 0.6);
+}
+
+.products-filter-bar p {
+    margin: 0;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.products-list {
+    margin-bottom: 40px;
+}
+
+.products-grid-page {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+}
+
+.product-page-card {
+    background: #ffffff;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.product-page-card img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+    display: block;
+}
+
+.product-page-info {
+    padding: 10px 10px 12px;
+}
+
+.product-page-brand {
+    margin: 0 0 4px;
+    font-size: 7px;
+    color: #8a8a8a;
+}
+
+.product-page-info h3 {
+    margin: 0 0 8px;
+    font-size: 9px;
+    line-height: 1.35;
+    color: #222222;
+    font-weight: 600;
+    min-height: 22px;
+}
+
+.product-page-price {
+    margin: 0 0 8px;
+    font-size: 9px;
+    font-weight: 700;
+    color: #b0003a;
+}
+
+.product-page-stock {
+    margin: 0 0 12px;
+    font-size: 7px;
+    color: #8a8a8a;
+}
+
+.product-page-actions {
+    display: flex;
+    gap: 8px;
+}
+
+/* PAGINAÇÃO PRODUTOS */
+
+.products-pagination {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 18px;
+
+    margin: 70px 0 80px;
+}
+
+.products-page-link {
+    min-width: 28px;
+    height: 28px;
+    padding: 0 12px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #f8f3ec;
+    color: #333333;
+
+    border-radius: 6px;
+    border: none;
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.products-page-link.active {
+    background: #b0003a;
+    color: #ffffff;
+}
+
+.products-page-link:hover {
+    opacity: 0.85;
+}
+
+@media (max-width: 900px) {
+    .products-grid-page {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .products-hero {
+        height: 190px;
+    }
+
+    .products-filter-bar {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 600px) {
+    .products-grid-page {
+        grid-template-columns: 1fr;
+    }
+
+    .products-hero {
+        height: 170px;
+    }
+
+    .products-filter-bar {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .products-category-input {
+        width: 100%;
+    }
+}
 /* =========================================================
    FOOTER (FIGMA)
 ========================================================= */

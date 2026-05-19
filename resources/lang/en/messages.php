@@ -105,4 +105,16 @@ return [
 
 'objective_title' => 'Our goal',
 'objective_text' => 'Nosso objetivo é claro: ser a melhor loja de instrumentos musicais do Brasil, oferecendo não apenas produtos de qualidade, mas uma experiência completa que inspire músicos de todos os níveis a alcançarem seu potencial máximo. Queremos estar ao seu lado em cada etapa da sua jornada musical, do primeiro acorde à performance profissional.',
+
+'products_subtitle' => 'Find the perfect instrument for your sound',
+'all' => 'All',
+'filter' => 'Filter',
+'showing_products' => 'Showing results',
+'all_items' => 'All items',
+'next' => 'Next',
+'showing' => 'Showing',
+'of' => 'of',
+'results' => 'results',
+'no_products' => 'No products found',
+'next' => 'Next',
 ];

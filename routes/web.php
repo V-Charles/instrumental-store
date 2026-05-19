@@ -50,3 +50,7 @@ Route::get('/nova-senha', function () {
 Route::get('/sobre', function () {
     return view('about');
 })->name('about');
+
+Route::get('/produtos', function () {
+    return view('products');
+})->name('products.index');
