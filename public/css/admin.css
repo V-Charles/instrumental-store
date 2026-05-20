@@ -605,6 +605,7 @@ body.admin-body {
 .image-thumbnails {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .thumbnail-box {
@@ -704,4 +705,28 @@ body.admin-body {
         flex-direction: column;
         gap: 0;
     }
+}
+
+.remove-image-btn {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #a60a33;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    z-index: 10;
+    transition: transform 0.2s;
+}
+
+.remove-image-btn:hover {
+    transform: scale(1.1);
+    background-color: #8a0729;
 }

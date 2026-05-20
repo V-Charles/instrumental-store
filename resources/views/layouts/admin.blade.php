@@ -84,5 +84,7 @@
             @yield('content')
         </main>
     </div>
+    <script src="{{ asset('js/mascara.js') }}"></script>
+    <script src="{{ asset('js/upload-imagens.js') }}"></script>
 </body>
 </html>
