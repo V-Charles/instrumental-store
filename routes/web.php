@@ -41,6 +41,10 @@ Route::prefix('admin')->group(function () {
     Route::get('/produtos', function () {
         return view('admin.produtos.index');
     });
+
+    Route::get('/produtos/create', function () {
+        return view('admin.produtos.create');
+    });
 });
 
 Route::get('/recuperar-senha', function () {
