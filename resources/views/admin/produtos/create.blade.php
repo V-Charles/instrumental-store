@@ -21,7 +21,7 @@
 
                 <div class="form-group">
                     <label for="descricao">Descrição do Produto</label>
-                    <textarea id="descricao" name="descricao" rows="5" placeholder="Descreva os detalhes do produto..."></textarea>
+                    <textarea id="descricao" name="descricao" rows="5" placeholder="Descreva os detalhes do produto..." required></textarea>
                 </div>
             </div>
 
@@ -69,11 +69,11 @@
                 <div class="form-row">
                     <div class="form-group half-width">
                         <label for="quantidade">Quantidade em estoque</label>
-                        <input type="number" id="quantidade" name="quantidade" min="0" placeholder="0">
+                        <input type="number" id="quantidade" name="quantidade" min="0" placeholder="0" required>
                     </div>
                     <div class="form-group half-width">
                         <label for="status">Status de estoque</label>
-                        <select id="status" name="status">
+                        <select id="status" name="status" required>
                             <option value="em_estoque">Em estoque</option>
                             <option value="fora_de_estoque">Fora de estoque</option>
                             <option value="sob_encomenda">Sob encomenda</option>

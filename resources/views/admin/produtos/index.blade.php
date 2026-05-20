@@ -26,7 +26,7 @@
     
     <div class="table-controls">
         <div class="table-tabs">
-            <button class="tab active">Todos Produtos (0)</button>
+            <button class="tab active">Todos Produtos ({{ $totalProdutos }})</button>
             <button class="tab">Produtos em destaque</button>
             <button class="tab">À venda</button>
             <button class="tab">Fora de estoque</button>
@@ -46,19 +46,17 @@
                 <th>ID</th>
                 <th>Produtos</th>
                 <th>Data de criação</th>
-                <th>Quantidade disponível</th>
+                <th>Pedido</th>
                 <th>Ação</th>
             </tr>
         </thead>
         <tbody>
-            
-            {{-- 
             @forelse($produtos as $produto)
                 <tr>
                     <td>{{ $produto->id }}</td>
                     <td>{{ $produto->nome }}</td>
                     <td>{{ $produto->created_at->format('d-m-Y') }}</td>
-                    <td>{{ $produto->pedidos_count ?? 0 }}</td>
+                    <td>0</td>
                     <td>
                         <div class="action-buttons">
                             <a href="/admin/produtos/{{ $produto->id }}/edit"><span class="material-symbols-outlined">edit</span></a>
@@ -70,19 +68,7 @@
                     <td colspan="5" style="text-align: center;">Nenhum produto cadastrado.</td>
                 </tr>
             @endforelse 
-            --}}
-
-            <tr>
-                <td colspan="5" style="text-align: center;">Nenhum produto cadastrado.</td>
-            </tr>
-
         </tbody>
     </table>
-
-    {{-- A Paginação automática do Laravel será inserida aqui depois: --}}
-    {{-- <div class="pagination-container">
-        {{ $produtos->links() }}
-    </div> --}}
-
 </div>
 @endsection
