@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', function() {
             let limiteExcedido = false;
 
             novosArquivos.forEach(file => {
-                if (arquivosAcumulados.length < 5) {
+                if (arquivosAcumulados.length < 4) {
                     arquivosAcumulados.push(file);
                     atualizarInputFiles();
                     
@@ -53,7 +53,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         }
                         box.remove();
 
-                        if (arquivosAcumulados.length < 5) {
+                        if (arquivosAcumulados.length < 4) {
                             botaoAdd.style.display = 'flex';
                         }
                     });
@@ -65,10 +65,10 @@ document.addEventListener('DOMContentLoaded', function() {
             });
 
             if (limiteExcedido) {
-                alert('Você atingiu o limite máximo de 5 imagens extras.');
+                alert('Você atingiu o limite máximo de 4 imagens extras.');
             }
 
-            if (arquivosAcumulados.length >= 5) {
+            if (arquivosAcumulados.length >= 4) {
                 botaoAdd.style.display = 'none';
             }
         });

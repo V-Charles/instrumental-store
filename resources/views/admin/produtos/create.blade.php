@@ -94,7 +94,7 @@
                 <h3>Upload de Mídias do produto</h3>
                 
                 <div class="image-upload-area">
-                    <input type="file" id="imagem_principal" name="imagem_principal" accept="image/*,video/*" required>
+                    <input type="file" id="imagem_principal" name="imagem_principal" accept="image/*" required>
                     <div class="upload-placeholder">
                         <span class="material-symbols-outlined">add_photo_alternate</span>
                         <p>Clique ou arraste a mídia principal aqui</p>

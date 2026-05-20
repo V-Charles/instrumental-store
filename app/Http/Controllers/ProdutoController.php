@@ -26,6 +26,8 @@ class ProdutoController extends Controller
             'preco' => 'required',
             'categoria' => 'required',
             'status' => 'required',
+            'imagem_principal' => 'required|image',
+            'imagens_extras' => 'nullable|array|max:4', 
         ]);
 
         $data = $request->all();
