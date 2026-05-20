@@ -20,6 +20,11 @@
                 </div>
 
                 <div class="form-group">
+                    <label for="marca">Marca do Produto</label>
+                    <input type="text" id="marca" name="marca" placeholder="Ex: Fender" required>
+                </div>
+
+                <div class="form-group">
                     <label for="descricao">Descrição do Produto</label>
                     <textarea id="descricao" name="descricao" rows="5" placeholder="Descreva os detalhes do produto..." required></textarea>
                 </div>
