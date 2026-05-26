@@ -1,12 +1,36 @@
 @extends('layouts.app')
 
 @section('content')
+
+@php
+    $produtoDisponivel = isset($produto);
+
+    $imagensExtras = $produtoDisponivel ? ($produto->imagens_extras ?? []) : [];
+
+    if (is_string($imagensExtras)) {
+        $imagensExtras = json_decode($imagensExtras, true) ?? [];
+    }
+
+    $imagemPrincipal = $produtoDisponivel ? ($produto->imagem_principal ?? null) : null;
+
+    $galeria = collect([$imagemPrincipal])
+        ->merge($imagensExtras)
+        ->filter()
+        ->values();
+
+    $cores = $produtoDisponivel ? ($produto->cores ?? []) : [];
+
+    if (is_string($cores)) {
+        $cores = json_decode($cores, true) ?? [];
+    }
+@endphp
+
 <div class="product-detail-page">
 
     <section class="product-detail-breadcrumb">
         <a href="{{ route('products.index') }}">{{ __('messages.products') }}</a>
         <span>/</span>
-        <span>Guitarra Stratocaster</span>
+        <span>{{ $produtoDisponivel ? $produto->nome : 'Produto' }}</span>
     </section>
 
     <section class="product-detail-main">
@@ -14,45 +38,64 @@
         <div class="product-detail-gallery">
 
             <div class="product-detail-thumbs">
-                <button type="button" class="product-thumb active" data-image="{{ asset('images/guitarra-stratocaster-cor-1.jpg') }}">
-                    <img src="{{ asset('images/guitarra-stratocaster-cor-1.jpg') }}" alt="Guitarra cor 1">
-                </button>
-
-                <button type="button" class="product-thumb" data-image="{{ asset('images/guitarra-stratocaster-cor-2.jpg') }}">
-                    <img src="{{ asset('images/guitarra-stratocaster-cor-2.jpg') }}" alt="Guitarra cor 2">
-                </button>
-
-                <button type="button" class="product-thumb" data-image="{{ asset('images/guitarra-stratocaster-cor-3.jpg') }}">
-                    <img src="{{ asset('images/guitarra-stratocaster-cor-3.jpg') }}" alt="Guitarra cor 3">
-                </button>
+                @forelse ($galeria as $index => $imagem)
+                    <button 
+                        type="button" 
+                        class="product-thumb {{ $index === 0 ? 'active' : '' }}" 
+                        data-image="{{ asset('storage/' . $imagem) }}">
+                        <img src="{{ asset('storage/' . $imagem) }}" alt="{{ $produtoDisponivel ? $produto->nome : 'Produto' }}">
+                    </button>
+                @empty
+                    <button 
+                        type="button" 
+                        class="product-thumb active" 
+                        data-image="{{ asset('images/placeholder-produto.jpg') }}">
+                        <img src="{{ asset('images/placeholder-produto.jpg') }}" alt="Produto">
+                    </button>
+                @endforelse
             </div>
 
             <div class="product-detail-image">
-                <img id="mainProductImage" src="{{ asset('images/guitarra-stratocaster-cor-1.jpg') }}" alt="Guitarra Stratocaster">
+                <img 
+                    id="mainProductImage" 
+                    src="{{ $galeria->isNotEmpty() ? asset('storage/' . $galeria[0]) : asset('images/placeholder-produto.jpg') }}" 
+                    alt="{{ $produtoDisponivel ? $produto->nome : 'Produto' }}">
             </div>
 
         </div>
 
         <div class="product-detail-info">
-            <p class="product-detail-brand">Fender</p>
+            <p class="product-detail-brand">
+                {{ $produtoDisponivel ? ($produto->marca ?? '') : '' }}
+            </p>
 
-            <h1>Guitarra Stratocaster</h1>
+            <h1>
+                {{ $produtoDisponivel ? $produto->nome : 'Produto' }}
+            </h1>
 
             <p class="product-detail-description">
-                {{ __('messages.product_detail_description') }}
+                {{ $produtoDisponivel ? ($produto->descricao ?? '') : 'As informações do produto serão carregadas pelo banco de dados.' }}
             </p>
 
-            <p class="product-detail-price">R$ 3.499,90</p>
-
-            <p class="product-detail-stock">
-                {{ __('messages.in_stock', ['count' => $product->stock ?? 15]) }}
+            <p class="product-detail-price">
+                @if ($produtoDisponivel)
+                    R$ {{ number_format($produto->preco, 2, ',', '.') }}
+                @else
+                    R$ 0,00
+                @endif
             </p>
 
-            <div class="product-detail-colors">
-                <button type="button" class="product-color active" data-image="{{ asset('images/guitarra-stratocaster-cor-1.jpg') }}" style="background:#b0003a;"></button>
-                <button type="button" class="product-color" data-image="{{ asset('images/guitarra-stratocaster-cor-2.jpg') }}" style="background:#111111;"></button>
-                <button type="button" class="product-color" data-image="{{ asset('images/guitarra-stratocaster-cor-3.jpg') }}" style="background:#f4c430;"></button>
-            </div>
+            @if (!empty($cores))
+                <div class="product-detail-colors">
+                    @foreach ($cores as $index => $cor)
+                        <button 
+                            type="button" 
+                            class="product-color {{ $index === 0 ? 'active' : '' }}"
+                            style="background: {{ $cor }};">
+                        </button>
+                    @endforeach
+                </div>
+            @endif
 
             <div class="product-detail-quantity">
                 <button type="button" id="decreaseQuantity">-</button>
@@ -79,77 +122,54 @@
 
         <div class="home-products-grid">
 
-            <article class="home-product-card">
-                <img src="{{ asset('images/violao-acustico-folk.jpg') }}" alt="Produto">
-                <div class="home-product-info">
-                    <p class="home-product-brand">Giannini</p>
-                    <h3>Violão Acústico Folk</h3>
-                    <p class="home-product-price">R$ 1.299,90</p>
-                    <p class="home-product-stock">{{ __('messages.in_stock', ['count' => 15]) }}</p>
+            @isset($produtosSimilares)
+                @forelse ($produtosSimilares as $produtoSimilar)
+                    <article class="home-product-card">
+                        <img 
+                            src="{{ $produtoSimilar->imagem_principal ? asset('storage/' . $produtoSimilar->imagem_principal) : asset('images/placeholder-produto.jpg') }}" 
+                            alt="{{ $produtoSimilar->nome }}">
 
-                    <div class="home-product-actions">
-                        <button class="home-btn home-btn--primary">
-                            <span class="material-symbols-outlined">shopping_cart</span>
-                            {{ __('messages.add') }}
-                        </button>
+                        <div class="home-product-info">
+                            <p class="home-product-brand">
+                                {{ $produtoSimilar->marca ?? '' }}
+                            </p>
 
-                        <a href="{{ route('product.detail', 'violao-acustico-folk') }}" class="home-btn home-btn--secondary">
-                            {{ __('messages.details') }}
-                        </a>
-                    </div>
-                </div>
-            </article>
+                            <h3>
+                                {{ $produtoSimilar->nome }}
+                            </h3>
 
-            <article class="home-product-card">
-                <img src="{{ asset('images/guitarra-les-paul.jpg') }}" alt="Produto">
-                <div class="home-product-info">
-                    <p class="home-product-brand">Gibson</p>
-                    <h3>Guitarra Les Paul</h3>
-                    <p class="home-product-price">R$ 4.299,90</p>
-                    <p class="home-product-stock">{{ __('messages.in_stock', ['count' => 10]) }}</p>
+                            <p class="home-product-price">
+                                R$ {{ number_format($produtoSimilar->preco, 2, ',', '.') }}
+                            </p>
 
-                    <div class="home-product-actions">
-                        <button class="home-btn home-btn--primary">
-                            <span class="material-symbols-outlined">shopping_cart</span>
-                            {{ __('messages.add') }}
-                        </button>
+                            <div class="home-product-actions">
+                                <a href="/carrinho" class="home-btn home-btn--primary">
+                                    <span class="material-symbols-outlined">shopping_cart</span>
+                                    {{ __('messages.add') }}
+                                </a>
 
-                        <a href="{{ route('product.detail', 'guitarra-les-paul') }}" class="home-btn home-btn--secondary">
-                            {{ __('messages.details') }}
-                        </a>
-                    </div>
-                </div>
-            </article>
-
-            <article class="home-product-card">
-                <img src="{{ asset('images/violao-classico-nylon.jpg') }}" alt="Produto">
-                <div class="home-product-info">
-                    <p class="home-product-brand">Giannini</p>
-                    <h3>Violão Clássico Nylon</h3>
-                    <p class="home-product-price">R$ 1.299,90</p>
-                    <p class="home-product-stock">{{ __('messages.in_stock', ['count' => 25]) }}</p>
-
-                    <div class="home-product-actions">
-                        <button class="home-btn home-btn--primary">
-                            <span class="material-symbols-outlined">shopping_cart</span>
-                            {{ __('messages.add') }}
-                        </button>
-
-                        <a href="{{ route('product.detail', 'violao-classico-nylon') }}" class="home-btn home-btn--secondary">
-                            {{ __('messages.details') }}
-                        </a>
-                    </div>
-                </div>
-            </article>
+                                <a href="{{ route('product.detail', $produtoSimilar->id) }}" class="home-btn home-btn--secondary">
+                                    {{ __('messages.details') }}
+                                </a>
+                            </div>
+                        </div>
+                    </article>
+                @empty
+                    <p>Nenhum produto similar encontrado.</p>
+                @endforelse
+            @else
+                <p>Produtos similares serão carregados pelo banco de dados.</p>
+            @endisset
 
         </div>
 
         <div class="product-detail-back">
-            <a href="{{ route('products.index') }}">
-                {{ __('messages.back') }}
+            <a href="{{ $produtoDisponivel ? route('products.index', ['categoria' => $produto->categoria]) : route('products.index') }}">
+                {{ __('messages.view_more') }}
             </a>
         </div>
     </section>
 
 </div>
+
 @endsection
