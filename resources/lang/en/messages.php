@@ -120,4 +120,40 @@ return [
 
 'product_detail_description' => 'The perfect guitar for those looking for quality, comfort and a remarkable sound. Ideal for studying, performing and recording.',
 'similar_products' => 'Similar products',
+
+// CLIENT AREA
+'client_area' => 'Client area',
+'client_greeting' => 'Hello, customer',
+'client_photo' => 'Customer photo',
+
+'personal_data' => 'Personal data',
+'addresses' => 'Addresses',
+'orders' => 'Orders',
+'cards' => 'Cards',
+'wishlist' => 'Wishlist',
+'configuration' => 'Settings',
+
+'logout' => 'Logout',
+
+'full_name' => 'Full Name',
+'birth_date' => 'Birth date',
+'cpf' => 'CPF',
+'email' => 'E-mail',
+'mobile' => 'Mobile',
+'gender' => 'Gender',
+'zip_code' => 'ZIP code',
+'street' => 'Street',
+'number' => 'Number',
+'neighborhood' => 'Neighborhood',
+'city' => 'City',
+'country' => 'Country',
+
+'select_option' => 'Select',
+'female' => 'Female',
+'male' => 'Male',
+'other' => 'Other',
+'prefer_not_to_say' => 'Prefer not to say',
+
+'edit' => 'Edit',
+'save' => 'Save',
 ];

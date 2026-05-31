@@ -53,3 +53,7 @@ Route::get('/sobre', function () {
 Route::get('/produto/{slug}', function ($slug) {
     return view('product-detail', compact('slug'));
 })->name('product.detail');
+
+Route::get('/cliente/dados-pessoais', function () {
+    return view('client.profile');
+});

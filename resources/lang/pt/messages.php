@@ -120,4 +120,40 @@ return [
 
 'product_detail_description' => 'A guitarra perfeita para quem busca qualidade, conforto e um som marcante. Ideal para estudos, apresentações e gravações.',
 'similar_products' => 'Produtos similares',
+
+// ÁREA DO CLIENTE
+'client_area' => 'Área do cliente',
+'client_greeting' => 'Olá, cliente',
+'client_photo' => 'Foto do cliente',
+
+'personal_data' => 'Dados pessoais',
+'addresses' => 'Endereços',
+'orders' => 'Pedidos',
+'cards' => 'Cartões',
+'wishlist' => 'Desejos',
+'configuration' => 'Configuração',
+
+'logout' => 'Sair',
+
+'full_name' => 'Nome Completo',
+'birth_date' => 'Data de nascimento',
+'cpf' => 'CPF',
+'email' => 'E-mail',
+'mobile' => 'Celular',
+'gender' => 'Sexo',
+'zip_code' => 'CEP',
+'street' => 'Rua',
+'number' => 'Número',
+'neighborhood' => 'Bairro',
+'city' => 'Cidade',
+'country' => 'País',
+
+'select_option' => 'Selecione',
+'female' => 'Feminino',
+'male' => 'Masculino',
+'other' => 'Outro',
+'prefer_not_to_say' => 'Prefiro não informar',
+
+'edit' => 'Editar',
+'save' => 'Salvar',
 ];
