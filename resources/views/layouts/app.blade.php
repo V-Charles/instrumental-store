@@ -10,6 +10,7 @@
     <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/cabecalho.css') }}">
     <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/client.css') }}">
 </head>
 <body>
     <header class="main-header">
