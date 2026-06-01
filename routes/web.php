@@ -79,3 +79,7 @@ Route::get('/cliente/dados-pessoais', function () {
 Route::get('/cliente/enderecos', function () {
     return view('client.addresses');
 });
+
+Route::get('/cliente/enderecos/editar', function () {
+    return view('client.address-edit');
+});

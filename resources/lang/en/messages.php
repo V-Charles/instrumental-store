@@ -1,14 +1,22 @@
 <?php
 
 return [
-    // HEADER
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+
     'home' => 'Home',
     'products' => 'Products',
     'about' => 'About',
     'favorites' => 'Favorites',
     'search_placeholder' => 'Search products...',
 
-    // FOOTER
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
     'quality' => 'QUALITY',
     'quality_text' => 'quality products',
 
@@ -37,7 +45,11 @@ return [
 
     'rights' => '2026. All rights reserved',
 
-    // AUTH
+
+    /* =========================================================
+       AUTHENTICATION - LOGIN / REGISTER / PASSWORD
+    ========================================================= */
+
     'create_account' => 'Create account',
     'email' => 'E-mail',
     'username' => 'Username',
@@ -53,7 +65,17 @@ return [
 
     'or' => 'or',
 
-    // HOME
+    'forgot_password_title' => 'Recover password',
+    'new_password_title' => 'New password',
+    'new_password' => 'New password',
+    'send' => 'Send',
+    'back' => 'Cancel',
+
+
+    /* =========================================================
+       HOME
+    ========================================================= */
+
     'hero_title' => 'Discover Your<br>New Sound',
 
     'hero_description' =>
@@ -67,95 +89,146 @@ return [
         'discover Instrumental Store best-selling products',
 
     'add' => 'Add',
-
     'details' => 'Details',
-
     'other_products' => 'Other products',
-
     'in_stock' => ':count in stock',
 
-    'forgot_password_title' => 'Recover password',
-    'new_password_title' => 'New password',
-    'new_password' => 'New password',
-    'send' => 'Send',
-    'back' => 'Cancel',
+    'home_products_backend_message' => 'Home products will be loaded from the database.',
 
-    // ABOUT
-'about_title' => 'About Instrumental Store',
-'about_text_1' => 'Instrumental Store was founded in 1998 with a simple dream: to democratize access to quality musical instruments in Brazil. Created by passionate musicians, our store started as a small establishment in São Paulo and grew to become a national reference.',
-'about_text_2' => 'Throughout more than 25 years of history, we have maintained our commitment to excellence, offering products from the best global brands and specialized service that only those who truly live and breathe music can provide.',
-'about_text_3' => 'Today, we serve thousands of musicians across the country, from beginners buying their first instrument to professionals seeking high-performance equipment. Our mission remains the same: to inspire and equip musicians so they can turn their passions into reality.',
 
-'timeline_title' => 'Our journey',
-'timeline_1968_title' => 'Foundation',
-'timeline_1968_text' => 'The beginning of our story, driven by a passion for musical instruments.',
-'timeline_2005_title' => 'Expansion',
-'timeline_2005_text' => 'Catalog growth and service expansion for new audiences.',
-'timeline_2020_title' => 'E-commerce',
-'timeline_2020_text' => 'Entry into the digital environment to make online shopping easier.',
-'timeline_2025_title' => 'Present',
-'timeline_2025_text' => 'A modern store focused on quality, technology and customer experience.',
+    /* =========================================================
+       ABOUT PAGE
+    ========================================================= */
 
-'value_passion_title' => 'Passion for music',
-'value_passion_text' => 'Music inspires everything we do.',
-'value_quality_title' => 'Quality',
-'value_quality_text' => 'We select reliable products for our customers.',
-'value_service_title' => 'Service',
-'value_service_text' => 'We value a simple, clear and secure experience.',
+    'about_title' => 'About Instrumental Store',
 
-'objective_title' => 'Our goal',
-'objective_text' => 'Nosso objetivo é claro: ser a melhor loja de instrumentos musicais do Brasil, oferecendo não apenas produtos de qualidade, mas uma experiência completa que inspire músicos de todos os níveis a alcançarem seu potencial máximo. Queremos estar ao seu lado em cada etapa da sua jornada musical, do primeiro acorde à performance profissional.',
+    'about_text_1' =>
+        'Instrumental Store was founded in 1998 with a simple dream: to democratize access to quality musical instruments in Brazil. Created by passionate musicians, our store started as a small establishment in São Paulo and grew to become a national reference.',
 
-'products_subtitle' => 'Find the perfect instrument for your sound',
-'all' => 'All',
-'filter' => 'Filter',
-'showing_products' => 'Showing results',
-'all_items' => 'All items',
-'next' => 'Next',
-'showing' => 'Showing',
-'of' => 'of',
-'results' => 'results',
-'no_products' => 'No products found',
-'next' => 'Next',
+    'about_text_2' =>
+        'Throughout more than 25 years of history, we have maintained our commitment to excellence, offering products from the best global brands and specialized service that only those who truly live and breathe music can provide.',
 
-'product_detail_description' => 'The perfect guitar for those looking for quality, comfort and a remarkable sound. Ideal for studying, performing and recording.',
-'similar_products' => 'Similar products',
+    'about_text_3' =>
+        'Today, we serve thousands of musicians across the country, from beginners buying their first instrument to professionals seeking high-performance equipment. Our mission remains the same: to inspire and equip musicians so they can turn their passions into reality.',
 
-// CLIENT AREA
-'client_area' => 'Client area',
-'client_greeting' => 'Hello, customer',
-'client_photo' => 'Customer photo',
+    'timeline_title' => 'Our journey',
 
-'personal_data' => 'Personal data',
-'addresses' => 'Addresses',
-'orders' => 'Orders',
-'cards' => 'Cards',
-'wishlist' => 'Wishlist',
-'configuration' => 'Settings',
+    'timeline_1968_title' => 'Foundation',
+    'timeline_1968_text' => 'The beginning of our story, driven by a passion for musical instruments.',
 
-'logout' => 'Logout',
+    'timeline_2005_title' => 'Expansion',
+    'timeline_2005_text' => 'Catalog growth and service expansion for new audiences.',
 
-'full_name' => 'Full Name',
-'birth_date' => 'Birth date',
-'cpf' => 'CPF',
-'email' => 'E-mail',
-'mobile' => 'Mobile',
-'gender' => 'Gender',
-'zip_code' => 'ZIP code',
-'street' => 'Street',
-'number' => 'Number',
-'neighborhood' => 'Neighborhood',
-'city' => 'City',
-'country' => 'Country',
+    'timeline_2020_title' => 'E-commerce',
+    'timeline_2020_text' => 'Entry into the digital environment to make online shopping easier.',
 
-'select_option' => 'Select',
-'female' => 'Female',
-'male' => 'Male',
-'other' => 'Other',
-'prefer_not_to_say' => 'Prefer not to say',
+    'timeline_2025_title' => 'Present',
+    'timeline_2025_text' => 'A modern store focused on quality, technology and customer experience.',
 
-'edit' => 'Edit',
-'save' => 'Save',
+    'value_passion_title' => 'Passion for music',
+    'value_passion_text' => 'Music inspires everything we do.',
 
-'register_new_address' => 'Register new address',
+    'value_quality_title' => 'Quality',
+    'value_quality_text' => 'We select reliable products for our customers.',
+
+    'value_service_title' => 'Service',
+    'value_service_text' => 'We value a simple, clear and secure experience.',
+
+    'objective_title' => 'Our goal',
+
+    'objective_text' =>
+        'Our goal is clear: to be the best musical instrument store in Brazil, offering not only quality products, but a complete experience that inspires musicians of all levels to reach their full potential. We want to be by your side at every stage of your musical journey, from the first chord to professional performance.',
+
+
+    /* =========================================================
+       PRODUCTS PAGE
+    ========================================================= */
+
+    'products_subtitle' => 'Find the perfect instrument for your sound',
+    'all' => 'All',
+    'filter' => 'Filter',
+    'showing_products' => 'Showing results',
+    'all_items' => 'All items',
+    'showing' => 'Showing',
+    'of' => 'of',
+    'results' => 'results',
+    'no_products' => 'No products found',
+    'next' => 'Next',
+
+    'products_backend_message' => 'Products will be loaded from the database.',
+
+
+    /* =========================================================
+       PRODUCT DETAIL PAGE
+    ========================================================= */
+
+    'product_detail_description' =>
+        'The perfect guitar for those looking for quality, comfort and a remarkable sound. Ideal for studying, performing and recording.',
+
+    'similar_products' => 'Similar products',
+
+
+    /* =========================================================
+       CLIENT AREA - SIDEBAR
+    ========================================================= */
+
+    'client_area' => 'Client area',
+    'client_greeting' => 'Hello, customer',
+    'client_photo' => 'Customer photo',
+
+    'personal_data' => 'Personal data',
+    'addresses' => 'Addresses',
+    'orders' => 'Orders',
+    'cards' => 'Cards',
+    'wishlist' => 'Wishlist',
+    'configuration' => 'Settings',
+
+    'logout' => 'Logout',
+
+
+    /* =========================================================
+       CLIENT AREA - PERSONAL DATA
+    ========================================================= */
+
+    'full_name' => 'Full Name',
+    'birth_date' => 'Birth date',
+    'cpf' => 'CPF',
+    'mobile' => 'Mobile',
+    'gender' => 'Gender',
+    'zip_code' => 'ZIP code',
+    'street' => 'Street',
+    'number' => 'Number',
+    'neighborhood' => 'Neighborhood',
+    'city' => 'City',
+    'state' => 'State',
+    'country' => 'Country',
+
+    'select_option' => 'Select',
+    'female' => 'Female',
+    'male' => 'Male',
+    'other' => 'Other',
+    'prefer_not_to_say' => 'Prefer not to say',
+
+
+    /* =========================================================
+       CLIENT AREA - ADDRESSES
+    ========================================================= */
+
+    'address' => 'Address',
+    'register_new_address' => 'Register new address',
+    'edit_address' => 'Edit address',
+    'complement' => 'Complement',
+
+    'no_addresses' => 'No addresses registered.',
+    'addresses_backend_message' => 'Addresses will be loaded from the database.',
+
+
+    /* =========================================================
+       GENERAL ACTIONS
+    ========================================================= */
+
+    'edit' => 'Edit',
+    'save' => 'Save',
+    'delete' => 'Delete',
+
 ];
