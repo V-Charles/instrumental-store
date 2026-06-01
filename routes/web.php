@@ -15,14 +15,11 @@ Route::get('/produtos', [ProductController::class, 'index'])->name('products.ind
 
 Route::get('/produtos/{id}', [ProductController::class, 'show'])->name('products.show');
 
+Route::get('/produto/{id}', [ProductController::class, 'show'])->name('product.detail');
+
 Route::get('/sobre', function () {
     return view('about');
 })->name('about');
-
-Route::get('/produto/{slug}', function ($slug) {
-    return view('product-detail', compact('slug'));
-})->name('product.detail');
-
 
 /* =========================================================
    AUTENTICAÇÃO - LOGIN E CADASTRO

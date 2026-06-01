@@ -29,9 +29,18 @@ class ProductController extends Controller
         return view('products.index');
     }
 
-    public function show($id)
-    {
-        $produto = Produto::findOrFail($id);
-        return view('products.show', compact('produto'));
-    }
+public function show($id)
+{
+    $produto = Produto::findOrFail($id);
+
+    $produtosSimilares = Produto::where('categoria', $produto->categoria)
+        ->where('id', '!=', $produto->id)
+        ->take(4)
+        ->get();
+
+    return view('product-detail', compact(
+        'produto',
+        'produtosSimilares'
+    ));
+}
 }
