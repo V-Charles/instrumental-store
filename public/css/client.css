@@ -470,3 +470,132 @@
         font-size: 0.8rem;
     }
 }
+
+/* =========================================================
+   CLIENTE - ENDEREÇOS
+========================================================= */
+
+.client-address-page {
+    width: 100%;
+    max-width: 640px;
+}
+
+.client-address-page h2 {
+    margin: 0 0 2rem;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #222222;
+}
+
+.client-address-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.4rem;
+}
+
+.client-address-card {
+    min-height: 130px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #a60a33;
+    border-radius: 6px;
+
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.client-address-card h3 {
+    margin: 0 0 0.6rem;
+
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #222222;
+}
+
+.client-address-card p {
+    margin: 0 0 0.5rem;
+
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: #555555;
+}
+
+.client-address-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    margin-top: 0.8rem;
+}
+
+.client-address-edit {
+    min-width: 70px;
+    height: 28px;
+
+    border: none;
+    border-radius: 6px;
+
+    background-color: #a60a33;
+    color: #ffffff;
+
+    font-size: 0.75rem;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.client-address-delete {
+    width: auto;
+    height: auto;
+
+    border: none;
+    background: transparent;
+    color: #a60a33;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    cursor: pointer;
+}
+
+.client-address-delete .material-symbols-outlined {
+    font-size: 18px;
+}
+
+.client-address-edit:hover {
+    background-color: #8a0729;
+}
+
+.client-address-delete:hover {
+    color: #8a0729;
+}
+
+.client-address-new {
+    margin-top: 2.5rem;
+}
+
+.client-address-new .client-btn {
+    min-width: 130px;
+}
+
+@media (max-width: 768px) {
+    .client-address-page {
+        max-width: 100%;
+    }
+
+    .client-address-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .client-address-new .client-btn {
+        width: 100%;
+    }
+}

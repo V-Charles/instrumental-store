@@ -156,4 +156,6 @@ return [
 
 'edit' => 'Editar',
 'save' => 'Salvar',
+
+'register_new_address' => 'Cadastrar novo endereço',
 ];

@@ -156,4 +156,6 @@ return [
 
 'edit' => 'Edit',
 'save' => 'Save',
+
+'register_new_address' => 'Register new address',
 ];
