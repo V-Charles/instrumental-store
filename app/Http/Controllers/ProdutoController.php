@@ -8,10 +8,40 @@ use Illuminate\Support\Facades\Storage;
 
 class ProdutoController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $produtos = Produto::all();
-        $totalProdutos = $produtos->count();
+        $query = Produto::query();
+
+        if ($request->filled('search')) {
+            $search = $request->search;
+            $query->where(function ($q) use ($search) {
+                $q->where('nome', 'like', "%{$search}%")
+                  ->orWhere('marca', 'like', "%{$search}%")
+                  ->orWhere('categoria', 'like', "%{$search}%")
+                  ->orWhere('descricao', 'like', "%{$search}%")
+                  ->orWhere('id', 'like', "%{$search}%");
+            });
+        }
+
+        if ($request->filled('categorias')) {
+            $query->whereIn('categoria', $request->categorias);
+        }
+
+        if ($request->filled('status') && $request->status !== 'destaque') {
+            $query->where('status', $request->status);
+        }
+
+        $produtos = $query->latest()->get();
+        $totalProdutos = Produto::count();
+
+        if ($request->wantsJson()) {
+            $produtos->transform(function($produto) {
+                $produto->data_criacao_formatada = $produto->created_at->format('d/m/Y');
+                return $produto;
+            });
+            return response()->json($produtos);
+        }
+
         return view('admin.produtos.index', compact('produtos', 'totalProdutos'));
     }
 
