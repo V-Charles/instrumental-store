@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="{{ session('locale', 'pt') }}">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -19,6 +19,7 @@
                 </a>
             </div>
         </div>
+        
         <div class="admin-header-actions">
             <a href="/" title="Acessar o Site Público" target="_blank" class="vitrine-link">
                 <span class="material-symbols-outlined">storefront</span>
@@ -26,29 +27,30 @@
 
             <div class="language-selector">
                 <span class="material-symbols-outlined lang-icon">language</span>
-                <a href="/admin/idioma/pt" class="lang-link {{ session('locale', 'pt') == 'pt' ? 'active' : '' }}">PT</a>
+                <a href="/lang/pt" class="lang-link {{ session('locale', 'pt') == 'pt' ? 'active' : '' }}">PT</a>
                 <span class="lang-separator">|</span>
-                <a href="/admin/idioma/en" class="lang-link {{ session('locale') == 'en' ? 'active' : '' }}">EN</a>
+                <a href="/lang/en" class="lang-link {{ session('locale') == 'en' ? 'active' : '' }}">EN</a>
             </div>
 
             <a href="/admin/logout" class="logout-btn">
                 <span class="material-symbols-outlined">logout</span>
-                Logout
+                {{ __('messages.admin_logout') }}
             </a>
         </div>
     </header>
+
     <div class="admin-breadcrumb-bar">
         <label for="menu-toggle" class="hamburger-label" title="Abrir Menu">
             <span class="material-symbols-outlined">menu</span>
         </label>
-        INICIO <span class="separator">></span> 
+        {{ __('messages.admin_home') }} <span class="separator">></span> 
         <span class="vertical-line"></span> 
-        @yield('breadcrumb', 'PAINEL ADMINISTRATIVO')
+        @yield('breadcrumb', __('messages.admin_panel'))
     </div>
+
     <div class="admin-main-container">
         
         <aside class="admin-sidebar">
-            
             <div class="admin-user-profile">
                 <img src="{{ asset('images/default-avatar.png') }}" alt="Foto do Usuário" class="user-avatar">
                 <div class="user-name">João Santos</div>
@@ -56,38 +58,39 @@
             <nav class="admin-nav">
                 <a href="/admin/dashboard" class="{{ request()->is('admin/dashboard') ? 'active' : '' }}">
                     <span class="material-symbols-outlined">desktop_windows</span>
-                    PAINEL CENTRAL
+                    {{ __('messages.dashboard') }}
                 </a>
                 <a href="/admin/produtos" class="{{ request()->is('admin/produtos*') ? 'active' : '' }}">
                     <span class="material-symbols-outlined">shopping_cart</span>
-                    PRODUTOS
+                    {{ __('messages.admin_products') }}
                 </a>
                 <a href="/admin/estoque" class="{{ request()->is('admin/estoque*') ? 'active' : '' }}">
                     <span class="material-symbols-outlined">warehouse</span>
-                    ESTOQUE
+                    {{ __('messages.inventory') }}
                 </a>
                 <a href="/admin/pedidos" class="{{ request()->is('admin/pedidos*') ? 'active' : '' }}">
                     <span class="material-symbols-outlined">package</span>
-                    PEDIDOS
+                    {{ __('messages.admin_orders') }}
                 </a>
                 <a href="/admin/pagamentos" class="{{ request()->is('admin/pagamentos*') ? 'active' : '' }}">
                     <span class="material-symbols-outlined">account_balance_wallet</span>
-                    PAGAMENTOS
+                    {{ __('messages.payments') }}
                 </a>
                 <a href="/admin/devolucoes" class="{{ request()->is('admin/devolucoes*') ? 'active' : '' }}">
                     <span class="material-symbols-outlined">sync_alt</span>
-                    DEVOLUÇÕES
+                    {{ __('messages.returns') }}
                 </a>
                 <a href="/admin/clientes" class="{{ request()->is('admin/clientes*') ? 'active' : '' }}">
                     <span class="material-symbols-outlined">person</span>
-                    CLIENTES
+                    {{ __('messages.clients') }}
                 </a>
                 <a href="/admin/equipe" class="{{ request()->is('admin/equipe*') ? 'active' : '' }}">
                     <span class="material-symbols-outlined">group</span>
-                    EQUIPE
+                    {{ __('messages.team') }}
                 </a>
             </nav>
         </aside>
+
         <main class="admin-content">
             @yield('content')
         </main>

@@ -293,4 +293,19 @@ return [
     'change_photo' => 'Change photo',
     'country_code' => 'Country code',
 'country_flag' => 'Country flag',
+
+   /* =========================================================
+       ADMIN PANEL (SIDEBAR & HEADER)
+    ========================================================= */
+    'admin_panel' => 'ADMIN PANEL',
+    'admin_home' => 'HOME',
+    'dashboard' => 'DASHBOARD',
+    'admin_products' => 'PRODUCTS',
+    'inventory' => 'INVENTORY',
+    'admin_orders' => 'ORDERS',
+    'payments' => 'PAYMENTS',
+    'returns' => 'RETURNS',
+    'clients' => 'CLIENTS',
+    'team' => 'TEAM',
+    'admin_logout' => 'Logout',
 ];

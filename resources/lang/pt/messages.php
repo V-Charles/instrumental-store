@@ -292,4 +292,19 @@ return [
     'change_photo' => 'Alterar foto',
     'country_code' => 'Código do país',
 'country_flag' => 'Bandeira do país',
+
+   /* =========================================================
+       PAINEL ADMIN (SIDEBAR & HEADER)
+    ========================================================= */
+    'admin_panel' => 'PAINEL ADMINISTRATIVO',
+    'admin_home' => 'INÍCIO',
+    'dashboard' => 'PAINEL CENTRAL',
+    'admin_products' => 'PRODUTOS',
+    'inventory' => 'ESTOQUE',
+    'admin_orders' => 'PEDIDOS',
+    'payments' => 'PAGAMENTOS',
+    'returns' => 'DEVOLUÇÕES',
+    'clients' => 'CLIENTES',
+    'team' => 'EQUIPE',
+    'admin_logout' => 'Sair',
 ];
