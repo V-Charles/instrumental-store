@@ -209,7 +209,6 @@ return [
     'other' => 'Outro',
     'prefer_not_to_say' => 'Prefiro não informar',
 
-
     /* =========================================================
        ÁREA DO CLIENTE - ENDEREÇOS
     ========================================================= */
@@ -232,7 +231,7 @@ return [
     'delete' => 'Excluir',
 
     /* =========================================================
-       PEDIDOS
+    PEDIDOS
     ========================================================= */
 
     'my_orders' => 'Compras',
@@ -245,10 +244,52 @@ return [
     'order_canceled' => 'Compra cancelada',
     'cancel_order' => 'Cancelar compra',
     'view' => 'Visualizar',
+
+    'no_orders' => 'Nenhum pedido encontrado.',
+    'orders_backend_message' => 'Os pedidos serão carregados pelo banco de dados.',
+
     'order_details' => 'Detalhes do pedido',
     'order_details_backend_message' => 'Os detalhes do pedido serão carregados pelo banco de dados.',
     'purchase_date' => 'Data da compra',
     'back_to_orders' => 'Voltar',
-    'order_details' => 'Detalhes do pedido',
-    'order_details_backend_message' => 'Os detalhes do pedido serão carregados pelo banco de dados.',
+
+    /* =========================================================
+       CARTÕES
+    ========================================================= */
+    'card' => 'Cartão',
+    'card_nickname' => 'Apelido do cartão',
+    'card_type' => 'Tipo de cartão',
+    'card_holder_name' => 'Nome impresso no cartão',
+    'card_number' => 'Número do cartão',
+    'card_ending' => 'final',
+    'expiration_date' => 'Data de validade',
+    'security_code' => 'Código de segurança',
+    'register_new_card' => 'Cadastrar novo cartão',
+    'back_to_cards' => 'Voltar',
+    'no_cards' => 'Nenhum cartão cadastrado.',
+    'cards_backend_message' => 'Os cartões serão carregados pelo banco de dados.',
+    'edit_card' => 'Editar cartão',
+
+    /* =========================================================
+       LISTA DE DESEJOS
+    ========================================================= */
+
+    'wishlist_title' => 'Lista de desejos',
+    'view_product' => 'Visualizar',
+    'wishlist_title' => 'Lista de desejos',
+    'view_product' => 'Visualizar',
+    'no_wishlist_items' => 'Nenhum produto favoritado.',
+    'wishlist_backend_message' => 'Os produtos favoritados serão carregados pelo banco de dados.',
+
+    /* =========================================================
+       CONFIGURAÇÕES DA CONTA
+    ========================================================= */
+    'account_settings' => 'Configurações da conta',
+    'personal_data_backend_message' => 'Os dados pessoais serão carregados pelo banco de dados.',
+    'account_settings' => 'Configurações da conta',
+    'account' => 'Conta',
+    'personal_data_backend_message' => 'Os dados pessoais serão carregados pelo banco de dados.',
+    'change_photo' => 'Alterar foto',
+    'country_code' => 'Código do país',
+'country_flag' => 'Bandeira do país',
 ];

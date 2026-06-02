@@ -187,3 +187,86 @@ if (decreaseQuantity && increaseQuantity && productQuantity) {
         }
     });
 }
+
+/* =========================================================
+   ÁREA DO CLIENTE - BANDEIRA PELO CÓDIGO DO PAÍS
+========================================================= */
+
+const countryInput = document.getElementById('country-code-input');
+const countryFlag = document.getElementById('country-flag-preview');
+
+const countryCodes = {
+    '1': 'us',
+    '7': 'ru',
+    '20': 'eg',
+    '27': 'za',
+    '30': 'gr',
+    '31': 'nl',
+    '32': 'be',
+    '33': 'fr',
+    '34': 'es',
+    '39': 'it',
+    '41': 'ch',
+    '44': 'gb',
+    '45': 'dk',
+    '46': 'se',
+    '47': 'no',
+    '48': 'pl',
+    '49': 'de',
+    '51': 'pe',
+    '52': 'mx',
+    '54': 'ar',
+    '55': 'br',
+    '56': 'cl',
+    '57': 'co',
+    '58': 've',
+    '61': 'au',
+    '64': 'nz',
+    '81': 'jp',
+    '82': 'kr',
+    '86': 'cn',
+    '91': 'in',
+    '351': 'pt',
+    '352': 'lu',
+    '353': 'ie',
+    '354': 'is',
+    '355': 'al',
+    '358': 'fi',
+    '380': 'ua',
+    '420': 'cz',
+    '421': 'sk',
+    '591': 'bo',
+    '593': 'ec',
+    '595': 'py',
+    '598': 'uy'
+};
+
+function updateCountryFlag() {
+    if (!countryInput || !countryFlag) {
+        return;
+    }
+
+    const typedCode = countryInput.value.trim();
+    const countryCode = countryCodes[typedCode];
+
+    if (countryCode) {
+        countryFlag.src = `https://flagcdn.com/24x18/${countryCode}.png`;
+        countryFlag.style.display = 'block';
+    } else {
+        countryFlag.src = '';
+        countryFlag.style.display = 'none';
+    }
+}
+
+if (countryInput && countryFlag) {
+    updateCountryFlag();
+
+    countryInput.addEventListener('input', function () {
+        this.value = this.value.replace(/\D/g, '');
+        updateCountryFlag();
+    });
+
+    countryFlag.addEventListener('error', function () {
+        this.style.display = 'none';
+    });
+}

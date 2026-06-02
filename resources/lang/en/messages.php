@@ -232,7 +232,7 @@ return [
     'delete' => 'Delete',
 
     /* =========================================================
-       ORDERS
+    ORDERS
     ========================================================= */
 
     'my_orders' => 'Purchases',
@@ -245,11 +245,52 @@ return [
     'order_canceled' => 'Purchase canceled',
     'cancel_order' => 'Cancel order',
     'view' => 'View',
+
+    'no_orders' => 'No orders found.',
+    'orders_backend_message' => 'Orders will be loaded from the database.',
+
     'order_details' => 'Order details',
     'order_details_backend_message' => 'Order details will be loaded from the database.',
     'purchase_date' => 'Purchase date',
     'back_to_orders' => 'Back',
-    'order_details' => 'Order details',
-    'order_details_backend_message' => 'Order details will be loaded from the database.',
-    
+
+    /* =========================================================
+       CARD
+    ========================================================= */
+
+    'card' => 'Card',
+    'card_nickname' => 'Card nickname',
+    'card_type' => 'Card type',
+    'card_holder_name' => 'Cardholder name',
+    'card_number' => 'Card number',
+    'card_ending' => 'ending',
+    'expiration_date' => 'Expiration date',
+    'security_code' => 'Security code',
+    'register_new_card' => 'Register new card',
+    'back_to_cards' => 'Back',
+    'no_cards' => 'No cards registered.',
+    'cards_backend_message' => 'Cards will be loaded from the database.',
+    'edit_card' => 'Edit card',
+
+    /* =========================================================
+       WISHLIST
+    ========================================================= */
+  
+    'wishlist_title' => 'Wishlist',
+    'view_product' => 'View',
+    'wishlist_title' => 'Wishlist',
+    'view_product' => 'View',
+    'no_wishlist_items' => 'No favorite products.',
+    'wishlist_backend_message' => 'Favorite products will be loaded from the database.',
+
+    /* =========================================================
+       SETTINGS
+    ========================================================= */
+    'account_settings' => 'Account settings',
+    'personal_data_backend_message' => 'Personal data will be loaded from the database.',
+    'account_settings' => 'Account settings',
+    'account' => 'Account',
+    'change_photo' => 'Change photo',
+    'country_code' => 'Country code',
+'country_flag' => 'Country flag',
 ];

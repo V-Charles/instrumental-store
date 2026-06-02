@@ -26,96 +26,90 @@
 
                 <h2>{{ __('messages.personal_data') }}</h2>
 
-                <form class="client-profile-form">
+                @isset($cliente)
 
                     <div class="client-form-grid">
 
                         <div class="client-form-group">
-                            <label>{{ __('messages.full_name') }} *</label>
-                            <input type="text" name="nome_completo" value="{{ $cliente->nome_completo ?? '' }}">
+                            <label>{{ __('messages.full_name') }}</label>
+                            <input type="text" value="{{ $cliente->nome_completo ?? '' }}" readonly>
                         </div>
 
                         <div class="client-form-group">
-                            <label>{{ __('messages.birth_date') }} *</label>
-                            <input type="date" name="data_nascimento" value="{{ $cliente->data_nascimento ?? '' }}">
+                            <label>{{ __('messages.birth_date') }}</label>
+                            <input type="text" value="{{ $cliente->data_nascimento ?? '' }}" readonly>
                         </div>
 
                         <div class="client-form-group">
-                            <label>{{ __('messages.cpf') }} *</label>
-                            <input type="text" name="cpf" value="{{ $cliente->cpf ?? '' }}">
+                            <label>{{ __('messages.cpf') }}</label>
+                            <input type="text" value="{{ $cliente->cpf ?? '' }}" readonly>
                         </div>
 
                         <div class="client-form-group">
                             <label>{{ __('messages.email') }}</label>
-                            <input type="email" name="email" value="{{ $cliente->email ?? '' }}">
+                            <input type="email" value="{{ $cliente->email ?? '' }}" readonly>
                         </div>
 
                         <div class="client-form-group">
-                            <label>{{ __('messages.mobile') }} *</label>
-                            <input type="text" name="celular" value="{{ $cliente->celular ?? '' }}">
+                            <label>{{ __('messages.mobile') }}</label>
+                            <input type="text" value="{{ $cliente->celular ?? '' }}" readonly>
                         </div>
 
                         <div class="client-form-group">
-                            <label>{{ __('messages.gender') }} *</label>
-                            <select name="sexo">
-                                <option value="">{{ __('messages.select_option') }}</option>
-                                <option value="feminino" {{ ($cliente->sexo ?? '') === 'feminino' ? 'selected' : '' }}>
-                                    {{ __('messages.female') }}
-                                </option>
-                                <option value="masculino" {{ ($cliente->sexo ?? '') === 'masculino' ? 'selected' : '' }}>
-                                    {{ __('messages.male') }}
-                                </option>
-                                <option value="nao_informar" {{ ($cliente->sexo ?? '') === 'nao_informar' ? 'selected' : '' }}>
-                                    {{ __('messages.prefer_not_to_say') }}
-                                </option>
-                            </select>
+                            <label>{{ __('messages.gender') }}</label>
+                            <input type="text" value="{{ $cliente->sexo ?? '' }}" readonly>
                         </div>
 
                         <div class="client-form-group">
                             <label>{{ __('messages.zip_code') }}</label>
-                            <input type="text" name="cep" value="{{ $cliente->cep ?? '' }}">
+                            <input type="text" value="{{ $cliente->cep ?? '' }}" readonly>
                         </div>
 
                         <div class="client-form-group">
-                            <label>{{ __('messages.street') }} *</label>
-                            <input type="text" name="rua" value="{{ $cliente->rua ?? '' }}">
+                            <label>{{ __('messages.street') }}</label>
+                            <input type="text" value="{{ $cliente->rua ?? '' }}" readonly>
                         </div>
 
                         <div class="client-form-group">
-                            <label>{{ __('messages.number') }} *</label>
-                            <input type="text" name="numero" value="{{ $cliente->numero ?? '' }}">
+                            <label>{{ __('messages.number') }}</label>
+                            <input type="text" value="{{ $cliente->numero ?? '' }}" readonly>
                         </div>
 
                         <div class="client-form-group">
-                            <label>{{ __('messages.neighborhood') }} *</label>
-                            <input type="text" name="bairro" value="{{ $cliente->bairro ?? '' }}">
+                            <label>{{ __('messages.neighborhood') }}</label>
+                            <input type="text" value="{{ $cliente->bairro ?? '' }}" readonly>
                         </div>
 
                         <div class="client-form-group">
-                            <label>{{ __('messages.city') }} *</label>
-                            <input type="text" name="cidade" value="{{ $cliente->cidade ?? '' }}">
+                            <label>{{ __('messages.city') }}</label>
+                            <input type="text" value="{{ $cliente->cidade ?? '' }}" readonly>
                         </div>
 
                         <div class="client-form-group">
-                            <label>{{ __('messages.country') }} *</label>
-                            <input type="text" name="pais" value="{{ $cliente->pais ?? '' }}">
+                            <label>{{ __('messages.state') }}</label>
+                            <input type="text" value="{{ $cliente->estado ?? '' }}" readonly>
+                        </div>
+
+                        <div class="client-form-group">
+                            <label>{{ __('messages.country') }}</label>
+                            <input type="text" value="{{ $cliente->pais ?? '' }}" readonly>
                         </div>
 
                     </div>
 
-                    <div class="client-profile-actions">
+                @else
 
-                        <button type="button" class="client-btn client-btn-secondary">
-                            {{ __('messages.edit') }}
-                        </button>
+                    <p class="client-empty-message">
+                        {{ __('messages.personal_data_backend_message') }}
+                    </p>
 
-                        <button type="submit" class="client-btn client-btn-primary">
-                            {{ __('messages.save') }}
-                        </button>
+                @endisset
 
-                    </div>
-
-                </form>
+                <div class="client-profile-actions">
+                    <a href="/cliente/configuracao" class="client-btn client-btn-primary client-btn-link">
+                        {{ __('messages.edit') }}
+                    </a>
+                </div>
 
             </section>
 

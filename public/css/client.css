@@ -1018,3 +1018,567 @@ button.client-status {
 .client-btn-link:hover {
     text-decoration: none;
 }
+
+/* =========================================================
+   ÁREA DO CLIENTE - CARTÕES
+========================================================= */
+
+.client-cards-page {
+    width: 100%;
+    max-width: 640px;
+}
+
+.client-cards-page h2 {
+    margin: 0 0 2rem;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #222222;
+}
+
+.client-cards-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.4rem;
+}
+
+.client-card-item {
+    min-height: 130px;
+
+    background-color: #ffffff;
+
+    border: 1px solid #a60a33;
+    border-radius: 6px;
+
+    padding: 1rem;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.client-card-item h3 {
+    margin: 0 0 0.6rem;
+
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #222222;
+}
+
+.client-card-item p {
+    margin: 0 0 0.5rem;
+
+    font-size: 0.78rem;
+    line-height: 1.5;
+    color: #555555;
+}
+
+.client-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    margin-top: 0.8rem;
+}
+
+.client-card-edit {
+    min-width: 70px;
+    height: 28px;
+
+    border: none;
+    border-radius: 6px;
+
+    background-color: #a60a33;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.client-card-delete {
+    width: auto;
+    height: auto;
+
+    border: none;
+    background: transparent;
+    color: #a60a33;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+
+    cursor: pointer;
+}
+
+.client-card-delete .material-symbols-outlined {
+    font-size: 18px;
+}
+
+.client-card-edit:hover {
+    background-color: #8a0729;
+}
+
+.client-card-delete:hover {
+    color: #8a0729;
+}
+
+.client-card-new {
+    margin-top: 2.5rem;
+}
+
+.client-card-new .client-btn {
+    min-width: 170px;
+}
+
+@media (max-width: 768px) {
+    .client-cards-page {
+        max-width: 100%;
+    }
+
+    .client-cards-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .client-card-new .client-btn {
+        width: 100%;
+    }
+}
+
+/* =========================================================
+   ÁREA DO CLIENTE - LISTA DE DESEJOS
+========================================================= */
+
+.client-wishlist-page {
+    width: 100%;
+    max-width: 760px;
+}
+
+.client-wishlist-page h2 {
+    margin: 0 0 2rem;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #222222;
+}
+
+.client-wishlist-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.client-wishlist-card {
+    position: relative;
+
+    width: 100%;
+
+    border: 1px solid #a60a33;
+    border-radius: 6px;
+
+    background-color: #ffffff;
+
+    display: grid;
+    grid-template-columns: 220px 1fr;
+    gap: 1.5rem;
+
+    padding: 1rem 1rem 1rem 2rem;
+}
+
+.client-wishlist-remove {
+    position: absolute;
+    top: 50%;
+    left: -30px;
+
+    width: auto;
+    height: auto;
+
+    border: none;
+    background: transparent;
+    color: #a60a33;
+
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    transform: translateY(-50%);
+}
+
+.client-wishlist-remove .material-symbols-outlined {
+    font-size: 22px;
+    color: #a60a33;
+
+    font-variation-settings:
+        'FILL' 1,
+        'wght' 700,
+        'GRAD' 0,
+        'opsz' 24;
+}
+
+.client-wishlist-remove:hover .material-symbols-outlined {
+    color: #8a0729;
+}
+
+.client-wishlist-image img {
+    width: 100%;
+    height: 150px;
+
+    object-fit: cover;
+    background-color: #eeeeee;
+}
+
+.client-wishlist-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.client-wishlist-info h3 {
+    margin: 0 0 0.7rem;
+
+    font-size: 1rem;
+    font-weight: bold;
+    color: #222222;
+}
+
+.client-wishlist-info p {
+    margin: 0 0 1.2rem;
+
+    font-size: 0.82rem;
+    line-height: 1.5;
+    color: #555555;
+}
+
+.client-wishlist-button {
+    width: 120px;
+    height: 34px;
+
+    background-color: #a60a33;
+    color: #ffffff;
+
+    border-radius: 4px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 0.75rem;
+    font-weight: bold;
+    text-decoration: none;
+
+    align-self: flex-end;
+}
+
+.client-wishlist-button:hover {
+    background-color: #8a0729;
+}
+
+/* Responsivo - lista de desejos */
+
+@media (max-width: 768px) {
+    .client-wishlist-page {
+        max-width: 100%;
+    }
+
+    .client-wishlist-card {
+        grid-template-columns: 1fr;
+        padding: 1rem;
+    }
+
+    .client-wishlist-remove {
+        top: 12px;
+        right: 12px;
+        left: auto;
+
+        transform: none;
+    }
+
+    .client-wishlist-image img {
+        height: 180px;
+    }
+
+    .client-wishlist-button {
+        width: 100%;
+        align-self: stretch;
+    }
+}
+
+.client-form-group input[readonly] {
+    background-color: #f7f7f7;
+    color: #555555;
+    cursor: default;
+}
+
+/* =========================================================
+   ÁREA DO CLIENTE - CONFIGURAÇÕES DA CONTA
+========================================================= */
+
+.client-settings-page {
+    width: 100%;
+    max-width: 1180px;
+}
+
+.client-settings-page h2 {
+    margin: 0 0 2rem;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #222222;
+}
+
+.client-settings-tabs {
+    width: 100%;
+    max-width: 800px;
+
+    margin-bottom: 1.8rem;
+
+    border-bottom: 1px solid #a60a33;
+
+    text-align: center;
+}
+
+.client-settings-tabs span {
+    display: inline-block;
+
+    padding-bottom: 0.5rem;
+
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #222222;
+}
+
+.client-settings-form {
+    width: 100%;
+}
+
+.client-settings-content {
+    display: grid;
+    grid-template-columns: 800px 190px;
+    gap: 3rem;
+    align-items: flex-start;
+}
+
+.client-settings-fields {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 3rem;
+    row-gap: 1.1rem;
+}
+
+.client-settings-group {
+    display: flex;
+    flex-direction: column;
+}
+
+.client-settings-group label {
+    margin-bottom: 0.35rem;
+
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #222222;
+}
+
+.client-settings-group input,
+.client-settings-group select {
+    width: 100%;
+    height: 40px;
+
+    border: none;
+    border-radius: 2px;
+
+    background-color: #f4f0ec;
+
+    padding: 0 0.9rem;
+
+    font-family: inherit;
+    font-size: 0.84rem;
+    color: #333333;
+
+    box-sizing: border-box;
+}
+
+.client-country-code-field {
+    width: 100%;
+    height: 40px;
+
+    background-color: #f4f0ec;
+
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+
+    padding: 0 0.8rem;
+    box-sizing: border-box;
+}
+
+.client-country-code-field input {
+    flex: 1;
+    height: 100%;
+
+    border: none;
+    background-color: transparent;
+
+    padding: 0;
+
+    font-family: inherit;
+    font-size: 0.84rem;
+    color: #333333;
+
+    outline: none;
+}
+
+.client-country-flag {
+    width: 24px;
+    height: 18px;
+
+    object-fit: cover;
+    display: none;
+}
+
+.client-settings-photo-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    padding-top: 1.7rem;
+}
+
+.client-settings-photo-label {
+    margin-bottom: 0.7rem;
+
+    font-size: 0.75rem;
+    font-weight: bold;
+    color: #222222;
+}
+
+.client-settings-photo-preview {
+    position: relative;
+
+    width: 180px;
+    height: 180px;
+
+    background-color: #f4f0ec;
+
+    border-radius: 10px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    overflow: hidden;
+}
+
+.client-settings-photo-preview img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+}
+
+.client-settings-photo-actions {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+
+    display: flex;
+    gap: 0.45rem;
+}
+
+.client-settings-photo-icon {
+    width: 34px;
+    height: 34px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #ffffff;
+    color: #222222;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+}
+
+.client-settings-photo-icon .material-symbols-outlined {
+    font-size: 20px;
+}
+
+.client-settings-photo-icon:hover {
+    background-color: #f4f0ec;
+}
+
+.client-settings-upload-input {
+    display: none;
+}
+
+.client-settings-actions {
+    width: 100%;
+    max-width: 990px;
+
+    margin-top: 3rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Campos readonly da página de visualização */
+.client-form-group input[readonly] {
+    background-color: #f7f7f7;
+    color: #555555;
+    cursor: default;
+}
+
+/* Responsivo - configurações da conta */
+
+@media (max-width: 1200px) {
+    .client-settings-page {
+        max-width: 100%;
+    }
+
+    .client-settings-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .client-settings-tabs {
+        max-width: 100%;
+    }
+
+    .client-settings-photo-area {
+        align-items: flex-start;
+        padding-top: 0;
+    }
+
+    .client-settings-actions {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 700px) {
+    .client-settings-fields {
+        grid-template-columns: 1fr;
+    }
+
+    .client-settings-actions {
+        flex-direction: column;
+        gap: 1rem;
+        align-items: stretch;
+    }
+
+    .client-settings-actions .client-btn {
+        width: 100%;
+    }
+}
