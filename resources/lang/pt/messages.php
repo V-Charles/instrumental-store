@@ -1,14 +1,22 @@
 <?php
 
 return [
-    // HEADER
+
+    /* =========================================================
+       HEADER
+    ========================================================= */
+
     'home' => 'Início',
     'products' => 'Produtos',
     'about' => 'Sobre',
     'favorites' => 'Favoritos',
     'search_placeholder' => 'Buscar produtos...',
 
-    // FOOTER
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
     'quality' => 'QUALIDADE',
     'quality_text' => 'produtos de qualidade',
 
@@ -37,7 +45,11 @@ return [
 
     'rights' => '2026. All rights reserved',
 
-    // AUTH
+
+    /* =========================================================
+       AUTENTICAÇÃO - LOGIN / CADASTRO / SENHA
+    ========================================================= */
+
     'create_account' => 'Criar conta',
     'email' => 'E-mail',
     'username' => 'Usuário',
@@ -53,7 +65,17 @@ return [
 
     'or' => 'ou',
 
-    // HOME
+    'forgot_password_title' => 'Recuperar senha',
+    'new_password_title' => 'Nova senha',
+    'new_password' => 'Nova senha',
+    'send' => 'Enviar',
+    'back' => 'Cancelar',
+
+
+    /* =========================================================
+       HOME
+    ========================================================= */
+
     'hero_title' => 'Descubra Seu<br>Novo Som',
 
     'hero_description' =>
@@ -67,95 +89,146 @@ return [
         'conheça os produtos mais vendidos da Instrumental Store',
 
     'add' => 'Adicionar',
-
     'details' => 'Detalhes',
-
     'other_products' => 'Outros produtos',
-
     'in_stock' => ':count em estoque',
-    
-    'forgot_password_title' => 'Recuperar senha',
-    'new_password_title' => 'Nova senha',
-    'new_password' => 'Nova senha',
-    'send' => 'Enviar',
-    'back' => 'Cancelar',
 
-    // SOBRE
-'about_title' => 'Sobre quem é a Instrumental Store',
-'about_text_1' => 'A Instrumental Store nasceu em 1998 com um sonho simples: democratizar o acesso a instrumentos musicais de qualidade no Brasil. Fundada por músicos apaixonados, nossa loja começou como um pequeno estabelecimento em São Paulo e cresceu para se tornar referência nacional.',
-'about_text_2' => 'Ao longo de mais de 25 anos de história, mantivemos nosso compromisso com a excelência, oferecendo produtos das melhores marcas mundiais e um atendimento especializado que só quem vive e respira música pode proporcionar.',
-'about_text_3' => 'Hoje, atendemos milhares de músicos em todo o país, desde iniciantes que estão comprando seu primeiro instrumento até profissionais que buscam equipamentos de alta performance. Nossa missão continua a mesma: inspirar e equipar músicos para que possam transformar suas paixões em realidade.',
+    'home_products_backend_message' => 'Os produtos da Home serão carregados pelo banco de dados.',
 
-'timeline_title' => 'Nossa trajetória',
-'timeline_1968_title' => 'Fundação',
-'timeline_1968_text' => 'Início da nossa história com a paixão por instrumentos musicais.',
-'timeline_2005_title' => 'Expansão',
-'timeline_2005_text' => 'Ampliação do catálogo e atendimento para novos públicos.',
-'timeline_2020_title' => 'E-commerce',
-'timeline_2020_text' => 'Entrada no ambiente digital para facilitar a compra online.',
-'timeline_2025_title' => 'Presente',
-'timeline_2025_text' => 'Uma loja moderna, focada em qualidade, tecnologia e experiência do cliente.',
 
-'value_passion_title' => 'Paixão pela música',
-'value_passion_text' => 'A música inspira tudo o que fazemos.',
-'value_quality_title' => 'Qualidade',
-'value_quality_text' => 'Selecionamos produtos confiáveis para nossos clientes.',
-'value_service_title' => 'Atendimento',
-'value_service_text' => 'Valorizamos uma experiência simples, clara e segura.',
+    /* =========================================================
+       PÁGINA SOBRE
+    ========================================================= */
 
-'objective_title' => 'Nosso objetivo',
-'objective_text' => 'Nosso objetivo é claro: ser a melhor loja de instrumentos musicais do Brasil, oferecendo não apenas produtos de qualidade, mas uma experiência completa que inspire músicos de todos os níveis a alcançarem seu potencial máximo. Queremos estar ao seu lado em cada etapa da sua jornada musical, do primeiro acorde à performance profissional.',
+    'about_title' => 'Sobre quem é a Instrumental Store',
 
-'products_subtitle' => 'Encontre o instrumento ideal para o seu som',
-'all' => 'Todos',
-'filter' => 'Filtrar',
-'showing_products' => 'Exibindo resultados',
-'all_items' => 'Todos os itens',
-'next' => 'Próx',
-'showing' => 'Exibindo',
-'of' => 'de',
-'results' => 'resultados',
-'no_products' => 'Nenhum produto encontrado',
-'next' => 'Próx',
+    'about_text_1' =>
+        'A Instrumental Store nasceu em 1998 com um sonho simples: democratizar o acesso a instrumentos musicais de qualidade no Brasil. Fundada por músicos apaixonados, nossa loja começou como um pequeno estabelecimento em São Paulo e cresceu para se tornar referência nacional.',
 
-'product_detail_description' => 'A guitarra perfeita para quem busca qualidade, conforto e um som marcante. Ideal para estudos, apresentações e gravações.',
-'similar_products' => 'Produtos similares',
+    'about_text_2' =>
+        'Ao longo de mais de 25 anos de história, mantivemos nosso compromisso com a excelência, oferecendo produtos das melhores marcas mundiais e um atendimento especializado que só quem vive e respira música pode proporcionar.',
 
-// ÁREA DO CLIENTE
-'client_area' => 'Área do cliente',
-'client_greeting' => 'Olá, cliente',
-'client_photo' => 'Foto do cliente',
+    'about_text_3' =>
+        'Hoje, atendemos milhares de músicos em todo o país, desde iniciantes que estão comprando seu primeiro instrumento até profissionais que buscam equipamentos de alta performance. Nossa missão continua a mesma: inspirar e equipar músicos para que possam transformar suas paixões em realidade.',
 
-'personal_data' => 'Dados pessoais',
-'addresses' => 'Endereços',
-'orders' => 'Pedidos',
-'cards' => 'Cartões',
-'wishlist' => 'Desejos',
-'configuration' => 'Configuração',
+    'timeline_title' => 'Nossa trajetória',
 
-'logout' => 'Sair',
+    'timeline_1968_title' => 'Fundação',
+    'timeline_1968_text' => 'Início da nossa história com a paixão por instrumentos musicais.',
 
-'full_name' => 'Nome Completo',
-'birth_date' => 'Data de nascimento',
-'cpf' => 'CPF',
-'email' => 'E-mail',
-'mobile' => 'Celular',
-'gender' => 'Sexo',
-'zip_code' => 'CEP',
-'street' => 'Rua',
-'number' => 'Número',
-'neighborhood' => 'Bairro',
-'city' => 'Cidade',
-'country' => 'País',
+    'timeline_2005_title' => 'Expansão',
+    'timeline_2005_text' => 'Ampliação do catálogo e atendimento para novos públicos.',
 
-'select_option' => 'Selecione',
-'female' => 'Feminino',
-'male' => 'Masculino',
-'other' => 'Outro',
-'prefer_not_to_say' => 'Prefiro não informar',
+    'timeline_2020_title' => 'E-commerce',
+    'timeline_2020_text' => 'Entrada no ambiente digital para facilitar a compra online.',
 
-'edit' => 'Editar',
-'save' => 'Salvar',
+    'timeline_2025_title' => 'Presente',
+    'timeline_2025_text' => 'Uma loja moderna, focada em qualidade, tecnologia e experiência do cliente.',
 
-'register_new_address' => 'Cadastrar novo endereço',
+    'value_passion_title' => 'Paixão pela música',
+    'value_passion_text' => 'A música inspira tudo o que fazemos.',
+
+    'value_quality_title' => 'Qualidade',
+    'value_quality_text' => 'Selecionamos produtos confiáveis para nossos clientes.',
+
+    'value_service_title' => 'Atendimento',
+    'value_service_text' => 'Valorizamos uma experiência simples, clara e segura.',
+
+    'objective_title' => 'Nosso objetivo',
+
+    'objective_text' =>
+        'Nosso objetivo é claro: ser a melhor loja de instrumentos musicais do Brasil, oferecendo não apenas produtos de qualidade, mas uma experiência completa que inspire músicos de todos os níveis a alcançarem seu potencial máximo. Queremos estar ao seu lado em cada etapa da sua jornada musical, do primeiro acorde à performance profissional.',
+
+
+    /* =========================================================
+       PÁGINA DE PRODUTOS
+    ========================================================= */
+
+    'products_subtitle' => 'Encontre o instrumento ideal para o seu som',
+    'all' => 'Todos',
+    'filter' => 'Filtrar',
+    'showing_products' => 'Exibindo resultados',
+    'all_items' => 'Todos os itens',
+    'showing' => 'Exibindo',
+    'of' => 'de',
+    'results' => 'resultados',
+    'no_products' => 'Nenhum produto encontrado',
+    'next' => 'Próx',
+
+    'products_backend_message' => 'Os produtos serão carregados pelo banco de dados.',
+
+
+    /* =========================================================
+       PÁGINA DE DETALHES DO PRODUTO
+    ========================================================= */
+
+    'product_detail_description' =>
+        'A guitarra perfeita para quem busca qualidade, conforto e um som marcante. Ideal para estudos, apresentações e gravações.',
+
+    'similar_products' => 'Produtos similares',
+
+
+    /* =========================================================
+       ÁREA DO CLIENTE - MENU LATERAL
+    ========================================================= */
+
+    'client_area' => 'Área do cliente',
+    'client_greeting' => 'Olá, cliente',
+    'client_photo' => 'Foto do cliente',
+
+    'personal_data' => 'Dados pessoais',
+    'addresses' => 'Endereços',
+    'orders' => 'Pedidos',
+    'cards' => 'Cartões',
+    'wishlist' => 'Desejos',
+    'configuration' => 'Configuração',
+
+    'logout' => 'Sair',
+
+
+    /* =========================================================
+       ÁREA DO CLIENTE - DADOS PESSOAIS
+    ========================================================= */
+
+    'full_name' => 'Nome Completo',
+    'birth_date' => 'Data de nascimento',
+    'cpf' => 'CPF',
+    'mobile' => 'Celular',
+    'gender' => 'Sexo',
+    'zip_code' => 'CEP',
+    'street' => 'Rua',
+    'number' => 'Número',
+    'neighborhood' => 'Bairro',
+    'city' => 'Cidade',
+    'state' => 'Estado',
+    'country' => 'País',
+
+    'select_option' => 'Selecione',
+    'female' => 'Feminino',
+    'male' => 'Masculino',
+    'other' => 'Outro',
+    'prefer_not_to_say' => 'Prefiro não informar',
+
+
+    /* =========================================================
+       ÁREA DO CLIENTE - ENDEREÇOS
+    ========================================================= */
+
+    'address' => 'Endereço',
+    'register_new_address' => 'Cadastrar novo endereço',
+    'edit_address' => 'Editar endereço',
+    'complement' => 'Complemento',
+
+    'no_addresses' => 'Nenhum endereço cadastrado.',
+    'addresses_backend_message' => 'Os endereços serão carregados pelo banco de dados.',
+
+
+    /* =========================================================
+       AÇÕES GERAIS
+    ========================================================= */
+
+    'edit' => 'Editar',
+    'save' => 'Salvar',
+    'delete' => 'Excluir',
+
 ];
