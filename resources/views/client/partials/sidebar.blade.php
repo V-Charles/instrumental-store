@@ -18,27 +18,27 @@
             {{ __('messages.personal_data') }}
         </a>
 
-        <a href="/cliente/enderecos" class="{{ request()->is('cliente/enderecos') ? 'active' : '' }}">
+        <a href="/cliente/enderecos" class="{{ request()->is('cliente/enderecos*') ? 'active' : '' }}">
             <span class="material-symbols-outlined">location_on</span>
             {{ __('messages.addresses') }}
         </a>
 
-        <a href="/cliente/pedidos" class="{{ request()->is('cliente/pedidos') ? 'active' : '' }}">
+        <a href="/cliente/pedidos" class="{{ request()->is('cliente/pedidos*') ? 'active' : '' }}">
             <span class="material-symbols-outlined">inventory_2</span>
             {{ __('messages.orders') }}
         </a>
 
-        <a href="/cliente/cartoes" class="{{ request()->is('cliente/cartoes') ? 'active' : '' }}">
+        <a href="/cliente/cartoes" class="{{ request()->is('cliente/cartoes*') ? 'active' : '' }}">
             <span class="material-symbols-outlined">credit_card</span>
             {{ __('messages.cards') }}
         </a>
 
-        <a href="/cliente/desejos" class="{{ request()->is('cliente/desejos') ? 'active' : '' }}">
+        <a href="/cliente/desejos" class="{{ request()->is('cliente/desejos*') ? 'active' : '' }}">
             <span class="material-symbols-outlined">favorite</span>
             {{ __('messages.wishlist') }}
         </a>
 
-        <a href="/cliente/configuracao" class="{{ request()->is('cliente/configuracao') ? 'active' : '' }}">
+        <a href="/cliente/configuracao" class="{{ request()->is('cliente/configuracao*') ? 'active' : '' }}">
             <span class="material-symbols-outlined">settings</span>
             {{ __('messages.configuration') }}
         </a>

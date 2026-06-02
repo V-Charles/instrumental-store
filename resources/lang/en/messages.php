@@ -231,4 +231,25 @@ return [
     'save' => 'Save',
     'delete' => 'Delete',
 
+    /* =========================================================
+       ORDERS
+    ========================================================= */
+
+    'my_orders' => 'Purchases',
+    'order_confirmed' => 'Order confirmed',
+    'order_preparing' => 'Order preparing',
+    'order_shipping' => 'Order on the way',
+    'order_delivered' => 'Order delivered',
+    'order_in_progress' => 'Track',
+    'order_finished' => 'Finished',
+    'order_canceled' => 'Purchase canceled',
+    'cancel_order' => 'Cancel order',
+    'view' => 'View',
+    'order_details' => 'Order details',
+    'order_details_backend_message' => 'Order details will be loaded from the database.',
+    'purchase_date' => 'Purchase date',
+    'back_to_orders' => 'Back',
+    'order_details' => 'Order details',
+    'order_details_backend_message' => 'Order details will be loaded from the database.',
+    
 ];

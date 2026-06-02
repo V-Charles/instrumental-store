@@ -231,4 +231,24 @@ return [
     'save' => 'Salvar',
     'delete' => 'Excluir',
 
+    /* =========================================================
+       PEDIDOS
+    ========================================================= */
+
+    'my_orders' => 'Compras',
+    'order_confirmed' => 'Pedido confirmado',
+    'order_preparing' => 'Pedido em preparo',
+    'order_shipping' => 'Pedido a caminho',
+    'order_delivered' => 'Pedido entregue',
+    'order_in_progress' => 'Acompanhar',
+    'order_finished' => 'Finalizado',
+    'order_canceled' => 'Compra cancelada',
+    'cancel_order' => 'Cancelar compra',
+    'view' => 'Visualizar',
+    'order_details' => 'Detalhes do pedido',
+    'order_details_backend_message' => 'Os detalhes do pedido serão carregados pelo banco de dados.',
+    'purchase_date' => 'Data da compra',
+    'back_to_orders' => 'Voltar',
+    'order_details' => 'Detalhes do pedido',
+    'order_details_backend_message' => 'Os detalhes do pedido serão carregados pelo banco de dados.',
 ];

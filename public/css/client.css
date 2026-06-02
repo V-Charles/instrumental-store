@@ -599,3 +599,422 @@
         width: 100%;
     }
 }
+
+/* =========================================================
+   ÁREA DO CLIENTE - PEDIDOS
+========================================================= */
+
+.client-orders-page {
+    width: 100%;
+    max-width: 900px;
+}
+
+.client-orders-page h2 {
+    margin: 0 0 2rem;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #222222;
+}
+
+.client-orders-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+}
+
+.client-order-card {
+    width: 100%;
+
+    background-color: #f8f3ec;
+
+    display: grid;
+    grid-template-columns: 220px 1fr 150px;
+    align-items: center;
+    gap: 1.5rem;
+
+    padding: 1rem;
+    box-sizing: border-box;
+}
+
+.client-order-product {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.client-order-product img {
+    width: 78px;
+    height: 58px;
+
+    object-fit: cover;
+    background-color: #eeeeee;
+}
+
+.client-order-product h3 {
+    margin: 0 0 0.4rem;
+
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #222222;
+}
+
+.client-order-product p {
+    margin: 0;
+
+    font-size: 0.75rem;
+    color: #555555;
+}
+
+.client-order-progress {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.client-order-step {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    min-width: 58px;
+}
+
+.client-order-step span {
+    width: 10px;
+    height: 10px;
+
+    border-radius: 50%;
+    background-color: #c7c7c7;
+}
+
+.client-order-step.active span {
+    background-color: #2e8b57;
+}
+
+.client-order-step.pending span {
+    background-color: #f2c94c;
+}
+
+.client-order-step p {
+    margin: 0.4rem 0 0;
+
+    font-size: 0.62rem;
+    color: #555555;
+    text-align: center;
+}
+
+.client-order-line {
+    width: 45px;
+    height: 2px;
+
+    background-color: #c7c7c7;
+    margin-bottom: 1.3rem;
+}
+
+.client-order-line.active {
+    background-color: #2e8b57;
+}
+
+.client-order-line.pending {
+    background-color: #f2c94c;
+}
+
+.client-order-status {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.client-order-status-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.client-status {
+    width: 130px;
+    height: 36px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 0;
+    margin: 0;
+
+    border: none;
+    border-radius: 4px;
+
+    background-color: #a60a33;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    text-decoration: none;
+    white-space: nowrap;
+
+    cursor: pointer;
+
+    appearance: none;
+    -webkit-appearance: none;
+}
+
+button.client-status {
+    font-family: inherit;
+    font-size: 0.75rem;
+    font-weight: 700;
+}
+
+.client-status-progress,
+.client-status-finished,
+.client-status-cancel-action {
+    background-color: #a60a33;
+    color: #ffffff;
+}
+
+.client-status-progress:hover,
+.client-status-finished:hover,
+.client-status-cancel-action:hover {
+    background-color: #8a0729;
+    color: #ffffff;
+}
+
+.client-status-canceled {
+    background-color: transparent;
+    color: #a60a33;
+    cursor: default;
+}
+
+.client-status-canceled:hover {
+    background-color: transparent;
+    color: #a60a33;
+}
+
+/* Responsivo - pedidos */
+
+@media (max-width: 900px) {
+    .client-order-card {
+        grid-template-columns: 1fr;
+        gap: 1.2rem;
+    }
+
+    .client-order-status {
+        justify-content: flex-start;
+    }
+
+    .client-order-status-actions {
+        align-items: flex-start;
+    }
+
+    .client-order-progress {
+        justify-content: flex-start;
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .client-order-product {
+        align-items: flex-start;
+    }
+
+    .client-order-product img {
+        width: 70px;
+        height: 52px;
+    }
+
+    .client-order-step {
+        min-width: 50px;
+    }
+
+    .client-order-line {
+        width: 32px;
+    }
+
+    .client-status {
+        width: 130px;
+        height: 36px;
+    }
+}
+
+.client-order-status-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.5rem;
+}
+
+.client-status-text {
+    width: 130px;
+    text-align: center;
+    font-size: 0.85rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.client-status-finished-text {
+    color: #222222;
+}
+
+.client-status-canceled {
+    width: 130px;
+    text-align: center;
+    background-color: transparent;
+    color: #a60a33;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: default;
+}
+
+.client-status-canceled:hover {
+    background-color: transparent;
+    color: #a60a33;
+}
+
+/* =========================================================
+   ÁREA DO CLIENTE - DETALHES DO PEDIDO
+========================================================= */
+
+.client-order-detail-page {
+    width: 100%;
+    max-width: 780px;
+}
+
+.client-order-detail-page h2 {
+    margin: 0 0 2rem;
+
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #222222;
+}
+
+.client-order-detail-content {
+    display: grid;
+    grid-template-columns: 280px 1fr;
+    align-items: center;
+    gap: 3rem;
+}
+
+.client-order-detail-image img {
+    width: 100%;
+    height: 260px;
+
+    object-fit: cover;
+    background-color: #eeeeee;
+}
+
+.client-order-detail-info h3 {
+    margin: 0 0 0.5rem;
+
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #222222;
+}
+
+.client-order-detail-brand {
+    margin: 0 0 0.5rem;
+
+    font-size: 0.85rem;
+    color: #555555;
+}
+
+.client-order-detail-price {
+    margin: 0 0 2rem;
+
+    font-size: 0.9rem;
+    color: #333333;
+}
+
+.client-order-detail-progress {
+    justify-content: flex-start;
+    margin-top: 1.5rem;
+}
+
+.client-order-detail-status {
+    margin-top: 1rem;
+}
+
+.client-status-progress-text {
+    width: 130px;
+    display: inline-block;
+
+    color: #222222;
+
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.client-status-finished-text {
+    color: #222222;
+}
+
+.client-status-canceled-text {
+    width: 130px;
+    display: inline-block;
+
+    color: #a60a33;
+
+    font-size: 0.85rem;
+    font-weight: 700;
+    text-align: center;
+}
+
+.client-order-detail-actions {
+    margin-top: 4rem;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+@media (max-width: 900px) {
+    .client-order-detail-content {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .client-order-detail-image img {
+        height: 240px;
+    }
+
+    .client-order-detail-progress {
+        overflow-x: auto;
+        padding-bottom: 0.5rem;
+    }
+}
+
+@media (max-width: 600px) {
+    .client-order-detail-actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+
+    .client-order-detail-actions .client-btn {
+        width: 100%;
+    }
+}
+
+.client-order-detail-date {
+    margin: 0 0 1.6rem;
+
+    font-size: 0.78rem;
+    color: #777777;
+}
+
+.client-btn-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.client-btn-link:hover {
+    text-decoration: none;
+}

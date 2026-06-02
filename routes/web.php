@@ -87,3 +87,11 @@ Route::get('/cliente/enderecos/editar', function () {
 Route::get('/cliente/enderecos/cadastrar', function () {
     return view('client.address-create');
 });
+
+Route::get('/cliente/pedidos', function () {
+    return view('client.orders');
+});
+
+Route::get('/cliente/pedidos/{id}', function ($id) {
+    return view('client.order-detail', compact('id'));
+});
