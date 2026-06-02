@@ -20,9 +20,17 @@
             </div>
         </div>
         <div class="admin-header-actions">
-            <a href="/" title="Acessar o Site Público" target="_blank">
-                <span class="material-symbols-outlined">language</span>
+            <a href="/" title="Acessar o Site Público" target="_blank" class="vitrine-link">
+                <span class="material-symbols-outlined">storefront</span>
             </a>
+
+            <div class="language-selector">
+                <span class="material-symbols-outlined lang-icon">language</span>
+                <a href="/admin/idioma/pt" class="lang-link {{ session('locale', 'pt') == 'pt' ? 'active' : '' }}">PT</a>
+                <span class="lang-separator">|</span>
+                <a href="/admin/idioma/en" class="lang-link {{ session('locale') == 'en' ? 'active' : '' }}">EN</a>
+            </div>
+
             <a href="/admin/logout" class="logout-btn">
                 <span class="material-symbols-outlined">logout</span>
                 Logout
