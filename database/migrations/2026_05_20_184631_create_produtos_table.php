@@ -11,6 +11,7 @@ return new class extends Migration
         Schema::create('produtos', function (Blueprint $table) {
             $table->id();
             $table->string('nome');
+            $table->string('marca')->nullable();
             $table->text('descricao')->nullable();
             $table->decimal('preco', 10, 2);
             $table->decimal('desconto', 10, 2)->nullable();
