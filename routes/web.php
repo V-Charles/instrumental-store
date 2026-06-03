@@ -106,9 +106,7 @@ Route::get('/cliente/enderecos/cadastrar', function () {
 
 Route::get('/cliente/pedidos', [PedidoController::class, 'meusPedidos']);
 
-Route::get('/cliente/pedidos/{id}', function ($id) {
-    return view('client.order-detail', compact('id'));
-});
+Route::get('/cliente/pedidos/{id}', [PedidoController::class, 'detalheCliente']);
 
 Route::get('/cliente/cartoes', function () {
     return view('client.cards');

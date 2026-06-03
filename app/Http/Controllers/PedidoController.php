@@ -66,4 +66,12 @@ class PedidoController extends Controller
 
     return view('client.orders', compact('pedidos'));
 }
+
+public function detalheCliente($id)
+{
+    $pedido = Pedido::with('itens.produto')
+        ->findOrFail($id);
+
+    return view('client.order-detail', compact('pedido'));
+}
 }

@@ -53,7 +53,7 @@
                         */
 
                         $statusPedido = strtolower($pedido->status ?? 'andamento');
-                        $etapaPedido = strtolower($pedido->etapa ?? 'confirmado');
+                        $etapaPedido = strtolower($pedido->status ?? 'confirmado');
 
                         $pedidoCancelado = $statusPedido === 'cancelado';
                         $pedidoFinalizado = $statusPedido === 'finalizado';
@@ -79,7 +79,8 @@
                         $envioPendente = !$pedidoCancelado && !$envioAtivo;
                         $entreguePendente = !$pedidoCancelado && !$entregueAtivo;
 
-                        $produto = $pedido->produto ?? null;
+                        $item = $pedido->itens->first();
+                        $produto = $item?->produto;
 
                         $nomeProduto = $produto->nome ?? __('messages.product');
                         $marcaProduto = $produto->marca ?? '';
@@ -147,7 +148,19 @@
                                 </div>
 
                             </div>
+                                <div style="margin-top:20px;">
 
+                                    <p>
+                                        <strong>Código:</strong>
+                                        {{ $pedido->codigo }}
+                                     </p>
+
+                                    <p>
+                                        <strong>Total:</strong>
+                                        R$ {{ number_format($pedido->total, 2, ',', '.') }}
+                                    </p>
+
+                            </div>
                             <div class="client-order-detail-status">
 
                                 @if ($pedidoCancelado)
@@ -170,6 +183,28 @@
 
                     </div>
 
+                    <h3>Itens do Pedido</h3>
+
+                        @foreach($pedido->itens as $item)
+
+                    <div style="margin-bottom:15px;">
+
+                        <strong>
+                            {{ $item->produto->nome }}
+                        </strong>
+
+                        <br>
+                            Quantidade:
+                            {{ $item->quantidade }}
+                        <br>
+
+                            Preço Unitário:
+                            R$ {{ number_format($item->preco_unitario, 2, ',', '.') }}
+
+                    </div>
+
+                @endforeach
+                
                     <div class="client-order-detail-actions">
 
                         <a href="/cliente/pedidos" class="client-btn client-btn-secondary client-btn-link">
