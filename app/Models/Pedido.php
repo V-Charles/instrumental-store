@@ -27,4 +27,9 @@ class Pedido extends Model
     {
         return $this->hasOne(Pagamento::class);
     }
+
+    public function devolucao()
+    {
+        return $this->hasOne(Devolucao::class);
+    }
 }
