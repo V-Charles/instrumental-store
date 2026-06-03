@@ -24,6 +24,8 @@ Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('cart');
 
 Route::post('/carrinho/adicionar/{id}', [CarrinhoController::class, 'adicionar'])->name('cart.add');
 
+Route::post('/carrinho/remover/{id}', [CarrinhoController::class, 'remover'])->name('cart.remove');
+
 Route::get('/sobre', function () {
     return view('about');
 })->name('about');

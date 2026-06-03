@@ -40,4 +40,19 @@ class CarrinhoController extends Controller
         return redirect()->back()
             ->with('success', 'Produto adicionado ao carrinho!');
     }
+
+    public function remover($id)
+    {
+        $cart = session()->get('cart', []);
+
+        if (isset($cart[$id])) {
+            unset($cart[$id]);
+        }
+
+        session()->put('cart', $cart);
+
+         return redirect()
+            ->route('cart')
+            ->with('success', 'Produto removido do carrinho!');
+}
 }

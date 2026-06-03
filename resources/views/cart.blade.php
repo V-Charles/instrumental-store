@@ -17,9 +17,20 @@
                 {{ $item['quantidade'] }}
             </p>
 
-            <p>
-                R$ {{ number_format($item['preco'], 2, ',', '.') }}
-            </p>
+        <p>
+            R$ {{ number_format($item['preco'], 2, ',', '.') }}
+        </p>
+
+        <form action="{{ route('cart.remove', $item['id']) }}"
+            method="POST">
+
+            @csrf
+
+            <button type="submit">
+                Remover
+            </button>
+
+        </form>
 
         </div>
 
