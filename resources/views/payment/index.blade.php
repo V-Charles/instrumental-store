@@ -190,9 +190,9 @@
 
             </div>
 
-            <a href="/compra-realizada" class="payment-finish-button">
-                {{ __('messages.finish') }}
-            </a>
+<a href="{{ route('order.success') }}" class="payment-finish-button" id="paymentFinishButton">
+    {{ __('messages.finish') }}
+</a>
 
         </aside>
 

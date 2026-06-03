@@ -309,3 +309,49 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+/* =========================================================
+   PAGAMENTO - SELEÇÃO DE FORMA DE PAGAMENTO
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+    const paymentMethod = document.getElementById("payment_method");
+    const paymentFinishButton = document.getElementById("paymentFinishButton");
+
+    if (paymentMethod && paymentFinishButton) {
+        paymentMethod.addEventListener("change", function () {
+            if (this.value === "pix") {
+                paymentFinishButton.href = "/pagamento-pix";
+            } else {
+                paymentFinishButton.href = "/compra-realizada";
+            }
+        });
+    }
+});
+
+/* =========================================================
+   PIX - COPIAR CÓDIGO
+========================================================= */
+
+document.addEventListener("DOMContentLoaded", function () {
+    const copyPixButton = document.getElementById("copyPixButton");
+    const pixCode = document.getElementById("pixCode");
+    const pixCopyMessage = document.getElementById("pixCopyMessage");
+
+    if (copyPixButton && pixCode) {
+        copyPixButton.addEventListener("click", function () {
+            pixCode.select();
+            pixCode.setSelectionRange(0, 99999);
+
+            navigator.clipboard.writeText(pixCode.value);
+
+            if (pixCopyMessage) {
+                pixCopyMessage.classList.add("active");
+
+                setTimeout(function () {
+                    pixCopyMessage.classList.remove("active");
+                }, 2000);
+            }
+        });
+    }
+});
