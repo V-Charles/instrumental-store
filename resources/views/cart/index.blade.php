@@ -10,10 +10,10 @@
 <div class="cart-page">
 
     <section class="cart-hero">
-        <img src="{{ asset('images/banner-produtos.jpg') }}" alt="Carrinho de compra">
+        <img src="{{ asset('images/banner-produtos.jpg') }}" alt="{{ __('messages.shopping_cart') }}">
 
         <div class="cart-hero-content">
-            <h1>Carrinho de compra</h1>
+            <h1>{{ __('messages.shopping_cart') }}</h1>
         </div>
     </section>
 
@@ -22,10 +22,10 @@
         <div class="cart-table-area">
 
             <div class="cart-table-header">
-                <span>Produto</span>
-                <span>Preço</span>
-                <span>Quantidade</span>
-                <span>Subtotal</span>
+                <span>{{ __('messages.product') }}</span>
+                <span>{{ __('messages.price') }}</span>
+                <span>{{ __('messages.quantity') }}</span>
+                <span>{{ __('messages.subtotal') }}</span>
                 <span></span>
             </div>
 
@@ -34,7 +34,8 @@
                 @foreach ($cartItems as $item)
 
                     @php
-                        $itemName = $item['nome'] ?? 'Produto';
+                        $itemId = $item['id'] ?? null;
+                        $itemName = $item['nome'] ?? __('messages.product');
                         $itemPrice = $item['preco'] ?? 0;
                         $itemQuantity = $item['quantidade'] ?? 1;
                         $itemImage = $item['imagem'] ?? null;
@@ -73,7 +74,7 @@
                             R$ {{ number_format($itemSubtotal, 2, ',', '.') }}
                         </p>
 
-                        <button type="button" class="cart-remove">
+                        <button type="button" class="cart-remove" title="{{ __('messages.remove') }}">
                             <span class="material-symbols-outlined">delete</span>
                         </button>
 
@@ -84,10 +85,10 @@
             @else
 
                 <div class="cart-empty">
-                    <p>Seu carrinho está vazio.</p>
+                    <p>{{ __('messages.cart_empty') }}</p>
 
                     <a href="{{ route('products.index') }}">
-                        Ver produtos
+                        {{ __('messages.see_products') }}
                     </a>
                 </div>
 
@@ -97,24 +98,26 @@
 
         <aside class="cart-summary">
 
-            <h2>Total</h2>
+            <h2>{{ __('messages.total') }}</h2>
 
             <div class="cart-summary-line">
-                <span>Subtotal</span>
+                <span>{{ __('messages.subtotal') }}</span>
+
                 <strong>
                     R$ {{ number_format($cartTotal, 2, ',', '.') }}
                 </strong>
             </div>
 
             <div class="cart-summary-line">
-                <span>Total</span>
+                <span>{{ __('messages.total') }}</span>
+
                 <strong>
                     R$ {{ number_format($cartTotal, 2, ',', '.') }}
                 </strong>
             </div>
 
             <a href="/dados-compra" class="cart-checkout">
-                Finalizar
+                {{ __('messages.finish') }}
             </a>
 
         </aside>
@@ -123,15 +126,18 @@
 
     <section class="cart-coupon">
 
-        <h3>Cupom</h3>
+        <h3>{{ __('messages.coupon') }}</h3>
 
         <form action="#" method="POST">
             @csrf
 
-            <input type="text" name="coupon" placeholder="Digite o cupom">
+            <input 
+                type="text" 
+                name="coupon" 
+                placeholder="{{ __('messages.enter_coupon') }}">
 
             <button type="submit">
-                Aplicar
+                {{ __('messages.apply') }}
             </button>
         </form>
 
