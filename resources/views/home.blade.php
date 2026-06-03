@@ -89,23 +89,19 @@
 
                             <div class="home-product-actions">
 
-                                <form action="{{ route('cart.add', $produto->id) }}"
-                                    method="POST">
-                                @csrf
-                                <button type="submit"
-                                    class="home-btn home-btn--primary">
-                                    <span class="material-symbols-outlined">
-                                        shopping_cart
-                                    </span>
+                                <form action="{{ route('cart.add', $produto->id) }}" method="POST">
+                                    @csrf
 
-<<<<<<< HEAD
-                                    {{ __('messages.add') }}
-                                </button>
+                                    <button type="submit" class="home-btn home-btn--primary">
+                                        <span class="material-symbols-outlined">
+                                            shopping_cart
+                                        </span>
+
+                                        {{ __('messages.add') }}
+                                    </button>
                                 </form>
-                                <a href="{{ route('product.detail', $produto->id) }}" class="home-btn home-btn--secondary">
-=======
+
                                 <a href="{{ route('products.show', $produto->id) }}" class="home-btn home-btn--secondary">
->>>>>>> a19f55033f64f47f4fcbb76d0689dbac056c77ac
                                     {{ __('messages.details') }}
                                 </a>
 
@@ -187,25 +183,20 @@
                             </p>
 
                             <div class="home-other-actions">
-                                <form action="{{ route('cart.add', $produto->id) }}"
-                                    method="POST">
-                                @csrf
-                                <button type="submit"
-                                    class="home-btn home-btn--primary">
-                                    <span class="material-symbols-outlined">
-                                        shopping_cart
-                                    </span>
 
-                                    {{ __('messages.add') }}
-<<<<<<< HEAD
-                                </button>
+                                <form action="{{ route('cart.add', $produto->id) }}" method="POST">
+                                    @csrf
+
+                                    <button type="submit" class="home-btn home-btn--primary">
+                                        <span class="material-symbols-outlined">
+                                            shopping_cart
+                                        </span>
+
+                                        {{ __('messages.add') }}
+                                    </button>
                                 </form>
-                                <a href="{{ route('product.detail', $produto->id) }}" class="home-btn home-btn--secondary">
-=======
-                                </a>
 
                                 <a href="{{ route('products.show', $produto->id) }}" class="home-btn home-btn--secondary">
->>>>>>> a19f55033f64f47f4fcbb76d0689dbac056c77ac
                                     {{ __('messages.details') }}
                                 </a>
 
