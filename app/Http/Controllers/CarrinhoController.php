@@ -8,11 +8,17 @@ use Illuminate\Http\Request;
 class CarrinhoController extends Controller
 {
     public function index()
-    {
-        $cart = session()->get('cart', []);
+{
+    $cart = session()->get('cart', []);
 
-        return view('cart', compact('cart'));
+    $total = 0;
+
+    foreach ($cart as $item) {
+        $total += $item['preco'] * $item['quantidade'];
     }
+
+    return view('cart', compact('cart', 'total'));
+}
 
     public function adicionar($id)
     {

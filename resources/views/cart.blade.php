@@ -14,48 +14,44 @@
 
             <div style="display:flex; gap:10px; align-items:center;">
 
-    <form action="{{ route('cart.decrease', $item['id']) }}"
-          method="POST">
+                <form action="{{ route('cart.decrease', $item['id']) }}"
+                      method="POST">
+                    @csrf
+                    <button type="submit">-</button>
+                </form>
 
-        @csrf
+                <strong>
+                    {{ $item['quantidade'] }}
+                </strong>
 
-        <button type="submit">
-            -
-        </button>
+                <form action="{{ route('cart.increase', $item['id']) }}"
+                      method="POST">
+                    @csrf
+                    <button type="submit">+</button>
+                </form>
 
-    </form>
+            </div>
 
-    <strong>
-        {{ $item['quantidade'] }}
-    </strong>
+            <p>
+                Preço Unitário:
+                R$ {{ number_format($item['preco'], 2, ',', '.') }}
+            </p>
 
-    <form action="{{ route('cart.increase', $item['id']) }}"
-          method="POST">
+            <p>
+                Subtotal:
+                R$ {{ number_format($item['preco'] * $item['quantidade'], 2, ',', '.') }}
+            </p>
 
-        @csrf
+            <form action="{{ route('cart.remove', $item['id']) }}"
+                  method="POST">
 
-        <button type="submit">
-            +
-        </button>
+                @csrf
 
-    </form>
+                <button type="submit">
+                    Remover
+                </button>
 
-</div>
-
-        <p>
-            R$ {{ number_format($item['preco'], 2, ',', '.') }}
-        </p>
-
-        <form action="{{ route('cart.remove', $item['id']) }}"
-            method="POST">
-
-            @csrf
-
-            <button type="submit">
-                Remover
-            </button>
-
-        </form>
+            </form>
 
         </div>
 
@@ -66,6 +62,15 @@
         <p>Carrinho vazio.</p>
 
     @endforelse
+
+    @if(count($cart) > 0)
+
+        <h2>
+            Total do Carrinho:
+            R$ {{ number_format($total, 2, ',', '.') }}
+        </h2>
+
+    @endif
 
 </div>
 
