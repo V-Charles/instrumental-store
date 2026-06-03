@@ -10,6 +10,7 @@ use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DevolucaoController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\FuncionarioController;
 
 /* =========================================================
    LOJA - PÁGINAS PÚBLICAS
@@ -92,6 +93,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/devolucoes', [DevolucaoController::class, 'index']);
     Route::get('/devolucoes/{id}', [DevolucaoController::class, 'show']);
     Route::post('/devolucoes/{id}/status', [DevolucaoController::class, 'updateStatus']);
+    Route::get('/funcionarios', [FuncionarioController::class, 'index']);
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/dashboard', [DashboardController::class, 'index']);
 });

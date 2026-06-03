@@ -80,7 +80,7 @@
                     <span class="material-symbols-outlined">person</span>
                     {{ __('messages.clients') }}
                 </a>
-                <a href="/admin/equipe" class="{{ request()->is('admin/equipe*') ? 'active' : '' }}">
+                <a href="/admin/funcionarios" class="{{ request()->is('admin/funcionarios*') ? 'active' : '' }}">
                     <span class="material-symbols-outlined">group</span>
                     {{ __('messages.team') }}
                 </a>
