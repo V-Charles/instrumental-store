@@ -307,4 +307,50 @@ return [
     'clients' => 'CLIENTES',
     'team' => 'EQUIPE',
     'admin_logout' => 'Sair',
+
+
+/* =========================================================
+   CARRINHO
+========================================================= */
+
+'cart' => 'Carrinho',
+'shopping_cart' => 'Carrinho de compra',
+'cart_empty' => 'Seu carrinho está vazio.',
+'view_cart' => 'Ver carrinho',
+'product' => 'Produto',
+'price' => 'Preço',
+'quantity' => 'Quantidade',
+'subtotal' => 'Subtotal',
+'total' => 'Total',
+'remove' => 'Remover',
+'finish' => 'Finalizar',
+'checkout' => 'Finalizar compra',
+'coupon' => 'Cupom',
+'enter_coupon' => 'Digite o cupom',
+'apply' => 'Aplicar',
+'see_products' => 'Ver produtos',
+'items_available' => 'itens disponíveis',
+
+/* =========================================================
+   PAGAMENTO / DADOS DA COMPRA
+========================================================= */
+
+'payment_form' => 'Formulário de pagamento',
+'purchase_data' => 'Dados da compra',
+'payment_method' => 'Forma de pagamento',
+'select' => 'Selecione',
+'credit_card' => 'Cartão de crédito',
+'debit_card' => 'Cartão de débito',
+'pix' => 'Pix',
+'registered_cards' => 'Cartões cadastrados',
+'select_registered_card' => 'Selecione cartão cadastrado',
+'no_registered_cards' => 'Nenhum cartão cadastrado',
+'register_payment_method' => 'Cadastrar forma',
+'registered_address' => 'Endereço cadastrado',
+'select_registered_address' => 'Selecione endereço cadastrado',
+'no_registered_address' => 'Nenhum endereço cadastrado',
+'register_address' => 'Cadastrar endereço',
+'no_products_in_cart' => 'Nenhum produto no carrinho',
+'back' => 'Voltar',
+
 ];
