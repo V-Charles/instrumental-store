@@ -2592,3 +2592,284 @@ body {
         text-align: center;
     }
 }
+
+/* =========================================================
+   PÁGINA DE PAGAMENTO PIX
+========================================================= */
+
+.pix-page {
+    width: 100%;
+    max-width: 1100px;
+
+    margin: 0 auto;
+    padding: 0 16px 90px;
+
+    box-sizing: border-box;
+}
+
+/* Banner */
+
+.pix-hero {
+    position: relative;
+
+    width: 100vw;
+    height: 260px;
+
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+
+    overflow: hidden;
+}
+
+.pix-hero img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    display: block;
+
+    filter: brightness(70%);
+}
+
+.pix-hero-content {
+    position: absolute;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pix-hero-content h1 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 28px;
+    font-weight: 700;
+    text-align: center;
+}
+
+/* Conteúdo */
+
+.pix-content {
+    min-height: 520px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 70px 0;
+
+    box-sizing: border-box;
+}
+
+.pix-box {
+    width: 100%;
+    max-width: 520px;
+
+    background: #f4f0ec;
+
+    padding: 42px 48px;
+
+    border-radius: 6px;
+
+    text-align: center;
+
+    box-sizing: border-box;
+}
+
+.pix-box h2 {
+    margin: 0 0 14px;
+
+    font-size: 20px;
+    color: #222222;
+    font-weight: 700;
+}
+
+.pix-instruction {
+    max-width: 390px;
+
+    margin: 0 auto 28px;
+
+    font-size: 12px;
+    line-height: 1.7;
+
+    color: #555555;
+}
+
+.pix-qr-code {
+    width: 170px;
+    height: 170px;
+
+    margin: 0 auto 28px;
+
+    background: #ffffff;
+
+    border: 1px solid #dddddd;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.pix-qr-code .material-symbols-outlined {
+    font-size: 120px;
+    color: #b0003a;
+}
+
+.pix-copy-area {
+    text-align: left;
+
+    margin-bottom: 26px;
+}
+
+.pix-copy-area label {
+    display: block;
+
+    margin-bottom: 8px;
+
+    color: #b0003a;
+
+    font-size: 12px;
+    font-weight: 700;
+}
+
+.pix-copy-row {
+    display: flex;
+    gap: 10px;
+}
+
+.pix-copy-row input {
+    flex: 1;
+    height: 38px;
+
+    border: 1px solid #dddddd;
+    outline: none;
+
+    padding: 0 12px;
+
+    font-family: inherit;
+    font-size: 11px;
+
+    box-sizing: border-box;
+}
+
+.pix-copy-row button {
+    width: 90px;
+    height: 38px;
+
+    border: none;
+    border-radius: 4px;
+
+    background: #b0003a;
+    color: #ffffff;
+
+    font-family: inherit;
+    font-size: 11px;
+    font-weight: 700;
+
+    cursor: pointer;
+}
+
+.pix-copy-message {
+    display: none;
+
+    margin: 8px 0 0;
+
+    font-size: 11px;
+    color: #b0003a;
+    font-weight: 600;
+}
+
+.pix-copy-message.active {
+    display: block;
+}
+
+.pix-total {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding-top: 20px;
+    margin-bottom: 28px;
+
+    border-top: 1px solid #e2d8cf;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    color: #222222;
+}
+
+.pix-total strong {
+    color: #b0003a;
+}
+
+.pix-actions {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+}
+
+.pix-back-button,
+.pix-confirm-button {
+    width: 150px;
+    height: 36px;
+
+    border-radius: 4px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    text-decoration: none;
+
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.pix-back-button {
+    background: #b0003a;
+    color: #ffffff;
+
+    border: 1px solid #b0003a;
+}
+
+.pix-confirm-button {
+    background: #b0003a;
+    color: #ffffff;
+
+    border: 1px solid #b0003a;
+}
+
+@media (max-width: 600px) {
+    .pix-hero {
+        height: 200px;
+    }
+
+    .pix-hero-content h1 {
+        font-size: 22px;
+    }
+
+    .pix-box {
+        padding: 32px 22px;
+    }
+
+    .pix-copy-row {
+        flex-direction: column;
+    }
+
+    .pix-copy-row button {
+        width: 100%;
+    }
+
+    .pix-actions {
+        flex-direction: column;
+    }
+
+    .pix-back-button,
+    .pix-confirm-button {
+        width: 100%;
+    }
+}
