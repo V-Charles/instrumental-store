@@ -270,3 +270,81 @@ if (countryInput && countryFlag) {
         this.style.display = 'none';
     });
 }
+
+/* =========================================================
+   DETALHES DO PRODUTO
+========================================================= */
+
+const productThumbs = document.querySelectorAll('.product-thumb img');
+const mainProductImage = document.getElementById('mainProductImage');
+
+if (productThumbs.length > 0 && mainProductImage) {
+    productThumbs.forEach(function (thumb) {
+        thumb.addEventListener('click', function () {
+            mainProductImage.src = this.src;
+
+            document.querySelectorAll('.product-thumb').forEach(function (button) {
+                button.classList.remove('active');
+            });
+
+            this.closest('.product-thumb').classList.add('active');
+        });
+    });
+}
+
+const decreaseQuantity = document.getElementById('decreaseQuantity');
+const increaseQuantity = document.getElementById('increaseQuantity');
+const productQuantity = document.getElementById('productQuantity');
+
+if (decreaseQuantity && increaseQuantity && productQuantity) {
+    decreaseQuantity.addEventListener('click', function () {
+        let quantity = Number(productQuantity.textContent);
+
+        if (quantity > 1) {
+            productQuantity.textContent = quantity - 1;
+        }
+    });
+
+    increaseQuantity.addEventListener('click', function () {
+        let quantity = Number(productQuantity.textContent);
+
+        productQuantity.textContent = quantity + 1;
+    });
+}
+
+const productThumbs = document.querySelectorAll('.product-thumb img');
+const mainProductImage = document.getElementById('mainProductImage');
+
+if (productThumbs.length > 0 && mainProductImage) {
+    productThumbs.forEach(function (thumb) {
+        thumb.addEventListener('click', function () {
+            mainProductImage.src = this.src;
+
+            document.querySelectorAll('.product-thumb').forEach(function (button) {
+                button.classList.remove('active');
+            });
+
+            this.closest('.product-thumb').classList.add('active');
+        });
+    });
+}
+
+const decreaseQuantity = document.getElementById('decreaseQuantity');
+const increaseQuantity = document.getElementById('increaseQuantity');
+const productQuantity = document.getElementById('productQuantity');
+
+if (decreaseQuantity && increaseQuantity && productQuantity) {
+    decreaseQuantity.addEventListener('click', function () {
+        let quantity = Number(productQuantity.textContent);
+
+        if (quantity > 1) {
+            productQuantity.textContent = quantity - 1;
+        }
+    });
+
+    increaseQuantity.addEventListener('click', function () {
+        let quantity = Number(productQuantity.textContent);
+
+        productQuantity.textContent = quantity + 1;
+    });
+}
