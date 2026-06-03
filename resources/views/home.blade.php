@@ -1,6 +1,11 @@
 @extends('layouts.app')
 
 @section('content')
+
+@php
+    $productPlaceholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='360' viewBox='0 0 600 360'%3E%3Crect width='600' height='360' fill='%23f4f0ec'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23a60a33' font-family='Arial' font-size='22'%3EInstrumental Store%3C/text%3E%3C/svg%3E";
+@endphp
+
 <div class="home-page">
 
     <section class="home-hero">
@@ -12,15 +17,15 @@
             <div class="home-hero-categories">
 
                 @isset($categorias)
+
                     @foreach ($categorias as $categoria)
+
                         <a href="{{ route('products.index', ['categoria' => $categoria]) }}">
                             {{ $categoria }}
                         </a>
+
                     @endforeach
-                @else
-                    <a href="{{ route('products.index') }}">
-                        {{ __('messages.products') }}
-                    </a>
+
                 @endisset
 
             </div>
@@ -65,19 +70,18 @@
 
                     <article class="home-product-card">
 
-                        <img 
-                            src="{{ $produto->imagem_principal ? asset('storage/' . $produto->imagem_principal) : asset('images/placeholder-produto.jpg') }}" 
-                            alt="{{ $produto->nome }}">
+                        <img
+                            src="{{ $produto->imagem_principal ? asset('storage/' . $produto->imagem_principal) : $productPlaceholder }}"
+                            alt="{{ $produto->nome }}"
+                            onerror="this.onerror=null; this.src='{{ $productPlaceholder }}';">
 
                         <div class="home-product-info">
 
                             <p class="home-product-brand">
-                                {{ $produto->marca ?? '' }}
+                                {{ $produto->categoria }}
                             </p>
 
-                            <h3>
-                                {{ $produto->nome }}
-                            </h3>
+                            <h3>{{ $produto->nome }}</h3>
 
                             <p class="home-product-price">
                                 R$ {{ number_format($produto->preco, 2, ',', '.') }}
@@ -94,10 +98,14 @@
                                         shopping_cart
                                     </span>
 
+<<<<<<< HEAD
                                     {{ __('messages.add') }}
                                 </button>
                                 </form>
                                 <a href="{{ route('product.detail', $produto->id) }}" class="home-btn home-btn--secondary">
+=======
+                                <a href="{{ route('products.show', $produto->id) }}" class="home-btn home-btn--secondary">
+>>>>>>> a19f55033f64f47f4fcbb76d0689dbac056c77ac
                                     {{ __('messages.details') }}
                                 </a>
 
@@ -109,15 +117,15 @@
 
                 @empty
 
-                    <p class="home-empty-message">
-                        {{ __('messages.no_products') }}
+                    <p class="client-empty-message">
+                        {{ __('messages.home_products_backend_message') }}
                     </p>
 
                 @endforelse
 
             @else
 
-                <p class="home-empty-message">
+                <p class="client-empty-message">
                     {{ __('messages.home_products_backend_message') }}
                 </p>
 
@@ -161,19 +169,18 @@
 
                     <article class="home-other-card">
 
-                        <img 
-                            src="{{ $produto->imagem_principal ? asset('storage/' . $produto->imagem_principal) : asset('images/placeholder-produto.jpg') }}" 
-                            alt="{{ $produto->nome }}">
+                        <img
+                            src="{{ $produto->imagem_principal ? asset('storage/' . $produto->imagem_principal) : $productPlaceholder }}"
+                            alt="{{ $produto->nome }}"
+                            onerror="this.onerror=null; this.src='{{ $productPlaceholder }}';">
 
                         <div class="home-other-info">
 
                             <p class="home-other-brand">
-                                {{ $produto->marca ?? '' }}
+                                {{ $produto->categoria }}
                             </p>
 
-                            <h3>
-                                {{ $produto->nome }}
-                            </h3>
+                            <h3>{{ $produto->nome }}</h3>
 
                             <p class="home-other-price">
                                 R$ {{ number_format($produto->preco, 2, ',', '.') }}
@@ -190,9 +197,15 @@
                                     </span>
 
                                     {{ __('messages.add') }}
+<<<<<<< HEAD
                                 </button>
                                 </form>
                                 <a href="{{ route('product.detail', $produto->id) }}" class="home-btn home-btn--secondary">
+=======
+                                </a>
+
+                                <a href="{{ route('products.show', $produto->id) }}" class="home-btn home-btn--secondary">
+>>>>>>> a19f55033f64f47f4fcbb76d0689dbac056c77ac
                                     {{ __('messages.details') }}
                                 </a>
 
@@ -204,15 +217,15 @@
 
                 @empty
 
-                    <p class="home-empty-message">
-                        {{ __('messages.no_products') }}
+                    <p class="client-empty-message">
+                        {{ __('messages.home_products_backend_message') }}
                     </p>
 
                 @endforelse
 
             @else
 
-                <p class="home-empty-message">
+                <p class="client-empty-message">
                     {{ __('messages.home_products_backend_message') }}
                 </p>
 
@@ -223,4 +236,5 @@
     </section>
 
 </div>
+
 @endsection
