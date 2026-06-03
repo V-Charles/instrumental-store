@@ -3,98 +3,102 @@
 @section('content')
 
 @php
-    $produtoDisponivel = isset($produto);
-
-    $imagensExtras = $produtoDisponivel ? ($produto->imagens_extras ?? []) : [];
+    $imagensExtras = $produto->imagens_extras ?? [];
 
     if (is_string($imagensExtras)) {
         $imagensExtras = json_decode($imagensExtras, true) ?? [];
-    }
-
-    $imagemPrincipal = $produtoDisponivel ? ($produto->imagem_principal ?? null) : null;
-
-    $galeria = collect([$imagemPrincipal])
-        ->merge($imagensExtras)
-        ->filter()
-        ->values();
-
-    $cores = $produtoDisponivel ? ($produto->cores ?? []) : [];
-
-    if (is_string($cores)) {
-        $cores = json_decode($cores, true) ?? [];
     }
 @endphp
 
 <div class="product-detail-page">
 
-    <section class="product-detail-breadcrumb">
-        <a href="{{ route('products.index') }}">{{ __('messages.products') }}</a>
-        <span>/</span>
-        <span>{{ $produtoDisponivel ? $produto->nome : 'Produto' }}</span>
-    </section>
+    <div class="product-detail-breadcrumb">
+        <a href="{{ route('home') }}">
+            Início
+        </a>
+
+        <span>></span>
+
+        <a href="{{ route('products.index') }}">
+            Produtos
+        </a>
+
+        <span>></span>
+
+        <span>{{ $produto->nome }}</span>
+    </div>
 
     <section class="product-detail-main">
 
         <div class="product-detail-gallery">
 
             <div class="product-detail-thumbs">
-                @forelse ($galeria as $index => $imagem)
-                    <button 
-                        type="button" 
-                        class="product-thumb {{ $index === 0 ? 'active' : '' }}" 
-                        data-image="{{ asset('storage/' . $imagem) }}">
-                        <img src="{{ asset('storage/' . $imagem) }}" alt="{{ $produtoDisponivel ? $produto->nome : 'Produto' }}">
+
+                @if ($produto->imagem_principal)
+                    <button type="button" class="product-thumb active">
+                        <img
+                            src="{{ asset('storage/' . $produto->imagem_principal) }}"
+                            alt="{{ $produto->nome }}">
                     </button>
-                @empty
-                    <button 
-                        type="button" 
-                        class="product-thumb active" 
-                        data-image="{{ asset('images/placeholder-produto.jpg') }}">
-                        <img src="{{ asset('images/placeholder-produto.jpg') }}" alt="Produto">
+                @else
+                    <button type="button" class="product-thumb active">
+                        <div class="product-thumb-placeholder">
+                            IS
+                        </div>
                     </button>
-                @endforelse
+                @endif
+
+                @foreach ($imagensExtras as $imagemExtra)
+
+                    <button type="button" class="product-thumb">
+                        <img
+                            src="{{ asset('storage/' . $imagemExtra) }}"
+                            alt="{{ $produto->nome }}">
+                    </button>
+
+                @endforeach
+
             </div>
 
             <div class="product-detail-image">
-                <img 
-                    id="mainProductImage" 
-                    src="{{ $galeria->isNotEmpty() ? asset('storage/' . $galeria[0]) : asset('images/placeholder-produto.jpg') }}" 
-                    alt="{{ $produtoDisponivel ? $produto->nome : 'Produto' }}">
+
+                @if ($produto->imagem_principal)
+                    <img
+                        id="mainProductImage"
+                        src="{{ asset('storage/' . $produto->imagem_principal) }}"
+                        alt="{{ $produto->nome }}">
+                @else
+                    <div class="product-image-placeholder">
+                        Instrumental Store
+                    </div>
+                @endif
+
             </div>
 
         </div>
 
         <div class="product-detail-info">
+
+            <h1>{{ $produto->nome }}</h1>
+
             <p class="product-detail-brand">
-                {{ $produtoDisponivel ? ($produto->marca ?? '') : '' }}
+                {{ $produto->marca ?? $produto->categoria ?? '' }}
             </p>
 
-            <h1>
-                {{ $produtoDisponivel ? $produto->nome : 'Produto' }}
-            </h1>
-
-            <p class="product-detail-description">
-                {{ $produtoDisponivel ? ($produto->descricao ?? '') : 'As informações do produto serão carregadas pelo banco de dados.' }}
-            </p>
+            @if ($produto->descricao)
+                <p class="product-detail-description">
+                    {{ $produto->descricao }}
+                </p>
+            @endif
 
             <p class="product-detail-price">
-                @if ($produtoDisponivel)
-                    R$ {{ number_format($produto->preco, 2, ',', '.') }}
-                @else
-                    R$ 0,00
-                @endif
+                R$ {{ number_format($produto->preco, 2, ',', '.') }}
             </p>
 
-            @if (!empty($cores))
-                <div class="product-detail-colors">
-                    @foreach ($cores as $index => $cor)
-                        <button 
-                            type="button" 
-                            class="product-color {{ $index === 0 ? 'active' : '' }}"
-                            style="background: {{ $cor }};">
-                        </button>
-                    @endforeach
-                </div>
+            @if (!is_null($produto->quantidade))
+                <p class="product-detail-stock">
+                    {{ $produto->quantidade }} itens disponíveis
+                </p>
             @endif
 
             <div class="product-detail-quantity">
@@ -104,87 +108,108 @@
             </div>
 
             <div class="product-detail-actions">
-                                <form action="{{ route('cart.add', $produtoSimilar->id) }}"
-                                    method="POST">
-                                @csrf
-                                <button type="submit"
-                                    class="home-btn home-btn--primary">
-                                    <span class="material-symbols-outlined">
-                                        shopping_cart
-                                    </span>
 
-                                    {{ __('messages.add') }}
-                                </button>
-                                </form>
+                <form action="{{ route('cart.add', $produto->id) }}" method="POST">
+                    @csrf
 
-                <a href="/compra" class="product-detail-buy">
-                    {{ __('messages.buy') }}
+                    <button type="submit" class="product-detail-add">
+                        <span class="material-symbols-outlined">
+                            shopping_cart
+                        </span>
+
+                        Adicionar
+                    </button>
+                </form>
+
+                <a href="/carrinho" class="product-detail-buy">
+                    Comprar
                 </a>
+
             </div>
+
         </div>
 
     </section>
 
     <section class="product-detail-related">
-        <h2>{{ __('messages.similar_products') }}</h2>
 
-        <div class="home-products-grid">
+        <h2>Produtos similares</h2>
+
+        <div class="products-grid-page">
 
             @isset($produtosSimilares)
-                @forelse ($produtosSimilares as $produtoSimilar)
-                    <article class="home-product-card">
-                        <img 
-                            src="{{ $produtoSimilar->imagem_principal ? asset('storage/' . $produtoSimilar->imagem_principal) : asset('images/placeholder-produto.jpg') }}" 
-                            alt="{{ $produtoSimilar->nome }}">
 
-                        <div class="home-product-info">
-                            <p class="home-product-brand">
-                                {{ $produtoSimilar->marca ?? '' }}
+                @forelse ($produtosSimilares as $produtoSimilar)
+
+                    <article class="product-page-card">
+
+                        @if ($produtoSimilar->imagem_principal)
+                            <img
+                                src="{{ asset('storage/' . $produtoSimilar->imagem_principal) }}"
+                                alt="{{ $produtoSimilar->nome }}">
+                        @else
+                            <div class="product-card-placeholder">
+                                Instrumental Store
+                            </div>
+                        @endif
+
+                        <div class="product-page-info">
+
+                            <p class="product-page-brand">
+                                {{ $produtoSimilar->marca ?? $produtoSimilar->categoria ?? '' }}
                             </p>
 
                             <h3>
                                 {{ $produtoSimilar->nome }}
                             </h3>
 
-                            <p class="home-product-price">
+                            <p class="product-page-price">
                                 R$ {{ number_format($produtoSimilar->preco, 2, ',', '.') }}
                             </p>
 
-                            <div class="home-product-actions">
-                               <form action="{{ route('cart.add', $produto->id) }}"
-                                    method="POST">
-                                @csrf
-                                <button type="submit"
-                                    class="home-btn home-btn--primary">
-                                    <span class="material-symbols-outlined">
-                                        shopping_cart
-                                    </span>
+                            <div class="product-page-actions">
 
-                                    {{ __('messages.add') }}
-                                </button>
+                                <form action="{{ route('cart.add', $produtoSimilar->id) }}" method="POST">
+                                    @csrf
+
+                                    <button type="submit" class="home-btn home-btn--primary">
+                                        <span class="material-symbols-outlined">
+                                            shopping_cart
+                                        </span>
+
+                                        Adicionar
+                                    </button>
                                 </form>
 
-                                <a href="{{ route('product.detail', $produtoSimilar->id) }}" class="home-btn home-btn--secondary">
-                                    {{ __('messages.details') }}
+                                <a href="{{ route('products.show', $produtoSimilar->id) }}" class="home-btn home-btn--secondary">
+                                    Detalhes
                                 </a>
+
                             </div>
+
                         </div>
+
                     </article>
+
                 @empty
-                    <p>Nenhum produto similar encontrado.</p>
+
+                    <p class="products-empty-message">
+                        Nenhum produto similar encontrado.
+                    </p>
+
                 @endforelse
-            @else
-                <p>Produtos similares serão carregados pelo banco de dados.</p>
+
             @endisset
 
         </div>
 
-        <div class="product-detail-back">
-            <a href="{{ $produtoDisponivel ? route('products.index', ['categoria' => $produto->categoria]) : route('products.index') }}">
-                {{ __('messages.view_more') }}
-            </a>
-        </div>
     </section>
+
+    <div class="product-detail-back">
+        <a href="{{ route('products.index') }}">
+            Voltar
+        </a>
+    </div>
 
 </div>
 
