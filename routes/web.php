@@ -89,6 +89,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/pagamentos', [PagamentoController::class, 'index']);
     Route::get('/clientes', [ClienteController::class, 'index']);
     Route::get('/devolucoes', [DevolucaoController::class, 'index']);
+    Route::get('/devolucoes/{id}', [DevolucaoController::class, 'show']);
 });
 
 

@@ -959,3 +959,44 @@ body.admin-body {
     font-weight: 800;
     color: #b0003a;
 }
+
+.action-panel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+.btn-action {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-weight: 600;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: #10332d;
+    color: #ffffff;
+}
+
+.btn-primary:hover {
+    background-color: #1a4d44;
+}
+
+.btn-danger {
+    background-color: #fff;
+    color: #b0003a;
+    border: 1px solid #b0003a;
+}
+
+.btn-danger:hover {
+    background-color: #fcf0f3;
+}

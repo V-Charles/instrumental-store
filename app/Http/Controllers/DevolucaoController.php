@@ -68,4 +68,11 @@ class DevolucaoController extends Controller
             'reembolsadas'
         ));
     }
+
+    public function show($id)
+    {
+        $devolucao = Devolucao::with(['pedido.itens.produto'])->findOrFail($id);
+        
+        return view('admin.devolucoes.show', compact('devolucao'));
+    }
 }
