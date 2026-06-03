@@ -30,6 +30,8 @@ Route::post('/carrinho/aumentar/{id}', [CarrinhoController::class, 'aumentar'])-
 
 Route::post('/carrinho/diminuir/{id}', [CarrinhoController::class, 'diminuir'])->name('cart.decrease');
 
+Route::post('/carrinho/finalizar', [CarrinhoController::class, 'finalizar'])->name('cart.checkout');
+
 Route::get('/sobre', function () {
     return view('about');
 })->name('about');
