@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PedidoController;
 
 /* =========================================================
    LOJA - PÁGINAS PÚBLICAS
@@ -67,6 +68,7 @@ Route::prefix('admin')->group(function () {
     Route::post('/produtos', [ProdutoController::class, 'store']);
     Route::get('/produtos/{id}/edit', [ProdutoController::class, 'edit']);
     Route::put('/produtos/{id}', [ProdutoController::class, 'update']);
+    Route::get('/pedidos', [PedidoController::class, 'index']);
 });
 
 
