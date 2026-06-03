@@ -29,8 +29,8 @@
         <div class="dash-card-header">
             <h3 class="dash-card-title">Relatório desta semana</h3>
             <div style="display: flex; gap: 12px; align-items: center;">
-                <span style="color: #b0003a; font-size: 13px; font-weight: 600; cursor: pointer;">Essa semana</span>
-                <span style="color: #888; font-size: 13px; font-weight: 600; cursor: pointer;">Última semana</span>
+                <span id="btn-semana-atual" style="color: #b0003a; font-size: 13px; font-weight: 600; cursor: pointer;">Essa semana</span>
+                <span id="btn-semana-anterior" style="color: #888; font-size: 13px; font-weight: 600; cursor: pointer;">Última semana</span>
                 <span class="material-symbols-outlined" style="color: #b0003a; cursor: pointer;">more_vert</span>
             </div>
         </div>
@@ -70,11 +70,12 @@
         <p style="margin: 4px 0 0 0; font-size: 28px; font-weight: 800; color: #10332d;">{{ number_format($totalPedidos, 0, ',', '.') }}</p>
     </div>
     <div style="display: flex; gap: 16px; background: #fbf5ee; padding: 6px 16px; border-radius: 6px;">
-        <span style="font-size: 13px; font-weight: 600; color: #333; cursor: pointer;">Pendente</span>
-        <span style="font-size: 13px; font-weight: 600; color: #888; cursor: pointer;">Cancelada</span>
+        <span class="tab-dash active" data-status="" style="font-size: 13px; font-weight: 600; color: #b0003a; cursor: pointer;">Todos</span>
+        <span class="tab-dash" data-status="pendente" style="font-size: 13px; font-weight: 600; color: #888; cursor: pointer;">Pendente</span>
+        <span class="tab-dash" data-status="cancelado" style="font-size: 13px; font-weight: 600; color: #888; cursor: pointer;">Cancelada</span>
     </div>
     <div class="search-box" style="margin-left: auto;">
-        <input type="text" placeholder="pesquisar">
+        <input type="text" id="input-pesquisa-dash" placeholder="pesquisar">
         <span class="material-symbols-outlined">search</span>
     </div>
 </div>
@@ -91,7 +92,7 @@
                 <th>Status</th>
             </tr>
         </thead>
-        <tbody>
+        <tbody id="tbody-pedidos-dash">
             @foreach($ultimosPedidos as $index => $pedido)
                 <tr>
                     <td>{{ $index + 1 }}</td>
@@ -119,7 +120,8 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <script>
     const chartLabels = @json($labelsGrafico);
-    const chartData = @json($dadosGrafico);
+    const dadosSemanaAtual = @json($dadosSemanaAtual);
+    const dadosSemanaAnterior = @json($dadosSemanaAnterior);
 </script>
-<script src="{{ asset('js/dashboard-chart.js') }}"></script>
+<script src="{{ asset('js/dashboard.js') }}"></script>
 @endsection
