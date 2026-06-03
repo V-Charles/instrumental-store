@@ -5,97 +5,16 @@
 function togglePassword(id) {
     const input = document.getElementById(id);
 
-    if (!input) return;
+    if (!input) {
+        return;
+    }
 
     input.type = input.type === "password" ? "text" : "password";
 }
 
 /* =========================================================
-   HOME - HERO
-========================================================= */
-
-document.addEventListener("DOMContentLoaded", () => {
-    const heroSlides = document.querySelectorAll(".home-hero-slide");
-    const heroDots = document.querySelectorAll(".home-hero-dots span");
-    const heroPrev = document.querySelector(".home-hero-prev");
-    const heroNext = document.querySelector(".home-hero-next");
-
-    let heroIndex = 0;
-
-    function showHeroSlide(index) {
-        if (!heroSlides.length) return;
-
-        heroSlides.forEach((slide) => slide.classList.remove("active"));
-        heroDots.forEach((dot) => dot.classList.remove("active"));
-
-        heroSlides[index].classList.add("active");
-
-        if (heroDots[index]) {
-            heroDots[index].classList.add("active");
-        }
-    }
-
-    if (heroPrev && heroNext && heroSlides.length) {
-        heroPrev.addEventListener("click", () => {
-            heroIndex = (heroIndex - 1 + heroSlides.length) % heroSlides.length;
-            showHeroSlide(heroIndex);
-        });
-
-        heroNext.addEventListener("click", () => {
-            heroIndex = (heroIndex + 1) % heroSlides.length;
-            showHeroSlide(heroIndex);
-        });
-
-        heroDots.forEach((dot, index) => {
-            dot.addEventListener("click", () => {
-                heroIndex = index;
-                showHeroSlide(heroIndex);
-            });
-        });
-
-        setInterval(() => {
-            heroIndex = (heroIndex + 1) % heroSlides.length;
-            showHeroSlide(heroIndex);
-        }, 5000);
-    }
-
-    /* =========================================================
-       HOME - SHIPPING BANNER
-    ========================================================= */
-
-    const shippingSlides = document.querySelectorAll(".home-shipping-slide");
-    const shippingPrev = document.querySelector(".home-shipping-prev");
-    const shippingNext = document.querySelector(".home-shipping-next");
-
-    let shippingIndex = 0;
-
-    function showShippingSlide(index) {
-        if (!shippingSlides.length) return;
-
-        shippingSlides.forEach((slide) => slide.classList.remove("active"));
-        shippingSlides[index].classList.add("active");
-    }
-
-    if (shippingPrev && shippingNext && shippingSlides.length) {
-        shippingPrev.addEventListener("click", () => {
-            shippingIndex = (shippingIndex - 1 + shippingSlides.length) % shippingSlides.length;
-            showShippingSlide(shippingIndex);
-        });
-
-        shippingNext.addEventListener("click", () => {
-            shippingIndex = (shippingIndex + 1) % shippingSlides.length;
-            showShippingSlide(shippingIndex);
-        });
-
-        setInterval(() => {
-            shippingIndex = (shippingIndex + 1) % shippingSlides.length;
-            showShippingSlide(shippingIndex);
-        }, 4500);
-    }
-});
-
-/* =========================================================
    HOME - CARROSSEL DO FRETE
+   Mantido fora do DOMContentLoaded porque é chamado no HTML
 ========================================================= */
 
 const shippingImages = [
@@ -109,7 +28,9 @@ let currentShipping = 0;
 function showShipping(index) {
     const img = document.getElementById("shippingImage");
 
-    if (!img) return;
+    if (!img) {
+        return;
+    }
 
     img.src = shippingImages[index];
 }
@@ -127,224 +48,264 @@ function prevShipping() {
 }
 
 /* =========================================================
-   DETALHES DO PRODUTO - GALERIA, CORES E QUANTIDADE
+   SCRIPTS DA PÁGINA
 ========================================================= */
 
-const productThumbs = document.querySelectorAll(".product-thumb");
-const mainProductImage = document.getElementById("mainProductImage");
-const productColors = document.querySelectorAll(".product-color");
+document.addEventListener("DOMContentLoaded", function () {
 
-const decreaseQuantity = document.getElementById("decreaseQuantity");
-const increaseQuantity = document.getElementById("increaseQuantity");
-const productQuantity = document.getElementById("productQuantity");
+    /* =========================================================
+       HOME - HERO
+    ========================================================= */
 
-if (productThumbs.length > 0 && mainProductImage) {
-    productThumbs.forEach((thumb) => {
-        thumb.addEventListener("click", () => {
-            const newImage = thumb.dataset.image;
+    const heroSlides = document.querySelectorAll(".home-hero-slide");
+    const heroDots = document.querySelectorAll(".home-hero-dots span");
+    const heroPrev = document.querySelector(".home-hero-prev");
+    const heroNext = document.querySelector(".home-hero-next");
 
-            mainProductImage.src = newImage;
+    let heroIndex = 0;
 
-            productThumbs.forEach((item) => item.classList.remove("active"));
-            thumb.classList.add("active");
-
-            productColors.forEach((color) => {
-                color.classList.toggle("active", color.dataset.image === newImage);
-            });
-        });
-    });
-}
-
-if (productColors.length > 0 && mainProductImage) {
-    productColors.forEach((color) => {
-        color.addEventListener("click", () => {
-            const newImage = color.dataset.image;
-
-            mainProductImage.src = newImage;
-
-            productColors.forEach((item) => item.classList.remove("active"));
-            color.classList.add("active");
-
-            productThumbs.forEach((thumb) => {
-                thumb.classList.toggle("active", thumb.dataset.image === newImage);
-            });
-        });
-    });
-}
-
-if (decreaseQuantity && increaseQuantity && productQuantity) {
-    let quantity = 1;
-
-    increaseQuantity.addEventListener("click", () => {
-        quantity++;
-        productQuantity.textContent = quantity;
-    });
-
-    decreaseQuantity.addEventListener("click", () => {
-        if (quantity > 1) {
-            quantity--;
-            productQuantity.textContent = quantity;
+    function showHeroSlide(index) {
+        if (!heroSlides.length) {
+            return;
         }
-    });
-}
 
-/* =========================================================
-   ÁREA DO CLIENTE - BANDEIRA PELO CÓDIGO DO PAÍS
-========================================================= */
+        heroSlides.forEach(function (slide) {
+            slide.classList.remove("active");
+        });
 
-const countryInput = document.getElementById('country-code-input');
-const countryFlag = document.getElementById('country-flag-preview');
+        heroDots.forEach(function (dot) {
+            dot.classList.remove("active");
+        });
 
-const countryCodes = {
-    '1': 'us',
-    '7': 'ru',
-    '20': 'eg',
-    '27': 'za',
-    '30': 'gr',
-    '31': 'nl',
-    '32': 'be',
-    '33': 'fr',
-    '34': 'es',
-    '39': 'it',
-    '41': 'ch',
-    '44': 'gb',
-    '45': 'dk',
-    '46': 'se',
-    '47': 'no',
-    '48': 'pl',
-    '49': 'de',
-    '51': 'pe',
-    '52': 'mx',
-    '54': 'ar',
-    '55': 'br',
-    '56': 'cl',
-    '57': 'co',
-    '58': 've',
-    '61': 'au',
-    '64': 'nz',
-    '81': 'jp',
-    '82': 'kr',
-    '86': 'cn',
-    '91': 'in',
-    '351': 'pt',
-    '352': 'lu',
-    '353': 'ie',
-    '354': 'is',
-    '355': 'al',
-    '358': 'fi',
-    '380': 'ua',
-    '420': 'cz',
-    '421': 'sk',
-    '591': 'bo',
-    '593': 'ec',
-    '595': 'py',
-    '598': 'uy'
-};
+        heroSlides[index].classList.add("active");
 
-function updateCountryFlag() {
-    if (!countryInput || !countryFlag) {
-        return;
+        if (heroDots[index]) {
+            heroDots[index].classList.add("active");
+        }
     }
 
-    const typedCode = countryInput.value.trim();
-    const countryCode = countryCodes[typedCode];
+    if (heroPrev && heroNext && heroSlides.length) {
+        heroPrev.addEventListener("click", function () {
+            heroIndex = (heroIndex - 1 + heroSlides.length) % heroSlides.length;
+            showHeroSlide(heroIndex);
+        });
 
-    if (countryCode) {
-        countryFlag.src = `https://flagcdn.com/24x18/${countryCode}.png`;
-        countryFlag.style.display = 'block';
-    } else {
-        countryFlag.src = '';
-        countryFlag.style.display = 'none';
+        heroNext.addEventListener("click", function () {
+            heroIndex = (heroIndex + 1) % heroSlides.length;
+            showHeroSlide(heroIndex);
+        });
+
+        heroDots.forEach(function (dot, index) {
+            dot.addEventListener("click", function () {
+                heroIndex = index;
+                showHeroSlide(heroIndex);
+            });
+        });
+
+        setInterval(function () {
+            heroIndex = (heroIndex + 1) % heroSlides.length;
+            showHeroSlide(heroIndex);
+        }, 5000);
     }
-}
 
-if (countryInput && countryFlag) {
-    updateCountryFlag();
+    /* =========================================================
+       HOME - SHIPPING BANNER
+    ========================================================= */
 
-    countryInput.addEventListener('input', function () {
-        this.value = this.value.replace(/\D/g, '');
+    const shippingSlides = document.querySelectorAll(".home-shipping-slide");
+    const shippingPrev = document.querySelector(".home-shipping-prev");
+    const shippingNext = document.querySelector(".home-shipping-next");
+
+    let shippingIndex = 0;
+
+    function showShippingSlide(index) {
+        if (!shippingSlides.length) {
+            return;
+        }
+
+        shippingSlides.forEach(function (slide) {
+            slide.classList.remove("active");
+        });
+
+        shippingSlides[index].classList.add("active");
+    }
+
+    if (shippingPrev && shippingNext && shippingSlides.length) {
+        shippingPrev.addEventListener("click", function () {
+            shippingIndex = (shippingIndex - 1 + shippingSlides.length) % shippingSlides.length;
+            showShippingSlide(shippingIndex);
+        });
+
+        shippingNext.addEventListener("click", function () {
+            shippingIndex = (shippingIndex + 1) % shippingSlides.length;
+            showShippingSlide(shippingIndex);
+        });
+
+        setInterval(function () {
+            shippingIndex = (shippingIndex + 1) % shippingSlides.length;
+            showShippingSlide(shippingIndex);
+        }, 4500);
+    }
+
+    /* =========================================================
+       DETALHES DO PRODUTO - MINIATURAS E QUANTIDADE
+    ========================================================= */
+
+    const detailThumbs = document.querySelectorAll(".product-thumb img");
+    const detailMainImage = document.getElementById("mainProductImage");
+
+    if (detailThumbs.length > 0 && detailMainImage) {
+        detailThumbs.forEach(function (thumb) {
+            thumb.addEventListener("click", function () {
+                detailMainImage.src = this.src;
+
+                document.querySelectorAll(".product-thumb").forEach(function (button) {
+                    button.classList.remove("active");
+                });
+
+                const buttonParent = this.closest(".product-thumb");
+
+                if (buttonParent) {
+                    buttonParent.classList.add("active");
+                }
+            });
+        });
+    }
+
+    const decreaseButton = document.getElementById("decreaseQuantity");
+    const increaseButton = document.getElementById("increaseQuantity");
+    const quantityText = document.getElementById("productQuantity");
+
+    if (decreaseButton && increaseButton && quantityText) {
+        decreaseButton.addEventListener("click", function () {
+            let quantity = Number(quantityText.textContent);
+
+            if (quantity > 1) {
+                quantityText.textContent = quantity - 1;
+            }
+        });
+
+        increaseButton.addEventListener("click", function () {
+            let quantity = Number(quantityText.textContent);
+
+            quantityText.textContent = quantity + 1;
+        });
+    }
+
+    /* =========================================================
+       ÁREA DO CLIENTE - BANDEIRA PELO CÓDIGO DO PAÍS
+    ========================================================= */
+
+    const countryInput = document.getElementById("country-code-input");
+    const countryFlag = document.getElementById("country-flag-preview");
+
+    const countryCodes = {
+        "1": "us",
+        "7": "ru",
+        "20": "eg",
+        "27": "za",
+        "30": "gr",
+        "31": "nl",
+        "32": "be",
+        "33": "fr",
+        "34": "es",
+        "39": "it",
+        "41": "ch",
+        "44": "gb",
+        "45": "dk",
+        "46": "se",
+        "47": "no",
+        "48": "pl",
+        "49": "de",
+        "51": "pe",
+        "52": "mx",
+        "54": "ar",
+        "55": "br",
+        "56": "cl",
+        "57": "co",
+        "58": "ve",
+        "61": "au",
+        "64": "nz",
+        "81": "jp",
+        "82": "kr",
+        "86": "cn",
+        "91": "in",
+        "351": "pt",
+        "352": "lu",
+        "353": "ie",
+        "354": "is",
+        "355": "al",
+        "358": "fi",
+        "380": "ua",
+        "420": "cz",
+        "421": "sk",
+        "591": "bo",
+        "593": "ec",
+        "595": "py",
+        "598": "uy"
+    };
+
+    function updateCountryFlag() {
+        if (!countryInput || !countryFlag) {
+            return;
+        }
+
+        const typedCode = countryInput.value.trim();
+        const countryCode = countryCodes[typedCode];
+
+        if (countryCode) {
+            countryFlag.src = `https://flagcdn.com/24x18/${countryCode}.png`;
+            countryFlag.style.display = "block";
+        } else {
+            countryFlag.src = "";
+            countryFlag.style.display = "none";
+        }
+    }
+
+    if (countryInput && countryFlag) {
         updateCountryFlag();
-    });
 
-    countryFlag.addEventListener('error', function () {
-        this.style.display = 'none';
-    });
-}
-
-/* =========================================================
-   DETALHES DO PRODUTO
-========================================================= */
-
-const productThumbs = document.querySelectorAll('.product-thumb img');
-const mainProductImage = document.getElementById('mainProductImage');
-
-if (productThumbs.length > 0 && mainProductImage) {
-    productThumbs.forEach(function (thumb) {
-        thumb.addEventListener('click', function () {
-            mainProductImage.src = this.src;
-
-            document.querySelectorAll('.product-thumb').forEach(function (button) {
-                button.classList.remove('active');
-            });
-
-            this.closest('.product-thumb').classList.add('active');
+        countryInput.addEventListener("input", function () {
+            this.value = this.value.replace(/\D/g, "");
+            updateCountryFlag();
         });
-    });
-}
 
-const decreaseQuantity = document.getElementById('decreaseQuantity');
-const increaseQuantity = document.getElementById('increaseQuantity');
-const productQuantity = document.getElementById('productQuantity');
-
-if (decreaseQuantity && increaseQuantity && productQuantity) {
-    decreaseQuantity.addEventListener('click', function () {
-        let quantity = Number(productQuantity.textContent);
-
-        if (quantity > 1) {
-            productQuantity.textContent = quantity - 1;
-        }
-    });
-
-    increaseQuantity.addEventListener('click', function () {
-        let quantity = Number(productQuantity.textContent);
-
-        productQuantity.textContent = quantity + 1;
-    });
-}
-
-const productThumbs = document.querySelectorAll('.product-thumb img');
-const mainProductImage = document.getElementById('mainProductImage');
-
-if (productThumbs.length > 0 && mainProductImage) {
-    productThumbs.forEach(function (thumb) {
-        thumb.addEventListener('click', function () {
-            mainProductImage.src = this.src;
-
-            document.querySelectorAll('.product-thumb').forEach(function (button) {
-                button.classList.remove('active');
-            });
-
-            this.closest('.product-thumb').classList.add('active');
+        countryFlag.addEventListener("error", function () {
+            this.style.display = "none";
         });
-    });
-}
+    }
 
-const decreaseQuantity = document.getElementById('decreaseQuantity');
-const increaseQuantity = document.getElementById('increaseQuantity');
-const productQuantity = document.getElementById('productQuantity');
+    /* =========================================================
+       MINI CARRINHO
+    ========================================================= */
 
-if (decreaseQuantity && increaseQuantity && productQuantity) {
-    decreaseQuantity.addEventListener('click', function () {
-        let quantity = Number(productQuantity.textContent);
+    const miniCartButton = document.getElementById("miniCartButton");
+    const miniCartBox = document.getElementById("miniCartBox");
+    const closeMiniCart = document.getElementById("closeMiniCart");
 
-        if (quantity > 1) {
-            productQuantity.textContent = quantity - 1;
-        }
-    });
+    if (miniCartButton && miniCartBox) {
+        miniCartButton.addEventListener("click", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
 
-    increaseQuantity.addEventListener('click', function () {
-        let quantity = Number(productQuantity.textContent);
+            miniCartBox.classList.toggle("active");
+        });
 
-        productQuantity.textContent = quantity + 1;
-    });
-}
+        miniCartBox.addEventListener("click", function (event) {
+            event.stopPropagation();
+        });
+
+        document.addEventListener("click", function () {
+            miniCartBox.classList.remove("active");
+        });
+    }
+
+    if (closeMiniCart && miniCartBox) {
+        closeMiniCart.addEventListener("click", function (event) {
+            event.preventDefault();
+            event.stopPropagation();
+
+            miniCartBox.classList.remove("active");
+        });
+    }
+});
