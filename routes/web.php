@@ -39,6 +39,10 @@ Route::get('/sobre', function () {
     return view('about');
 })->name('about');
 
+Route::get('/carrinho', function () {
+    return view('cart.index');
+})->name('cart.index');
+
 /* =========================================================
    AUTENTICAÇÃO - LOGIN E CADASTRO
 ========================================================= */
