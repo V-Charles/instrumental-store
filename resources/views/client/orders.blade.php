@@ -47,7 +47,7 @@
                                 */
 
                                 $statusPedido = strtolower($pedido->status ?? 'andamento');
-                                $etapaPedido = strtolower($pedido->etapa ?? 'confirmado');
+                                $etapaPedido = strtolower($pedido->status ?? 'confirmado');
 
                                 $pedidoCancelado = $statusPedido === 'cancelado';
                                 $pedidoFinalizado = $statusPedido === 'finalizado';
