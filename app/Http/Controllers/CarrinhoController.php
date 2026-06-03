@@ -55,4 +55,35 @@ class CarrinhoController extends Controller
             ->route('cart')
             ->with('success', 'Produto removido do carrinho!');
 }
+
+public function aumentar($id)
+{
+    $cart = session()->get('cart', []);
+
+    if (isset($cart[$id])) {
+        $cart[$id]['quantidade']++;
+    }
+
+    session()->put('cart', $cart);
+
+    return redirect()->route('cart');
+}
+
+public function diminuir($id)
+{
+    $cart = session()->get('cart', []);
+
+    if (isset($cart[$id])) {
+
+        if ($cart[$id]['quantidade'] > 1) {
+            $cart[$id]['quantidade']--;
+        } else {
+            unset($cart[$id]);
+        }
+    }
+
+    session()->put('cart', $cart);
+
+    return redirect()->route('cart');
+}
 }

@@ -12,10 +12,35 @@
 
             <h3>{{ $item['nome'] }}</h3>
 
-            <p>
-                Quantidade:
-                {{ $item['quantidade'] }}
-            </p>
+            <div style="display:flex; gap:10px; align-items:center;">
+
+    <form action="{{ route('cart.decrease', $item['id']) }}"
+          method="POST">
+
+        @csrf
+
+        <button type="submit">
+            -
+        </button>
+
+    </form>
+
+    <strong>
+        {{ $item['quantidade'] }}
+    </strong>
+
+    <form action="{{ route('cart.increase', $item['id']) }}"
+          method="POST">
+
+        @csrf
+
+        <button type="submit">
+            +
+        </button>
+
+    </form>
+
+</div>
 
         <p>
             R$ {{ number_format($item['preco'], 2, ',', '.') }}

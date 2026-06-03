@@ -26,6 +26,10 @@ Route::post('/carrinho/adicionar/{id}', [CarrinhoController::class, 'adicionar']
 
 Route::post('/carrinho/remover/{id}', [CarrinhoController::class, 'remover'])->name('cart.remove');
 
+Route::post('/carrinho/aumentar/{id}', [CarrinhoController::class, 'aumentar'])->name('cart.increase');
+
+Route::post('/carrinho/diminuir/{id}', [CarrinhoController::class, 'diminuir'])->name('cart.decrease');
+
 Route::get('/sobre', function () {
     return view('about');
 })->name('about');
