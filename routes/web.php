@@ -8,6 +8,7 @@ use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\PagamentoController;
 use App\Http\Controllers\CarrinhoController;
 use App\Http\Controllers\ClienteController;
+use App\Http\Controllers\DevolucaoController;
 
 /* =========================================================
    LOJA - PÁGINAS PÚBLICAS
@@ -87,6 +88,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/pedidos/{id}', [PedidoController::class, 'show']);
     Route::get('/pagamentos', [PagamentoController::class, 'index']);
     Route::get('/clientes', [ClienteController::class, 'index']);
+    Route::get('/devolucoes', [DevolucaoController::class, 'index']);
 });
 
 
