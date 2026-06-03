@@ -352,5 +352,8 @@ return [
 'register_address' => 'Register address',
 'no_products_in_cart' => 'No products in cart',
 'back' => 'Back',
-
+'purchase_completed' => 'Purchase completed',
+'purchase_success_message' => 'Purchase completed successfully',
+'back_to_products' => 'Back to products',
+'thank_you_purchase' => 'Thank you for shopping with us!',
 ];
