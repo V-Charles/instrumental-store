@@ -33,6 +33,12 @@
     </span>
 </div>
 
+@if(session('success'))
+    <div style="background-color: #d4edda; color: #155724; padding: 12px; border-radius: 6px; margin-bottom: 20px; font-weight: 600; font-size: 14px; border: 1px solid #c3e6cb;">
+        {{ session('success') }}
+    </div>
+@endif
+
 <div class="details-grid">
     <div class="details-main">
         <div class="details-card">
@@ -82,13 +88,33 @@
             
             <div class="action-panel">
                 @if($devolucao->status == 'solicitado')
-                    <button class="btn-action btn-primary"><span class="material-symbols-outlined">local_shipping</span> Autorizar Postagem</button>
-                    <button class="btn-action btn-danger"><span class="material-symbols-outlined">close</span> Recusar Solicitação</button>
+                    <form action="/admin/devolucoes/{{ $devolucao->id }}/status" method="POST" style="margin-bottom: 12px;">
+                        @csrf
+                        <input type="hidden" name="status" value="aguardando_envio">
+                        <button type="submit" class="btn-action btn-primary" style="width: 100%;"><span class="material-symbols-outlined">local_shipping</span> Autorizar Postagem</button>
+                    </form>
+                    <form action="/admin/devolucoes/{{ $devolucao->id }}/status" method="POST">
+                        @csrf
+                        <input type="hidden" name="status" value="recusado">
+                        <button type="submit" class="btn-action btn-danger" style="width: 100%;"><span class="material-symbols-outlined">close</span> Recusar Solicitação</button>
+                    </form>
                 @elseif($devolucao->status == 'aguardando_envio')
-                    <button class="btn-action btn-primary"><span class="material-symbols-outlined">inventory_2</span> Confirmar Recebimento</button>
+                    <form action="/admin/devolucoes/{{ $devolucao->id }}/status" method="POST">
+                        @csrf
+                        <input type="hidden" name="status" value="inspecao">
+                        <button type="submit" class="btn-action btn-primary" style="width: 100%;"><span class="material-symbols-outlined">inventory_2</span> Confirmar Recebimento</button>
+                    </form>
                 @elseif($devolucao->status == 'inspecao')
-                    <button class="btn-action btn-primary"><span class="material-symbols-outlined">payments</span> Autorizar Estorno</button>
-                    <button class="btn-action btn-danger"><span class="material-symbols-outlined">block</span> Reprovar Inspeção</button>
+                    <form action="/admin/devolucoes/{{ $devolucao->id }}/status" method="POST" style="margin-bottom: 12px;">
+                        @csrf
+                        <input type="hidden" name="status" value="reembolsado">
+                        <button type="submit" class="btn-action btn-primary" style="width: 100%;"><span class="material-symbols-outlined">payments</span> Autorizar Estorno</button>
+                    </form>
+                    <form action="/admin/devolucoes/{{ $devolucao->id }}/status" method="POST">
+                        @csrf
+                        <input type="hidden" name="status" value="recusado">
+                        <button type="submit" class="btn-action btn-danger" style="width: 100%;"><span class="material-symbols-outlined">block</span> Reprovar Inspeção</button>
+                    </form>
                 @else
                     <div style="text-align: center; padding: 12px; background: #fbf5ee; border-radius: 6px; color: #10332d; font-weight: 600;">
                         Processo Finalizado

@@ -75,4 +75,19 @@ class DevolucaoController extends Controller
         
         return view('admin.devolucoes.show', compact('devolucao'));
     }
+
+    public function updateStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|in:solicitado,aguardando_envio,inspecao,reembolsado,recusado'
+        ]);
+
+        $devolucao = Devolucao::findOrFail($id);
+        
+        $devolucao->update([
+            'status' => $request->status
+        ]);
+
+        return redirect()->back()->with('success', 'Status da devolução atualizado com sucesso!');
+    }
 }

@@ -90,6 +90,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/clientes', [ClienteController::class, 'index']);
     Route::get('/devolucoes', [DevolucaoController::class, 'index']);
     Route::get('/devolucoes/{id}', [DevolucaoController::class, 'show']);
+    Route::post('/devolucoes/{id}/status', [DevolucaoController::class, 'updateStatus']);
 });
 
 
