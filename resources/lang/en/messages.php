@@ -308,4 +308,49 @@ return [
     'clients' => 'CLIENTS',
     'team' => 'TEAM',
     'admin_logout' => 'Logout',
+
+/* =========================================================
+   CART
+========================================================= */
+
+'cart' => 'Cart',
+'shopping_cart' => 'Shopping cart',
+'cart_empty' => 'Your cart is empty.',
+'view_cart' => 'View cart',
+'product' => 'Product',
+'price' => 'Price',
+'quantity' => 'Quantity',
+'subtotal' => 'Subtotal',
+'total' => 'Total',
+'remove' => 'Remove',
+'finish' => 'Finish',
+'checkout' => 'Checkout',
+'coupon' => 'Coupon',
+'enter_coupon' => 'Enter coupon',
+'apply' => 'Apply',
+'see_products' => 'See products',
+'items_available' => 'items available',
+
+/* =========================================================
+   PAYMENT / PURCHASE DATA
+========================================================= */
+
+'payment_form' => 'Payment form',
+'purchase_data' => 'Purchase data',
+'payment_method' => 'Payment method',
+'select' => 'Select',
+'credit_card' => 'Credit card',
+'debit_card' => 'Debit card',
+'pix' => 'Pix',
+'registered_cards' => 'Registered cards',
+'select_registered_card' => 'Select registered card',
+'no_registered_cards' => 'No registered cards',
+'register_payment_method' => 'Register method',
+'registered_address' => 'Registered address',
+'select_registered_address' => 'Select registered address',
+'no_registered_address' => 'No registered address',
+'register_address' => 'Register address',
+'no_products_in_cart' => 'No products in cart',
+'back' => 'Back',
+
 ];
