@@ -48,6 +48,10 @@ Route::get('/dados-compra', function () {
     return view('payment.index');
 })->name('payment.index');
 
+Route::get('/compra-realizada', function () {
+    return view('order.success');
+})->name('order.success');
+
 /* =========================================================
    AUTENTICAÇÃO - LOGIN E CADASTRO
 ========================================================= */
