@@ -52,6 +52,10 @@ Route::get('/compra-realizada', function () {
     return view('order.success');
 })->name('order.success');
 
+Route::get('/pagamento-pix', function () {
+    return view('payment.pix');
+})->name('payment.pix');
+
 /* =========================================================
    AUTENTICAÇÃO - LOGIN E CADASTRO
 ========================================================= */
