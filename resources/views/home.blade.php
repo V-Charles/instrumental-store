@@ -85,7 +85,7 @@
 
                             <div class="home-product-actions">
 
-                                <a href="/carrinho" class="home-btn home-btn--primary">
+                                <a href="{{ route('cart') }}" class="home-btn home-btn--primary">
                                     <span class="material-symbols-outlined">shopping_cart</span>
                                     {{ __('messages.add') }}
                                 </a>
@@ -174,7 +174,7 @@
 
                             <div class="home-other-actions">
 
-                                <a href="/carrinho" class="home-btn home-btn--primary">
+                                <a href="{{ route('cart') }}" class="home-btn home-btn--primary">
                                     <span class="material-symbols-outlined">shopping_cart</span>
                                     {{ __('messages.add') }}
                                 </a>

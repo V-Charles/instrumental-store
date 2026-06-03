@@ -18,6 +18,10 @@ Route::get('/produtos/{id}', [ProductController::class, 'show'])->name('products
 
 Route::get('/produto/{id}', [ProductController::class, 'show'])->name('product.detail');
 
+Route::get('/carrinho', function () {
+    return view('cart');
+})->name('cart');
+
 Route::get('/sobre', function () {
     return view('about');
 })->name('about');

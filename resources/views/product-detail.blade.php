@@ -104,7 +104,7 @@
             </div>
 
             <div class="product-detail-actions">
-                <a href="/carrinho" class="product-detail-add">
+                <a href="{{ route('cart') }}" class="product-detail-add">
                     <span class="material-symbols-outlined">shopping_cart</span>
                     {{ __('messages.add') }}
                 </a>
@@ -143,7 +143,7 @@
                             </p>
 
                             <div class="home-product-actions">
-                                <a href="/carrinho" class="home-btn home-btn--primary">
+                                <a href="{{ route('cart') }}" class="home-btn home-btn--primary">
                                     <span class="material-symbols-outlined">shopping_cart</span>
                                     {{ __('messages.add') }}
                                 </a>
