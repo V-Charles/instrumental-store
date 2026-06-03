@@ -69,6 +69,7 @@ Route::prefix('admin')->group(function () {
     Route::get('/produtos/{id}/edit', [ProdutoController::class, 'edit']);
     Route::put('/produtos/{id}', [ProdutoController::class, 'update']);
     Route::get('/pedidos', [PedidoController::class, 'index']);
+    Route::get('/pedidos/{id}', [PedidoController::class, 'show']);
 });
 
 

@@ -50,4 +50,11 @@ class PedidoController extends Controller
             'pedidosCancelados'
         ));
     }
+
+    public function show($id)
+    {
+        $pedido = Pedido::with('itens.produto')->findOrFail($id);
+        
+        return view('admin.pedidos.show', compact('pedido'));
+    }
 }
