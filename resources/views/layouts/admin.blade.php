@@ -64,10 +64,6 @@
                     <span class="material-symbols-outlined">shopping_cart</span>
                     {{ __('messages.admin_products') }}
                 </a>
-                <a href="/admin/estoque" class="{{ request()->is('admin/estoque*') ? 'active' : '' }}">
-                    <span class="material-symbols-outlined">warehouse</span>
-                    {{ __('messages.inventory') }}
-                </a>
                 <a href="/admin/pedidos" class="{{ request()->is('admin/pedidos*') ? 'active' : '' }}">
                     <span class="material-symbols-outlined">package</span>
                     {{ __('messages.admin_orders') }}
