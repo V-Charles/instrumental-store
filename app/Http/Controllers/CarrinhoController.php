@@ -6,6 +6,7 @@ use App\Models\Produto;
 use Illuminate\Http\Request;
 use App\Models\Pedido;
 use App\Models\ItemPedido;
+use App\Models\Pagamento;
 
 class CarrinhoController extends Controller
 {
@@ -95,12 +96,12 @@ public function diminuir($id)
     return redirect()->route('cart');
 }
 
-public function finalizar()
+public function finalizar(Request $request)
 {
     $cart = session()->get('cart', []);
 
     if (empty($cart)) {
-        return redirect()->route('cart');
+        return redirect()->back();
     }
 
     $total = 0;
@@ -110,28 +111,19 @@ public function finalizar()
     }
 
     $pedido = Pedido::create([
-        'codigo' => 'PED-' . strtoupper(uniqid()),
-        'total' => $total,
-        'status' => 'pendente',
-        'forma_pagamento' => null,
-        'cliente_nome' => 'Cliente Teste',
-        'cliente_email' => 'cliente@teste.com',
+        // ...
     ]);
 
     foreach ($cart as $item) {
 
         ItemPedido::create([
-            'pedido_id' => $pedido->id,
-            'produto_id' => $item['id'],
-            'quantidade' => $item['quantidade'],
-            'preco_unitario' => $item['preco'],
+            // ...
         ]);
+
     }
 
     session()->forget('cart');
 
-    return redirect()
-        ->route('home')
-        ->with('success', 'Pedido criado com sucesso!');
+    return redirect()->route('home');
 }
 }

@@ -75,6 +75,30 @@
 
         @csrf
 
+        <div>
+
+            <label>
+                Forma de pagamento
+            </label>
+
+            <select name="forma_pagamento" required>
+
+                <option value="">
+                    Selecione
+                </option>
+
+                <option value="credito">
+                    Cartão de Crédito
+                </option>
+
+                <option value="debito">
+                    Cartão de Débito
+                </option>
+
+    </select>
+
+        </div>
+
         <button type="submit">
             Finalizar Compra
         </button>
