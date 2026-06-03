@@ -6,6 +6,7 @@ use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\PagamentoController;
+use App\Http\Controllers\CarrinhoController;
 
 /* =========================================================
    LOJA - PÁGINAS PÚBLICAS
@@ -19,9 +20,9 @@ Route::get('/produtos/{id}', [ProductController::class, 'show'])->name('products
 
 Route::get('/produto/{id}', [ProductController::class, 'show'])->name('product.detail');
 
-Route::get('/carrinho', function () {
-    return view('cart');
-})->name('cart');
+Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('cart');
+
+Route::post('/carrinho/adicionar/{id}', [CarrinhoController::class, 'adicionar'])->name('cart.add');
 
 Route::get('/sobre', function () {
     return view('about');

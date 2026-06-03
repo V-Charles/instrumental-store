@@ -104,10 +104,18 @@
             </div>
 
             <div class="product-detail-actions">
-                <a href="{{ route('cart') }}" class="product-detail-add">
-                    <span class="material-symbols-outlined">shopping_cart</span>
-                    {{ __('messages.add') }}
-                </a>
+                                <form action="{{ route('cart.add', $produtoSimilar->id) }}"
+                                    method="POST">
+                                @csrf
+                                <button type="submit"
+                                    class="home-btn home-btn--primary">
+                                    <span class="material-symbols-outlined">
+                                        shopping_cart
+                                    </span>
+
+                                    {{ __('messages.add') }}
+                                </button>
+                                </form>
 
                 <a href="/compra" class="product-detail-buy">
                     {{ __('messages.buy') }}
@@ -143,10 +151,18 @@
                             </p>
 
                             <div class="home-product-actions">
-                                <a href="{{ route('cart') }}" class="home-btn home-btn--primary">
-                                    <span class="material-symbols-outlined">shopping_cart</span>
+                               <form action="{{ route('cart.add', $produto->id) }}"
+                                    method="POST">
+                                @csrf
+                                <button type="submit"
+                                    class="home-btn home-btn--primary">
+                                    <span class="material-symbols-outlined">
+                                        shopping_cart
+                                    </span>
+
                                     {{ __('messages.add') }}
-                                </a>
+                                </button>
+                                </form>
 
                                 <a href="{{ route('product.detail', $produtoSimilar->id) }}" class="home-btn home-btn--secondary">
                                     {{ __('messages.details') }}
