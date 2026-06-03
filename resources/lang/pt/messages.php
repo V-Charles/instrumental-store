@@ -356,4 +356,11 @@ return [
 'purchase_success_message' => 'Compra realizada com sucesso',
 'back_to_products' => 'Voltar aos produtos',
 'thank_you_purchase' => 'Obrigada por comprar conosco!',
+'pix_payment' => 'Pagamento via Pix',
+'pay_with_pix' => 'Pague com Pix',
+'pix_instruction' => 'Escaneie o QR Code ou copie o código Pix abaixo para concluir o pagamento.',
+'pix_code' => 'Código Pix',
+'copy' => 'Copiar',
+'pix_copied' => 'Código Pix copiado!',
+'confirm_payment' => 'Confirmar pagamento',
 ];
