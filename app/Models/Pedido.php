@@ -22,4 +22,9 @@ class Pedido extends Model
     {
         return $this->hasMany(ItemPedido::class);
     }
+
+    public function pagamento()
+    {
+        return $this->hasOne(Pagamento::class);
+    }
 }

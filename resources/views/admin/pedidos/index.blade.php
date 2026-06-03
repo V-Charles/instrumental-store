@@ -29,16 +29,16 @@
 <div class="table-container">
     <div class="table-controls">
         <div class="table-tabs">
-            <button class="tab active">Todos os Pedidos ({{ $totalPedidos }})</button>
-            <button class="tab">Pendentes</button>
-            <button class="tab">Enviados</button>
-            <button class="tab">Entregues</button>
-            <button class="tab">Cancelados</button>
+            <button class="tab {{ request('status') == '' ? 'active' : '' }}" data-status="">Todos os Pedidos ({{ $totalPedidos }})</button>
+            <button class="tab {{ request('status') == 'pendente' ? 'active' : '' }}" data-status="pendente">Pendentes</button>
+            <button class="tab {{ request('status') == 'enviado' ? 'active' : '' }}" data-status="enviado">Enviados</button>
+            <button class="tab {{ request('status') == 'entregue' ? 'active' : '' }}" data-status="entregue">Entregues</button>
+            <button class="tab {{ request('status') == 'cancelado' ? 'active' : '' }}" data-status="cancelado">Cancelados</button>
         </div>
         
         <div class="table-actions">
             <div class="search-box">
-                <input type="text" id="input-pesquisa-pedidos" placeholder="Buscar por cliente ou código">
+                <input type="text" id="input-pesquisa-pedidos" value="{{ request('search') }}" placeholder="Buscar por cliente ou código">
                 <span class="material-symbols-outlined">search</span>
             </div>
         </div>
@@ -78,10 +78,12 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="6" style="text-align: center; padding: 2rem;">Nenhum pedido registrado no sistema ainda.</td>
+                    <td colspan="6" style="text-align: center; padding: 2rem;">Nenhum pedido encontrado com estes filtros.</td>
                 </tr>
             @endforelse 
         </tbody>
     </table>
 </div>
+
+<script src="{{ asset('js/filtros-pedidos.js') }}"></script>
 @endsection

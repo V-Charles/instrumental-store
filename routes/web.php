@@ -5,6 +5,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PedidoController;
+use App\Http\Controllers\PagamentoController;
 
 /* =========================================================
    LOJA - PÁGINAS PÚBLICAS
@@ -73,6 +74,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/produtos/{id}/edit', [ProdutoController::class, 'edit']);
     Route::put('/produtos/{id}', [ProdutoController::class, 'update']);
     Route::get('/pedidos', [PedidoController::class, 'index']);
+    Route::get('/pedidos/{id}', [PedidoController::class, 'show']);
+    Route::get('/pagamentos', [PagamentoController::class, 'index']);
 });
 
 
