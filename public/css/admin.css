@@ -811,3 +811,34 @@ body.admin-body {
     background-color: #e2e3e5;
     color: #383d41;
 }
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.metric-card {
+    background-color: #fbf5ee;
+    border: 1px solid #f2e8de;
+    border-radius: 8px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.metric-title {
+    font-size: 15px;
+    font-weight: 700;
+    color: #333333;
+    margin: 0;
+}
+
+.metric-value {
+    font-size: 32px;
+    font-weight: 800;
+    color: #10332d;
+    margin: 0;
+}

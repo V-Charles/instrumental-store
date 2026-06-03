@@ -7,6 +7,25 @@
     <h2>{{ __('messages.admin_orders') }}</h2>
 </div>
 
+<div class="metrics-grid">
+    <div class="metric-card">
+        <h3 class="metric-title">Total de pedidos</h3>
+        <p class="metric-value">{{ $totalPedidos }}</p>
+    </div>
+    <div class="metric-card">
+        <h3 class="metric-title">Novos pedidos</h3>
+        <p class="metric-value">{{ $novosPedidos }}</p>
+    </div>
+    <div class="metric-card">
+        <h3 class="metric-title">Pedidos finalizados</h3>
+        <p class="metric-value">{{ $pedidosFinalizados }}</p>
+    </div>
+    <div class="metric-card">
+        <h3 class="metric-title">Pedidos cancelados</h3>
+        <p class="metric-value">{{ $pedidosCancelados }}</p>
+    </div>
+</div>
+
 <div class="table-container">
     <div class="table-controls">
         <div class="table-tabs">
