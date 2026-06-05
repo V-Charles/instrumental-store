@@ -3,7 +3,7 @@
 @section('content')
 
 @php
-    $cartItems = session('cart', []);
+    $cartItems = $cart ?? session('cart', []);
     $cartTotal = 0;
 @endphp
 
@@ -65,18 +65,38 @@
                         </p>
 
                         <div class="cart-quantity">
-                            <button type="button">-</button>
+
+                            <form action="{{ route('cart.diminuir', $itemId) }}" method="POST">
+                                @csrf
+
+                                <button type="submit">
+                                    -
+                                </button>
+                            </form>
+
                             <span>{{ $itemQuantity }}</span>
-                            <button type="button">+</button>
+
+                            <form action="{{ route('cart.aumentar', $itemId) }}" method="POST">
+                                @csrf
+
+                                <button type="submit">
+                                    +
+                                </button>
+                            </form>
+
                         </div>
 
                         <p class="cart-subtotal">
                             R$ {{ number_format($itemSubtotal, 2, ',', '.') }}
                         </p>
 
-                        <button type="button" class="cart-remove" title="{{ __('messages.remove') }}">
-                            <span class="material-symbols-outlined">delete</span>
-                        </button>
+                        <form action="{{ route('cart.remover', $itemId) }}" method="POST" class="cart-remove-form">
+                            @csrf
+
+                            <button type="submit" class="cart-remove" title="{{ __('messages.remove') }}">
+                                <span class="material-symbols-outlined">delete</span>
+                            </button>
+                        </form>
 
                     </div>
 
@@ -116,7 +136,7 @@
                 </strong>
             </div>
 
-            <a href="/dados-compra" class="cart-checkout">
+            <a href="{{ route('payment.index') }}" class="cart-checkout">
                 {{ __('messages.finish') }}
             </a>
 
