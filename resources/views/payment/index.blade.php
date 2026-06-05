@@ -199,10 +199,10 @@
     </section>
 
     <div class="payment-back">
-        <a href="{{ route('cart.index') }}">
-            {{ __('messages.back') }}
-        </a>
-    </div>
+    <a href="{{ route('cart') }}">
+        {{ __('messages.back') }}
+    </a>
+</div>
 
 </div>
 
