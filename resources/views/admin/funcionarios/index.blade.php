@@ -3,9 +3,16 @@
 @section('breadcrumb', 'Funcionários')
 
 @section('content')
-<div class="admin-page-header">
+<div class="admin-page-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
     <h2>Equipe e Acessos</h2>
+    <a href="/admin/funcionarios/criar" class="btn-action btn-primary" style="text-decoration: none;">Novo Funcionário</a>
 </div>
+
+@if(session('success'))
+    <div style="background-color: #d4edda; color: #155724; padding: 12px; border-radius: 6px; margin-bottom: 20px; font-weight: 600; font-size: 14px; border: 1px solid #c3e6cb;">
+        {{ session('success') }}
+    </div>
+@endif
 
 <div class="metrics-grid">
     <div class="metric-card">
@@ -69,7 +76,6 @@
                             {{ $statusTexto }}
                         </span>
                     </td>
-                    <td>{{ $funcionario->created_at->format('d/m/Y') }}</td>
                     <td>{{ $funcionario->created_at->format('d/m/Y') }}</td>
                     <td>
                         <div class="action-buttons">

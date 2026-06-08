@@ -49,4 +49,36 @@ class FuncionarioController extends Controller
             'totalOperadores'
         ));
     }
+
+    public function create()
+    {
+        return view('admin.funcionarios.create');
+    }
+
+    public function store(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users',
+            'password' => 'required|string|min:8',
+            'cargo' => 'required|in:admin,gerente,operador',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048'
+        ]);
+
+        $fotoPath = null;
+        if ($request->hasFile('foto')) {
+            $fotoPath = $request->file('foto')->store('funcionarios', 'public');
+        }
+
+        User::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'password' => \Illuminate\Support\Facades\Hash::make($request->password),
+            'cargo' => $request->cargo,
+            'ativo' => true,
+            'foto' => $fotoPath,
+        ]);
+
+        return redirect('/admin/funcionarios')->with('success', 'Funcionário cadastrado com sucesso!');
+    }
 }

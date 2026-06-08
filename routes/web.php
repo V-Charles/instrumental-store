@@ -102,6 +102,8 @@ Route::prefix('admin')->group(function () {
     Route::get('/devolucoes/{id}', [DevolucaoController::class, 'show']);
     Route::post('/devolucoes/{id}/status', [DevolucaoController::class, 'updateStatus']);
     Route::get('/funcionarios', [FuncionarioController::class, 'index']);
+    Route::get('/funcionarios/criar', [FuncionarioController::class, 'create']);
+    Route::post('/funcionarios', [FuncionarioController::class, 'store']);
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/dashboard', [DashboardController::class, 'index']);
 });
