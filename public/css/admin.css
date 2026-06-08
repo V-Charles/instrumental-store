@@ -983,12 +983,14 @@ body.admin-body {
 }
 
 .btn-primary {
-    background-color: #10332d;
+    background-color: #b0003a;
     color: #ffffff;
+    border: none;
+    transition: background-color 0.3s;
 }
 
 .btn-primary:hover {
-    background-color: #1a4d44;
+    background-color: #8b002d;
 }
 
 .btn-danger {
