@@ -79,7 +79,7 @@
                     <td>{{ $funcionario->created_at->format('d/m/Y') }}</td>
                     <td>
                         <div class="action-buttons">
-                            <a href="#" title="Editar"><span class="material-symbols-outlined">edit</span></a>
+                            <a href="/admin/funcionarios/{{ $funcionario->id }}/editar" title="Editar"><span class="material-symbols-outlined">edit</span></a>
                         </div>
                     </td>
                 </tr>

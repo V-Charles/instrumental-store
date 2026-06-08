@@ -81,4 +81,43 @@ class FuncionarioController extends Controller
 
         return redirect('/admin/funcionarios')->with('success', 'Funcionário cadastrado com sucesso!');
     }
+
+    public function edit($id)
+    {
+        $funcionario = User::findOrFail($id);
+        return view('admin.funcionarios.create', compact('funcionario'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $funcionario = User::findOrFail($id);
+
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|string|email|max:255|unique:users,email,'.$funcionario->id,
+            'password' => 'nullable|string|min:8',
+            'cargo' => 'required|in:admin,gerente,operador',
+            'ativo' => 'required|boolean',
+            'foto' => 'nullable|image|mimes:jpeg,png,jpg,webp|max:2048'
+        ]);
+
+        $dados = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'cargo' => $request->cargo,
+            'ativo' => $request->ativo,
+        ];
+
+        if ($request->filled('password')) {
+            $dados['password'] = \Illuminate\Support\Facades\Hash::make($request->password);
+        }
+
+        if ($request->hasFile('foto')) {
+            $dados['foto'] = $request->file('foto')->store('funcionarios', 'public');
+        }
+
+        $funcionario->update($dados);
+
+        return redirect('/admin/funcionarios')->with('success', 'Dados do funcionário atualizados com sucesso!');
+    }
 }

@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', function() {
                         <td>${funcionario.data_formatada}</td>
                         <td>
                             <div class="action-buttons">
-                                <a href="#" title="Editar"><span class="material-symbols-outlined">edit</span></a>
+                                <a href="/admin/funcionarios/${funcionario.id}/editar" title="Editar"><span class="material-symbols-outlined">edit</span></a>
                             </div>
                         </td>
                     `;

@@ -98,36 +98,29 @@ Route::get('/lang/{locale}', function ($locale) {
 
 Route::prefix('admin')->group(function () {
     Route::get('/', [DashboardController::class, 'index']);
-
     Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::get('/produtos', [ProdutoController::class, 'index']);
-
     Route::get('/produtos/create', [ProdutoController::class, 'create']);
-
     Route::post('/produtos', [ProdutoController::class, 'store']);
-
     Route::get('/produtos/{id}/edit', [ProdutoController::class, 'edit']);
-
     Route::put('/produtos/{id}', [ProdutoController::class, 'update']);
 
     Route::get('/pedidos', [PedidoController::class, 'index']);
-
     Route::get('/pedidos/{id}', [PedidoController::class, 'show']);
 
     Route::get('/pagamentos', [PagamentoController::class, 'index']);
-
     Route::get('/clientes', [ClienteController::class, 'index']);
 
     Route::get('/devolucoes', [DevolucaoController::class, 'index']);
-
     Route::get('/devolucoes/{id}', [DevolucaoController::class, 'show']);
-
     Route::post('/devolucoes/{id}/status', [DevolucaoController::class, 'updateStatus']);
 
     Route::get('/funcionarios', [FuncionarioController::class, 'index']);
-    Route::get('/', [DashboardController::class, 'index']);
-    Route::get('/dashboard', [DashboardController::class, 'index']);
+    Route::get('/funcionarios/criar', [FuncionarioController::class, 'create']);
+    Route::post('/funcionarios', [FuncionarioController::class, 'store']);
+    Route::get('/funcionarios/{id}/editar', [FuncionarioController::class, 'edit']);
+    Route::put('/funcionarios/{id}', [FuncionarioController::class, 'update']);
 });
 
 /* =========================================================
