@@ -32,9 +32,13 @@
                 <a href="/lang/en" class="lang-link {{ session('locale') == 'en' ? 'active' : '' }}">EN</a>
             </div>
 
-            <a href="/admin/logout" class="logout-btn">
+            <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
+                @csrf
+            </form>
+
+            <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="logout-btn" style="cursor: pointer;">
                 <span class="material-symbols-outlined">logout</span>
-                {{ __('messages.admin_logout') }}
+                Sair
             </a>
         </div>
     </header>
