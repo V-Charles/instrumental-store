@@ -352,5 +352,15 @@ return [
 'register_address' => 'Register address',
 'no_products_in_cart' => 'No products in cart',
 'back' => 'Back',
-
+'purchase_completed' => 'Purchase completed',
+'purchase_success_message' => 'Purchase completed successfully',
+'back_to_products' => 'Back to products',
+'thank_you_purchase' => 'Thank you for shopping with us!',
+'pix_payment' => 'Pix payment',
+'pay_with_pix' => 'Pay with Pix',
+'pix_instruction' => 'Scan the QR Code or copy the Pix code below to complete the payment.',
+'pix_code' => 'Pix code',
+'copy' => 'Copy',
+'pix_copied' => 'Pix code copied!',
+'confirm_payment' => 'Confirm payment',
 ];

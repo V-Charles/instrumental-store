@@ -24,38 +24,52 @@ Route::get('/produtos/{id}', [ProductController::class, 'show'])->name('products
 
 Route::get('/produto/{id}', [ProductController::class, 'show'])->name('product.detail');
 
+/* =========================================================
+   CARRINHO
+========================================================= */
+
 Route::get('/carrinho', [CarrinhoController::class, 'index'])->name('cart');
 
 Route::post('/carrinho/adicionar/{id}', [CarrinhoController::class, 'adicionar'])->name('cart.add');
 
-Route::post('/carrinho/remover/{id}', [CarrinhoController::class, 'remover'])->name('cart.remove');
+Route::post('/carrinho/remover/{id}', [CarrinhoController::class, 'remover'])->name('cart.remover');
 
-Route::post('/carrinho/aumentar/{id}', [CarrinhoController::class, 'aumentar'])->name('cart.increase');
+Route::post('/carrinho/aumentar/{id}', [CarrinhoController::class, 'aumentar'])->name('cart.aumentar');
 
-Route::post('/carrinho/diminuir/{id}', [CarrinhoController::class, 'diminuir'])->name('cart.decrease');
+Route::post('/carrinho/diminuir/{id}', [CarrinhoController::class, 'diminuir'])->name('cart.diminuir');
 
-Route::post('/carrinho/finalizar', [CarrinhoController::class, 'finalizar'])->name('cart.checkout');
+Route::post('/carrinho/finalizar', [CarrinhoController::class, 'finalizar'])->name('cart.finalizar');
+
+/* =========================================================
+   PÁGINAS INSTITUCIONAIS / COMPRA
+========================================================= */
 
 Route::get('/sobre', function () {
     return view('about');
 })->name('about');
 
-Route::get('/carrinho', function () {
-    return view('cart.index');
-})->name('cart.index');
-
 Route::get('/dados-compra', function () {
     return view('payment.index');
 })->name('payment.index');
+
+Route::get('/pagamento-pix', function () {
+    return view('payment.pix');
+})->name('payment.pix');
+
+Route::get('/compra-realizada', function () {
+    return view('order.success');
+})->name('order.success');
 
 /* =========================================================
    AUTENTICAÇÃO - LOGIN E CADASTRO
 ========================================================= */
 
 Route::get('/login', [AuthController::class, 'loginForm'])->name('login');
+
 Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 
 Route::get('/cadastro', [AuthController::class, 'registerForm'])->name('register');
+
 Route::post('/cadastro', [AuthController::class, 'register'])->name('register.submit');
 
 Route::get('/recuperar-senha', function () {
@@ -65,7 +79,6 @@ Route::get('/recuperar-senha', function () {
 Route::get('/nova-senha', function () {
     return view('auth.reset-password');
 })->name('password.reset');
-
 
 /* =========================================================
    IDIOMA - INTERNACIONALIZAÇÃO
@@ -79,35 +92,43 @@ Route::get('/lang/{locale}', function ($locale) {
     return redirect()->back();
 })->name('lang.switch');
 
-
 /* =========================================================
    ADMINISTRAÇÃO DA LOJA
 ========================================================= */
 
 Route::prefix('admin')->group(function () {
-    Route::get('/dashboard', function () {
-        return view('admin.dashboard');
-    });
+    Route::get('/', [DashboardController::class, 'index']);
+
+    Route::get('/dashboard', [DashboardController::class, 'index']);
 
     Route::get('/produtos', [ProdutoController::class, 'index']);
+
     Route::get('/produtos/create', [ProdutoController::class, 'create']);
+
     Route::post('/produtos', [ProdutoController::class, 'store']);
+
     Route::get('/produtos/{id}/edit', [ProdutoController::class, 'edit']);
+
     Route::put('/produtos/{id}', [ProdutoController::class, 'update']);
+
     Route::get('/pedidos', [PedidoController::class, 'index']);
+
     Route::get('/pedidos/{id}', [PedidoController::class, 'show']);
+
     Route::get('/pagamentos', [PagamentoController::class, 'index']);
+
     Route::get('/clientes', [ClienteController::class, 'index']);
+
     Route::get('/devolucoes', [DevolucaoController::class, 'index']);
+
     Route::get('/devolucoes/{id}', [DevolucaoController::class, 'show']);
+
     Route::post('/devolucoes/{id}/status', [DevolucaoController::class, 'updateStatus']);
+
     Route::get('/funcionarios', [FuncionarioController::class, 'index']);
-    Route::get('/funcionarios/criar', [FuncionarioController::class, 'create']);
-    Route::post('/funcionarios', [FuncionarioController::class, 'store']);
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/dashboard', [DashboardController::class, 'index']);
 });
-
 
 /* =========================================================
    ÁREA DO CLIENTE

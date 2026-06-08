@@ -190,19 +190,19 @@
 
             </div>
 
-            <a href="/compra-realizada" class="payment-finish-button">
-                {{ __('messages.finish') }}
-            </a>
+<a href="{{ route('order.success') }}" class="payment-finish-button" id="paymentFinishButton">
+    {{ __('messages.finish') }}
+</a>
 
         </aside>
 
     </section>
 
     <div class="payment-back">
-        <a href="{{ route('cart.index') }}">
-            {{ __('messages.back') }}
-        </a>
-    </div>
+    <a href="{{ route('cart') }}">
+        {{ __('messages.back') }}
+    </a>
+</div>
 
 </div>
 
