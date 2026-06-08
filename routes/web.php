@@ -11,6 +11,7 @@ use App\Http\Controllers\ClienteController;
 use App\Http\Controllers\DevolucaoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FuncionarioController;
+use App\Http\Controllers\AdminAuthController;
 
 /* =========================================================
    LOJA - PÁGINAS PÚBLICAS
@@ -97,6 +98,11 @@ Route::get('/lang/{locale}', function ($locale) {
 ========================================================= */
 
 Route::prefix('admin')->group(function () {
+
+    Route::get('/login', [AdminAuthController::class, 'loginForm'])->name('admin.login');
+    Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
+    Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
+
     Route::get('/', [DashboardController::class, 'index']);
     Route::get('/dashboard', [DashboardController::class, 'index']);
 
