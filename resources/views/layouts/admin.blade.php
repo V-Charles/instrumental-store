@@ -25,12 +25,13 @@
                 <span class="material-symbols-outlined">storefront</span>
             </a>
 
-            <div class="language-selector">
-                <span class="material-symbols-outlined lang-icon">language</span>
-                <a href="/lang/pt" class="lang-link {{ session('locale', 'pt') == 'pt' ? 'active' : '' }}">PT</a>
-                <span class="lang-separator">|</span>
-                <a href="/lang/en" class="lang-link {{ session('locale') == 'en' ? 'active' : '' }}">EN</a>
-            </div>
+            @php
+                $idiomaAtual = session('locale', 'pt');
+                $proximoIdioma = $idiomaAtual === 'pt' ? 'en' : 'pt';
+            @endphp
+            <a href="{{ route('lang.switch', $proximoIdioma) }}" class="lang-toggle" title="Mudar idioma">
+                <span class="material-symbols-outlined">language</span>
+            </a>
 
             <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" style="display: none;">
                 @csrf
