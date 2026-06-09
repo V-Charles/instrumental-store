@@ -74,4 +74,22 @@ public function detalheCliente($id)
 
     return view('client.order-detail', compact('pedido'));
 }
+
+public function atualizarStatus(Request $request, $id)
+{
+    $request->validate([
+        'status' => 'required|in:pendente,pago,enviado,entregue'
+    ]);
+
+    $pedido = Pedido::findOrFail($id);
+
+    $pedido->update([
+        'status' => $request->status
+    ]);
+
+    return back()->with(
+        'success',
+        'Status atualizado com sucesso.'
+    );
+}
 }

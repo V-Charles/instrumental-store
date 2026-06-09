@@ -179,3 +179,7 @@ Route::get('/cliente/dados-pessoais', function () {
 Route::get('/cliente/configuracao', function () {
     return view('client.settings');
 });
+
+Route::put('/admin/pedidos/{id}/status',
+    [PedidoController::class, 'atualizarStatus']
+)->name('admin.pedidos.status');
