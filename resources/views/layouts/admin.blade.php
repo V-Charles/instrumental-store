@@ -56,8 +56,19 @@
         
         <aside class="admin-sidebar">
             <div class="admin-user-profile">
-                <img src="{{ asset('images/default-avatar.png') }}" alt="Foto do Usuário" class="user-avatar">
-                <div class="user-name">João Santos</div>
+                @if(auth()->check() && auth()->user()->foto)
+                    <img src="{{ asset('storage/' . auth()->user()->foto) }}" alt="Foto do Usuário" class="user-avatar" style="object-fit: cover;">
+                @else
+                    <img src="{{ asset('images/default-avatar.png') }}" alt="Foto do Usuário" class="user-avatar">
+                @endif
+                
+                <div class="user-name">{{ auth()->check() ? auth()->user()->name : 'Usuário' }}</div>
+                
+                @if(auth()->check() && auth()->user()->cargo)
+                    <div style="font-size: 12px; color: #888; text-transform: capitalize; margin-top: 4px;">
+                        {{ __('messages.role_' . strtolower(auth()->user()->cargo)) }}
+                    </div>
+                @endif
             </div>
             <nav class="admin-nav">
                 <a href="/admin/dashboard" class="{{ request()->is('admin/dashboard') ? 'active' : '' }}">
