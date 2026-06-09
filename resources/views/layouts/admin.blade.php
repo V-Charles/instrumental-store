@@ -38,8 +38,7 @@
             </form>
 
             <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="logout-btn" style="cursor: pointer;">
-                <span class="material-symbols-outlined">logout</span>
-                Sair
+                <span class="material-symbols-outlined">logout</span>{{ __('messages.logout') }}
             </a>
         </div>
     </header>

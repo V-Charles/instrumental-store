@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
-@section('breadcrumb', isset($produto) ? 'EDITAR PRODUTO' : 'ADICIONAR PRODUTO')
+@section('breadcrumb', isset($produto) ? __('messages.edit_product_upper') : __('messages.add_product_upper'))
 
 @section('content')
 <div class="admin-page-header">
-    <h2>{{ isset($produto) ? 'Editar produto' : 'Adicionar novo produto' }}</h2>
+    <h2>{{ isset($produto) ? __('messages.edit_product') : __('messages.add_new_product') }}</h2>
 </div>
 
 <form action="{{ isset($produto) ? '/admin/produtos/' . $produto->id : '/admin/produtos' }}" method="POST" enctype="multipart/form-data" class="product-create-form">
@@ -16,29 +16,29 @@
     <div class="form-layout-grid">
         <div class="form-left-column">
             <div class="form-card">
-                <h3>Detalhes básicos</h3>
+                <h3>{{ __('messages.basic_details') }}</h3>
                 
                 <div class="form-group">
-                    <label for="nome">Nome do Produto</label>
-                    <input type="text" id="nome" name="nome" value="{{ old('nome', $produto->nome ?? '') }}" placeholder="Ex: Guitarra Stratocaster" required>
+                    <label for="nome">{{ __('messages.product_name') }}</label>
+                    <input type="text" id="nome" name="nome" value="{{ old('nome', $produto->nome ?? '') }}" placeholder="{{ __('messages.placeholder_product_name') }}" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="marca">Marca do Produto</label>
-                    <input type="text" id="marca" name="marca" value="{{ old('marca', $produto->marca ?? '') }}" placeholder="Ex: Fender" required>
+                    <label for="marca">{{ __('messages.product_brand') }}</label>
+                    <input type="text" id="marca" name="marca" value="{{ old('marca', $produto->marca ?? '') }}" placeholder="{{ __('messages.placeholder_product_brand') }}" required>
                 </div>
 
                 <div class="form-group">
-                    <label for="descricao">Descrição do Produto</label>
-                    <textarea id="descricao" name="descricao" rows="5" placeholder="Descreva os detalhes do produto..." required>{{ old('descricao', $produto->descricao ?? '') }}</textarea>
+                    <label for="descricao">{{ __('messages.product_description') }}</label>
+                    <textarea id="descricao" name="descricao" rows="5" placeholder="{{ __('messages.placeholder_product_description') }}" required>{{ old('descricao', $produto->descricao ?? '') }}</textarea>
                 </div>
             </div>
 
             <div class="form-card">
-                <h3>Precificação</h3>
+                <h3>{{ __('messages.pricing') }}</h3>
                 
                 <div class="form-group">
-                    <label for="preco">Preço do produto</label>
+                    <label for="preco">{{ __('messages.product_price') }}</label>
                     <div class="input-with-prefix">
                         <span class="prefix">R$</span>
                         <input type="text" id="preco" name="preco" value="{{ old('preco', isset($produto) ? number_format($produto->preco, 2, ',', '.') : '') }}" placeholder="0,00" required>
@@ -47,7 +47,7 @@
 
                 <div class="form-row">
                     <div class="form-group half-width">
-                        <label for="desconto">Desconto do produto <span class="optional">(Opcional)</span></label>
+                        <label for="desconto">{{ __('messages.product_discount') }} <span class="optional">({{ __('messages.optional') }})</span></label>
                         <div class="input-with-prefix">
                             <span class="prefix">R$</span>
                             <input type="text" id="desconto" name="desconto" value="{{ old('desconto', (isset($produto) && $produto->desconto) ? number_format($produto->desconto, 2, ',', '.') : '') }}" placeholder="0,00">
@@ -55,37 +55,37 @@
                     </div>
                     <div class="form-group half-width align-bottom">
                         <div class="calculated-price">
-                            Vendido = R$ <span id="preco-final">{{ isset($produto) ? number_format(($produto->preco - ($produto->desconto ?? 0)), 2, ',', '.') : '0,00' }}</span>
+                            {{ __('messages.sold_status') }} = R$ <span id="preco-final">{{ isset($produto) ? number_format(($produto->preco - ($produto->desconto ?? 0)), 2, ',', '.') : '0,00' }}</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="form-row">
                     <div class="form-group half-width">
-                        <label for="data_inicio">Início da Expiração</label>
+                        <label for="data_inicio">{{ __('messages.expiration_start') }}</label>
                         <input type="date" id="data_inicio" name="data_inicio" value="{{ old('data_inicio', $produto->data_inicio ?? '') }}">
                     </div>
                     <div class="form-group half-width">
-                        <label for="data_fim">Fim da Expiração</label>
+                        <label for="data_fim">{{ __('messages.expiration_end') }}</label>
                         <input type="date" id="data_fim" name="data_fim" value="{{ old('data_fim', $produto->data_fim ?? '') }}">
                     </div>
                 </div>
             </div>
 
             <div class="form-card">
-                <h3>Inventário</h3>
+                <h3>{{ __('messages.inventory') }}</h3>
                 
                 <div class="form-row">
                     <div class="form-group half-width">
-                        <label for="quantidade">Quantidade em estoque</label>
+                        <label for="quantidade">{{ __('messages.stock_quantity') }}</label>
                         <input type="number" id="quantidade" name="quantidade" value="{{ old('quantidade', $produto->quantidade ?? '') }}" min="0" placeholder="0" required>
                     </div>
                     <div class="form-group half-width">
-                        <label for="status">Status de estoque</label>
+                        <label for="status">{{ __('messages.stock_status') }}</label>
                         <select id="status" name="status" required>
-                            <option value="em_estoque" {{ (old('status', $produto->status ?? '') == 'em_estoque') ? 'selected' : '' }}>Em estoque</option>
-                            <option value="fora_de_estoque" {{ (old('status', $produto->status ?? '') == 'fora_de_estoque') ? 'selected' : '' }}>Fora de estoque</option>
-                            <option value="sob_encomenda" {{ (old('status', $produto->status ?? '') == 'sob_encomenda') ? 'selected' : '' }}>Sob encomenda</option>
+                            <option value="em_estoque" {{ (old('status', $produto->status ?? '') == 'em_estoque') ? 'selected' : '' }}>{{ __('messages.in_stock') }}</option>
+                            <option value="fora_de_estoque" {{ (old('status', $produto->status ?? '') == 'fora_de_estoque') ? 'selected' : '' }}>{{ __('messages.out_of_stock') }}</option>
+                            <option value="sob_encomenda" {{ (old('status', $produto->status ?? '') == 'sob_encomenda') ? 'selected' : '' }}>{{ __('messages.on_demand') }}</option>
                         </select>
                     </div>
                 </div>
@@ -93,9 +93,8 @@
         </div>
 
         <div class="form-right-column">
-            
             <div class="form-card">
-                <h3>Upload de Mídias do produto</h3>
+                <h3>{{ __('messages.media_upload_title') }}</h3>
                 
                 <div class="image-upload-area">
                     <input type="file" id="imagem_principal" name="imagem_principal" accept="image/*" {{ isset($produto) ? '' : 'required' }}>
@@ -104,7 +103,7 @@
                             <img src="{{ asset('storage/' . $produto->imagem_principal) }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
                         @else
                             <span class="material-symbols-outlined">add_photo_alternate</span>
-                            <p>Clique ou arraste a mídia principal aqui</p>
+                            <p>{{ __('messages.media_upload_placeholder') }}</p>
                         @endif
                     </div>
                 </div>
@@ -122,33 +121,33 @@
                         <div class="thumbnail-box dotted-box" style="width: 120px;">
                             <input type="file" id="imagens_extras" name="imagens_extras[]" accept="image/*" multiple>
                             <span class="material-symbols-outlined">library_add</span>
-                            <span>Add imagens</span>
+                            <span>{{ __('messages.add_images') }}</span>
                         </div>
                     @endif
                 </div>
             </div>
 
             <div class="form-card">
-                <h3>Categorias</h3>
+                <h3>{{ __('messages.categories') }}</h3>
                 
                 <div class="form-group">
-                    <label for="categoria">Categoria do produto</label>
+                    <label for="categoria">{{ __('messages.product_category') }}</label>
                     <select id="categoria" name="categoria" required>
-                        <option value="" disabled {{ !isset($produto) ? 'selected' : '' }}>selecione seu produto</option>
-                        <option value="acessorios" {{ (old('categoria', $produto->categoria ?? '') == 'acessorios') ? 'selected' : '' }}>Acessórios</option>
-                        <option value="cordas" {{ (old('categoria', $produto->categoria ?? '') == 'cordas') ? 'selected' : '' }}>Cordas</option>
-                        <option value="amplificadores" {{ (old('categoria', $produto->categoria ?? '') == 'amplificadores') ? 'selected' : '' }}>Amplificadores</option>
-                        <option value="pedais" {{ (old('categoria', $produto->categoria ?? '') == 'pedais') ? 'selected' : '' }}>Pedais & Pedaleiras</option>
-                        <option value="percussao" {{ (old('categoria', $produto->categoria ?? '') == 'percussao') ? 'selected' : '' }}>Percussão</option>
-                        <option value="audio" {{ (old('categoria', $produto->categoria ?? '') == 'audio') ? 'selected' : '' }}>Áudio e Tecnologia</option>
-                        <option value="sopro" {{ (old('categoria', $produto->categoria ?? '') == 'sopro') ? 'selected' : '' }}>Sopro</option>
-                        <option value="teclas" {{ (old('categoria', $produto->categoria ?? '') == 'teclas') ? 'selected' : '' }}>Teclas</option>
+                        <option value="" disabled {{ !isset($produto) ? 'selected' : '' }}>{{ __('messages.select_product_placeholder') }}</option>
+                        <option value="acessorios" {{ (old('categoria', $produto->categoria ?? '') == 'acessorios') ? 'selected' : '' }}>{{ __('messages.cat_accessories') }}</option>
+                        <option value="cordas" {{ (old('categoria', $produto->categoria ?? '') == 'cordas') ? 'selected' : '' }}>{{ __('messages.cat_strings') }}</option>
+                        <option value="amplificadores" {{ (old('categoria', $produto->categoria ?? '') == 'amplificadores') ? 'selected' : '' }}>{{ __('messages.cat_amplifiers') }}</option>
+                        <option value="pedais" {{ (old('categoria', $produto->categoria ?? '') == 'pedais') ? 'selected' : '' }}>{{ __('messages.cat_pedals') }}</option>
+                        <option value="percussao" {{ (old('categoria', $produto->categoria ?? '') == 'percussao') ? 'selected' : '' }}>{{ __('messages.cat_percussion') }}</option>
+                        <option value="audio" {{ (old('categoria', $produto->categoria ?? '') == 'audio') ? 'selected' : '' }}>{{ __('messages.cat_audio') }}</option>
+                        <option value="sopro" {{ (old('categoria', $produto->categoria ?? '') == 'sopro') ? 'selected' : '' }}>{{ __('messages.cat_wind') }}</option>
+                        <option value="teclas" {{ (old('categoria', $produto->categoria ?? '') == 'teclas') ? 'selected' : '' }}>{{ __('messages.cat_keys') }}</option>
                     </select>
                 </div>
             </div>
 
             <div class="form-card">
-                <h3>Selecionar cor</h3>
+                <h3>{{ __('messages.select_color') }}</h3>
                 
                 <div class="color-picker-group">
                     <input type="checkbox" id="cor_verde" name="cores[]" value="verde" {{ in_array('verde', old('cores', $produto->cores ?? [])) ? 'checked' : '' }}>
@@ -170,8 +169,8 @@
         </div>
     </div>
     <div class="form-actions-footer">
-        <a href="/admin/produtos" class="btn-cancel">Cancelar</a>
-        <button type="submit" class="btn-save">Salvar</button>
+        <a href="/admin/produtos" class="btn-cancel">{{ __('messages.cancel') }}</a>
+        <button type="submit" class="btn-save">{{ __('messages.save') }}</button>
     </div>
 </form>
 @endsection

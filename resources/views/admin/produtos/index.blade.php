@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('breadcrumb', 'PRODUTOS')
+@section('breadcrumb', __('messages.products_upper'))
 
 @section('content')
 
@@ -15,37 +15,37 @@
 </style>
 
 <div class="admin-page-header">
-    <h2>Produtos</h2>
+    <h2>{{ __('messages.admin_products') }}</h2>
     <a href="/admin/produtos/create" class="btn-primary">
         <span class="material-symbols-outlined">add_circle</span>
-        Adicionar produto
+        {{ __('messages.add_product') }}
     </a>
 </div>
 
 <div class="categories-grid">
-    <button class="category-card" data-value="acessorios">Acessórios</button>
-    <button class="category-card" data-value="cordas">Cordas</button>
-    <button class="category-card" data-value="amplificadores">Amplificadores</button>
-    <button class="category-card" data-value="pedais">Pedais & Pedaleiras</button>
-    <button class="category-card" data-value="percussao">Percussão</button>
-    <button class="category-card" data-value="audio">Áudio e Tecnologia</button>
-    <button class="category-card" data-value="sopro">Sopro</button>
-    <button class="category-card" data-value="teclas">Teclas</button>
+    <button class="category-card" data-value="acessorios">{{ __('messages.cat_accessories') }}</button>
+    <button class="category-card" data-value="cordas">{{ __('messages.cat_strings') }}</button>
+    <button class="category-card" data-value="amplificadores">{{ __('messages.cat_amplifiers') }}</button>
+    <button class="category-card" data-value="pedais">{{ __('messages.cat_pedals') }}</button>
+    <button class="category-card" data-value="percussao">{{ __('messages.cat_percussion') }}</button>
+    <button class="category-card" data-value="audio">{{ __('messages.cat_audio') }}</button>
+    <button class="category-card" data-value="sopro">{{ __('messages.cat_wind') }}</button>
+    <button class="category-card" data-value="teclas">{{ __('messages.cat_keys') }}</button>
 </div>
 
 <div class="table-container">
     
     <div class="table-controls">
         <div class="table-tabs">
-            <button class="tab {{ request('status') == '' ? 'active' : '' }}" data-status="">Todos Produtos ({{ $totalProdutos }})</button>
-            <button class="tab" data-status="destaque">Produtos em destaque</button>
-            <button class="tab {{ request('status') == 'em_estoque' ? 'active' : '' }}" data-status="em_estoque">À venda</button>
-            <button class="tab {{ request('status') == 'fora_de_estoque' ? 'active' : '' }}" data-status="fora_de_estoque">Fora de estoque</button>
+            <button class="tab {{ request('status') == '' ? 'active' : '' }}" data-status="">{{ __('messages.all_products_count', ['total' => $totalProdutos]) }}</button>
+            <button class="tab" data-status="destaque">{{ __('messages.featured_products') }}</button>
+            <button class="tab {{ request('status') == 'em_estoque' ? 'active' : '' }}" data-status="em_estoque">{{ __('messages.on_sale') }}</button>
+            <button class="tab {{ request('status') == 'fora_de_estoque' ? 'active' : '' }}" data-status="fora_de_estoque">{{ __('messages.out_of_stock') }}</button>
         </div>
         
         <div class="table-actions">
             <div class="search-box">
-                <input type="text" id="input-pesquisa" value="{{ request('search') }}" placeholder="pesquisar">
+                <input type="text" id="input-pesquisa" value="{{ request('search') }}" placeholder="{{ __('messages.search_placeholder') }}">
                 <span class="material-symbols-outlined">search</span>
             </div>
         </div>
@@ -54,11 +54,11 @@
     <table class="admin-table">
         <thead>
             <tr>
-                <th>ID</th>
-                <th>Produtos</th>
-                <th>Data de criação</th>
-                <th>Pedido</th>
-                <th>Ação</th>
+                <th>{{ __('messages.id_column') }}</th>
+                <th>{{ __('messages.products_column') }}</th>
+                <th>{{ __('messages.created_at_column') }}</th>
+                <th>{{ __('messages.order_column') }}</th>
+                <th>{{ __('messages.action_column') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -76,7 +76,7 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="5" style="text-align: center; padding: 2rem;">Nenhum produto encontrado com estes filtros.</td>
+                    <td colspan="5" style="text-align: center; padding: 2rem;">{{ __('messages.no_products_found') }}</td>
                 </tr>
             @endforelse 
         </tbody>
