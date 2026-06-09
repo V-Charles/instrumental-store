@@ -58,13 +58,16 @@ class PedidoController extends Controller
         return view('admin.pedidos.show', compact('pedido'));
     }
 
-    public function meusPedidos()
+public function meusPedidos()
 {
     $pedidos = Pedido::with('itens.produto')
         ->latest()
         ->get();
 
-    return view('client.orders', compact('pedidos'));
+    return view(
+        'client.orders',
+        compact('pedidos')
+    );
 }
 
 public function detalheCliente($id)

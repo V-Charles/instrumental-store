@@ -73,7 +73,8 @@
                                 $envioPendente = !$pedidoCancelado && !$envioAtivo;
                                 $entreguePendente = !$pedidoCancelado && !$entregueAtivo;
 
-                                $produto = $pedido->produto ?? null;
+                                $item = $pedido->itens->first();
+                                $produto = $item?->produto;
 
                                 $nomeProduto = $produto->nome ?? __('messages.product');
                                 $marcaProduto = $produto->marca ?? '';
