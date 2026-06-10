@@ -198,7 +198,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/cliente/desejos', [AreaClienteController::class, 'favoritos']);
 
-    Route::get('/cliente/dados-pessoais', [AreaClienteController::class, 'perfil']);
+    Route::get('/cliente/dados-pessoais', [AreaClienteController::class, 'perfil'])
+        ->name('cliente.dados');
 
-    Route::get('/cliente/configuracao', [AreaClienteController::class, 'configuracao']);
-});
+    Route::put('/cliente/dados-pessoais', [AreaClienteController::class, 'atualizarPerfil'])
+        ->name('cliente.dados.atualizar');
+        Route::get('/cliente/configuracao', [AreaClienteController::class, 'configuracao']);
+    });
