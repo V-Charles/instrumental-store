@@ -12,6 +12,7 @@ use App\Http\Controllers\DevolucaoController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\AdminAuthController;
+use App\Http\Controllers\GoogleController;
 
 /* =========================================================
    LOJA - PÁGINAS PÚBLICAS
@@ -72,6 +73,15 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::get('/cadastro', [AuthController::class, 'registerForm'])->name('register');
 
 Route::post('/cadastro', [AuthController::class, 'register'])->name('register.submit');
+
+/* =========================================================
+   LOGIN COM GOOGLE
+========================================================= */
+
+Route::get('/auth/google', [GoogleController::class, 'redirect'])
+    ->name('google.login');
+
+Route::get('/auth/google/callback', [GoogleController::class, 'callback']);
 
 /* =========================================================
    RECUPERAÇÃO DE SENHA

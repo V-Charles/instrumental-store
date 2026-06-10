@@ -25,9 +25,9 @@
 
             <p class="divider">ou</p>
 
-            <button type="button" class="google-btn">
-                {{ __('messages.login_google') }}
-            </button>
+            <a href="{{ route('google.login') }}" class="google-btn">
+                Entrar com Google
+            </a>
 
             <p class="register">
                 {{ __('messages.dont_have_account') }}
