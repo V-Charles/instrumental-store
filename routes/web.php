@@ -15,6 +15,7 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
+use App\Http\Controllers\AreaClienteController;
 
 /* =========================================================
    LOJA - PÁGINAS PÚBLICAS
@@ -76,10 +77,6 @@ Route::get('/cadastro', [AuthController::class, 'registerForm'])->name('register
 
 Route::post('/cadastro', [AuthController::class, 'register'])->name('register.submit');
 
-Route::get('/recuperar-senha', function () {
-    return view('auth.forgot-password');
-})->name('password.forgot');
-
 /* =========================================================
    LOGIN COM GOOGLE
 ========================================================= */
@@ -122,40 +119,57 @@ Route::get('/lang/{locale}', function ($locale) {
 ========================================================= */
 
 Route::prefix('admin')->group(function () {
-    
+
     Route::get('/login', [AdminAuthController::class, 'loginForm'])->name('admin.login');
+
     Route::post('/login', [AdminAuthController::class, 'login'])->name('admin.login.submit');
 
     Route::middleware([\App\Http\Middleware\CheckAdminAccess::class])->group(function () {
-        
+
         Route::post('/logout', [AdminAuthController::class, 'logout'])->name('admin.logout');
 
         Route::get('/', [DashboardController::class, 'index']);
+
         Route::get('/dashboard', [DashboardController::class, 'index']);
 
         Route::get('/produtos', [ProdutoController::class, 'index']);
+
         Route::get('/pedidos', [PedidoController::class, 'index']);
+
         Route::get('/pedidos/{id}', [PedidoController::class, 'show']);
+
+        Route::put('/pedidos/{id}/status', [PedidoController::class, 'atualizarStatus'])
+            ->name('admin.pedidos.status');
+
         Route::get('/pagamentos', [PagamentoController::class, 'index']);
+
         Route::get('/clientes', [ClienteController::class, 'index']);
+
         Route::get('/devolucoes', [DevolucaoController::class, 'index']);
 
         Route::middleware([\App\Http\Middleware\CheckManagerAccess::class])->group(function () {
-            
+
             Route::get('/produtos/create', [ProdutoController::class, 'create']);
+
             Route::post('/produtos', [ProdutoController::class, 'store']);
+
             Route::get('/produtos/{id}/edit', [ProdutoController::class, 'edit']);
+
             Route::put('/produtos/{id}', [ProdutoController::class, 'update']);
-            
+
             Route::get('/devolucoes/{id}', [DevolucaoController::class, 'show']);
+
             Route::post('/devolucoes/{id}/status', [DevolucaoController::class, 'updateStatus']);
 
             Route::get('/funcionarios', [FuncionarioController::class, 'index']);
+
             Route::get('/funcionarios/criar', [FuncionarioController::class, 'create']);
+
             Route::post('/funcionarios', [FuncionarioController::class, 'store']);
+
             Route::get('/funcionarios/{id}/editar', [FuncionarioController::class, 'edit']);
+
             Route::put('/funcionarios/{id}', [FuncionarioController::class, 'update']);
-            
         });
     });
 });
@@ -166,48 +180,25 @@ Route::prefix('admin')->group(function () {
 
 Route::middleware(['auth', 'verified'])->group(function () {
 
-    Route::get('/cliente/enderecos', function () {
-        return view('client.addresses');
-    });
+    Route::get('/cliente/enderecos', [AreaClienteController::class, 'enderecos']);
 
-    Route::get('/cliente/enderecos/editar', function () {
-        return view('client.address-edit');
-    });
+    Route::get('/cliente/enderecos/editar', [AreaClienteController::class, 'editarEndereco']);
 
-    Route::get('/cliente/enderecos/cadastrar', function () {
-        return view('client.address-create');
-    });
+    Route::get('/cliente/enderecos/cadastrar', [AreaClienteController::class, 'criarEndereco']);
 
     Route::get('/cliente/pedidos', [PedidoController::class, 'meusPedidos']);
 
     Route::get('/cliente/pedidos/{id}', [PedidoController::class, 'detalheCliente']);
 
-    Route::get('/cliente/cartoes', function () {
-        return view('client.cards');
-    });
+    Route::get('/cliente/cartoes', [AreaClienteController::class, 'cartoes']);
 
-    Route::get('/cliente/cartoes/cadastrar', function () {
-        return view('client.card-create');
-    });
+    Route::get('/cliente/cartoes/cadastrar', [AreaClienteController::class, 'criarCartao']);
 
-    Route::get('/cliente/cartoes/editar', function () {
-        return view('client.card-edit');
-    });
+    Route::get('/cliente/cartoes/editar', [AreaClienteController::class, 'editarCartao']);
 
-    Route::get('/cliente/desejos', function () {
-        return view('client.wishlist');
-    });
+    Route::get('/cliente/desejos', [AreaClienteController::class, 'favoritos']);
 
-    Route::get('/cliente/dados-pessoais', function () {
-        return view('client.profile');
-    });
+    Route::get('/cliente/dados-pessoais', [AreaClienteController::class, 'perfil']);
 
-    Route::get('/cliente/configuracao', function () {
-        return view('client.settings');
-    });
-
+    Route::get('/cliente/configuracao', [AreaClienteController::class, 'configuracao']);
 });
-
-Route::put('/admin/pedidos/{id}/status',
-    [PedidoController::class, 'atualizarStatus']
-)->name('admin.pedidos.status');
