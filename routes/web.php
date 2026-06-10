@@ -73,13 +73,21 @@ Route::get('/cadastro', [AuthController::class, 'registerForm'])->name('register
 
 Route::post('/cadastro', [AuthController::class, 'register'])->name('register.submit');
 
-Route::get('/recuperar-senha', function () {
-    return view('auth.forgot-password');
-})->name('password.forgot');
+/* =========================================================
+   RECUPERAÇÃO DE SENHA
+========================================================= */
 
-Route::get('/nova-senha', function () {
-    return view('auth.reset-password');
-})->name('password.reset');
+Route::get('/recuperar-senha', [ForgotPasswordController::class, 'showLinkRequestForm'])
+    ->name('password.request');
+
+Route::post('/recuperar-senha', [ForgotPasswordController::class, 'sendResetLink'])
+    ->name('password.email');
+
+Route::get('/nova-senha/{token}', [ResetPasswordController::class, 'showResetForm'])
+    ->name('password.reset');
+
+Route::post('/nova-senha', [ResetPasswordController::class, 'resetPassword'])
+    ->name('password.update');
 
 /* =========================================================
    IDIOMA - INTERNACIONALIZAÇÃO
