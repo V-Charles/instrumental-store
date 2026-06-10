@@ -8,6 +8,12 @@
 
         <form method="POST" action="{{ route('register.submit') }}">
             @csrf
+            
+            <label>Nome Completo</label>
+            <input type="text" name="name" required>
+
+            <label>CPF</label>
+            <input type="text" name="cpf" required>
 
             <label>{{ __('messages.email') }}</label>
             <input type="email" name="email" required>
