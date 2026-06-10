@@ -13,6 +13,8 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\FuncionarioController;
 use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\GoogleController;
+use App\Http\Controllers\ForgotPasswordController;
+use App\Http\Controllers\ResetPasswordController;
 
 /* =========================================================
    LOJA - PÁGINAS PÚBLICAS
@@ -73,6 +75,10 @@ Route::post('/login', [AuthController::class, 'login'])->name('login.submit');
 Route::get('/cadastro', [AuthController::class, 'registerForm'])->name('register');
 
 Route::post('/cadastro', [AuthController::class, 'register'])->name('register.submit');
+
+Route::get('/recuperar-senha', function () {
+    return view('auth.forgot-password');
+})->name('password.forgot');
 
 /* =========================================================
    LOGIN COM GOOGLE

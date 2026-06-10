@@ -6,8 +6,10 @@
     <div class="auth-left">
         <h2>{{ __('messages.new_password_title') }}</h2>
 
-        <form method="POST" action="#">
-            @csrf
+        <form method="POST" action="{{ route('password.update') }}">
+        @csrf
+
+            <input type="hidden" name="token" value="{{ $token }}">
 
             <label>{{ __('messages.new_password') }}</label>
             <input type="password" name="password" required>
@@ -18,10 +20,6 @@
             <button type="submit">
                 {{ __('messages.send') }}
             </button>
-
-            <a href="{{ route('login') }}" class="forgot">
-                {{ __('messages.back') }}
-            </a>
         </form>
     </div>
 

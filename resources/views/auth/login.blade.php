@@ -15,7 +15,7 @@
             <label>{{ __('messages.password') }}</label>
             <input type="password" name="password" required>
 
-            <a href="{{ route('password.forgot') }}" class="forgot">
+            <a href="{{ route('password.request') }}" class="forgot">
                 {{ __('messages.forgot_password') }}
             </a>
 

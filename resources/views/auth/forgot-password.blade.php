@@ -6,7 +6,7 @@
     <div class="auth-left">
         <h2>{{ __('messages.forgot_password_title') }}</h2>
 
-        <form method="POST" action="#">
+        <form method="POST" action="{{ route('password.email') }}">
             @csrf
 
             <label>{{ __('messages.email') }}</label>
