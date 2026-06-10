@@ -140,44 +140,48 @@ Route::prefix('admin')->group(function () {
    ÁREA DO CLIENTE
 ========================================================= */
 
-Route::get('/cliente/enderecos', function () {
-    return view('client.addresses');
-});
+Route::middleware(['auth', 'verified'])->group(function () {
 
-Route::get('/cliente/enderecos/editar', function () {
-    return view('client.address-edit');
-});
+    Route::get('/cliente/enderecos', function () {
+        return view('client.addresses');
+    });
 
-Route::get('/cliente/enderecos/cadastrar', function () {
-    return view('client.address-create');
-});
+    Route::get('/cliente/enderecos/editar', function () {
+        return view('client.address-edit');
+    });
 
-Route::get('/cliente/pedidos', [PedidoController::class, 'meusPedidos']);
+    Route::get('/cliente/enderecos/cadastrar', function () {
+        return view('client.address-create');
+    });
 
-Route::get('/cliente/pedidos/{id}', [PedidoController::class, 'detalheCliente']);
+    Route::get('/cliente/pedidos', [PedidoController::class, 'meusPedidos']);
 
-Route::get('/cliente/cartoes', function () {
-    return view('client.cards');
-});
+    Route::get('/cliente/pedidos/{id}', [PedidoController::class, 'detalheCliente']);
 
-Route::get('/cliente/cartoes/cadastrar', function () {
-    return view('client.card-create');
-});
+    Route::get('/cliente/cartoes', function () {
+        return view('client.cards');
+    });
 
-Route::get('/cliente/cartoes/editar', function () {
-    return view('client.card-edit');
-});
+    Route::get('/cliente/cartoes/cadastrar', function () {
+        return view('client.card-create');
+    });
 
-Route::get('/cliente/desejos', function () {
-    return view('client.wishlist');
-});
+    Route::get('/cliente/cartoes/editar', function () {
+        return view('client.card-edit');
+    });
 
-Route::get('/cliente/dados-pessoais', function () {
-    return view('client.profile');
-});
+    Route::get('/cliente/desejos', function () {
+        return view('client.wishlist');
+    });
 
-Route::get('/cliente/configuracao', function () {
-    return view('client.settings');
+    Route::get('/cliente/dados-pessoais', function () {
+        return view('client.profile');
+    });
+
+    Route::get('/cliente/configuracao', function () {
+        return view('client.settings');
+    });
+
 });
 
 Route::put('/admin/pedidos/{id}/status',
