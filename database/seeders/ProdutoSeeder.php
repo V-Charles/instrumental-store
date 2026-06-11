@@ -613,7 +613,7 @@ class ProdutoSeeder extends Seeder
         ];
 
         foreach ($produtos as $produto) {
-            DB::table('produtos')->updateOrInsert(
+            \App\Models\Produto::updateOrCreate(
                 ['nome' => $produto['nome']],
                 [
                     'descricao' => $produto['descricao'],
@@ -622,13 +622,11 @@ class ProdutoSeeder extends Seeder
                     'data_inicio' => null,
                     'data_fim' => null,
                     'quantidade' => $produto['quantidade'],
-                    'status' => 'ativo',
+                    'status' => 'em_estoque',
                     'imagem_principal' => null,
-                    'imagens_extras' => json_encode([]),
+                    'imagens_extras' => [],
                     'categoria' => $produto['categoria'],
-                    'cores' => json_encode([]),
-                    'created_at' => now(),
-                    'updated_at' => now(),
+                    'cores' => [],
                 ]
             );
         }
