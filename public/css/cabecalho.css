@@ -138,6 +138,41 @@
     color: #d81b60;
 }
 
+/* ========================================================= 
+   SAUDAÇÃO DO USUÁRIO (HEADER)
+========================================================= */
+
+.user-greeting-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.user-greeting-text {
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: #333;
+    white-space: nowrap; 
+}
+
+.user-greeting-link {
+    display: flex;
+    align-items: center;
+    color: #111;
+    text-decoration: none;
+    transition: color 0.3s;
+}
+
+.user-greeting-link:hover {
+    color: #d81b60;
+}
+
+@media (max-width: 768px) {
+    .user-greeting-text {
+        display: none;
+    }
+}
+
 @media (max-width: 1024px) {
     .nav-links ul {
         gap: 1.5rem;

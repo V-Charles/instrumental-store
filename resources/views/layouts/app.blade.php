@@ -68,9 +68,23 @@
             </nav>
 
             <div class="header-actions">
-                <a href="/login" title="Minha Conta">
-                    <span class="material-symbols-outlined">person_alert</span>
-                </a>
+                <div class="user-greeting-wrapper">
+                    @auth
+                        <span class="user-greeting-text">
+                            Olá, {{ explode(' ', Auth::user()->name)[0] }}!
+                        </span>
+                        <a href="{{ route('cliente.dados') }}" title="Minha Conta" class="user-greeting-link">
+                            <span class="material-symbols-outlined">person</span>
+                        </a>
+                    @else
+                        <span class="user-greeting-text">
+                            Olá, Visitante!
+                        </span>
+                        <a href="/login" title="Fazer Login" class="user-greeting-link">
+                            <span class="material-symbols-outlined">person_alert</span>
+                        </a>
+                    @endauth
+                </div>
                 
                 <div class="search-container fixed-search">
                     <input type="text" class="desktop-search-input" placeholder="{{ __('messages.search_placeholder') ?? 'O que você procura?' }}">
