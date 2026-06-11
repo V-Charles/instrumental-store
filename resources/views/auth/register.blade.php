@@ -12,14 +12,8 @@
             <label>Nome Completo</label>
             <input type="text" name="name" required>
 
-            <label>CPF</label>
-            <input type="text" name="cpf" required>
-
             <label>{{ __('messages.email') }}</label>
             <input type="email" name="email" required>
-
-            <label>{{ __('messages.username') }}</label>
-            <input type="text" name="username" required>
 
             <label>{{ __('messages.password') }}</label>
             <input type="password" name="password" required>
