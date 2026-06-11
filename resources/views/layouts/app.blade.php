@@ -72,13 +72,16 @@
                     <span class="material-symbols-outlined">person_alert</span>
                 </a>
                 
+                <div class="search-container fixed-search">
+                    <input type="text" class="desktop-search-input" placeholder="{{ __('messages.search_placeholder') ?? 'O que você procura?' }}">
+                    <button class="icon-btn" title="Buscar">
+                        <span class="material-symbols-outlined">search</span>
+                    </button>
+                </div>
+
                 <a href="{{ route('lang.switch', app()->getLocale() === 'pt' ? 'en' : 'pt') }}" title="Idioma">
                     <span class="material-symbols-outlined">language</span>
                 </a>
-                
-                <button class="icon-btn desktop-search-btn" title="Buscar">
-                    <span class="material-symbols-outlined">search</span>
-                </button>
                 
                 <a href="/favoritos" class="desktop-favorites" title="Favoritos">
                     <span class="material-symbols-outlined">favorite</span>
