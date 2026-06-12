@@ -26,7 +26,17 @@
 
             <h2>{{ __('messages.purchase_data') }}</h2>
 
-            <form action="#" method="POST" class="payment-form">
+            @if ($errors->any())
+                <div style="color: #b0003a; background-color: #f8d7da; border: 1px solid #f5c6cb; padding: 10px; margin-bottom: 20px; border-radius: 4px;">
+                    <ul style="margin: 0; padding-left: 20px;">
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+
+            <form action="{{ route('cart.finalizar') }}" method="POST" class="payment-form" id="checkout-form">
                 @csrf
 
                 <div class="payment-form-group">
@@ -39,15 +49,15 @@
                             {{ __('messages.select') }}
                         </option>
 
-                        <option value="credito">
+                        <option value="credito" {{ old('payment_method') == 'credito' ? 'selected' : '' }}>
                             {{ __('messages.credit_card') }}
                         </option>
 
-                        <option value="debito">
+                        <option value="debito" {{ old('payment_method') == 'debito' ? 'selected' : '' }}>
                             {{ __('messages.debit_card') }}
                         </option>
 
-                        <option value="pix">
+                        <option value="pix" {{ old('payment_method') == 'pix' ? 'selected' : '' }}>
                             {{ __('messages.pix') }}
                         </option>
                     </select>
@@ -66,26 +76,18 @@
                             </option>
 
                             @forelse ($cartoesCadastrados as $cartao)
-
-                                <option value="{{ $cartao->id }}">
-                                    {{ $cartao->apelido ?? __('messages.credit_card') }}
-
-                                    @if (!empty($cartao->final))
-                                        - final {{ $cartao->final }}
-                                    @endif
+                                <option value="{{ $cartao->id }}" data-tipo="{{ strtolower($cartao->tipo_cartao ?? '') }}" {{ old('registered_card') == $cartao->id ? 'selected' : '' }}>
+                                    {{ !empty($cartao->apelido_cartao) ? $cartao->apelido_cartao : 'Cartão' }} - final {{ substr($cartao->numero ?? $cartao->numero_cartao ?? '0000', -4) }}
                                 </option>
-
                             @empty
-
                                 <option value="" disabled>
                                     {{ __('messages.no_registered_cards') }}
                                 </option>
-
                             @endforelse
                         </select>
                     </div>
 
-                    <button type="button" class="payment-secondary-button">
+                    <button type="button" class="payment-secondary-button" onclick="window.location.href='{{ route('cliente.cartoes.create') }}'">
                         {{ __('messages.register_payment_method') }}
                     </button>
 
@@ -105,7 +107,7 @@
 
                             @forelse ($enderecosCadastrados as $endereco)
 
-                                <option value="{{ $endereco->id }}">
+                                <option value="{{ $endereco->id }}" {{ old('delivery_address') == $endereco->id ? 'selected' : '' }}>
                                     {{ $endereco->rua ?? __('messages.registered_address') }}
 
                                     @if (!empty($endereco->numero))
@@ -127,7 +129,7 @@
                         </select>
                     </div>
 
-                    <button type="button" class="payment-secondary-button">
+                    <button type="button" class="payment-secondary-button" onclick="window.location.href='{{ route('cliente.enderecos.create') }}'">
                         {{ __('messages.register_address') }}
                     </button>
 
@@ -190,20 +192,64 @@
 
             </div>
 
-<a href="{{ route('order.success') }}" class="payment-finish-button" id="paymentFinishButton">
-    {{ __('messages.finish') }}
-</a>
+            <button type="submit" form="checkout-form" class="payment-finish-button" id="paymentFinishButton">
+                {{ __('messages.finish') }}
+            </button>
 
         </aside>
 
     </section>
 
     <div class="payment-back">
-    <a href="{{ route('cart') }}">
-        {{ __('messages.back') }}
-    </a>
-</div>
+        <a href="{{ route('cart') }}">
+            {{ __('messages.back') }}
+        </a>
+    </div>
 
 </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const paymentMethod = document.getElementById('payment_method');
+        const registeredCard = document.getElementById('registered_card');
+        
+        function filterCards() {
+            const selectedMethod = paymentMethod.value;
+            const options = registeredCard.options;
+            let hasValidOptionSelected = false;
+
+            for (let i = 0; i < options.length; i++) {
+                const option = options[i];
+                
+                if (option.value === "") {
+                    continue;
+                }
+
+                const cardType = option.getAttribute('data-tipo');
+                
+                if (selectedMethod === "") {
+                    option.style.display = '';
+                    hasValidOptionSelected = true;
+                } else if (selectedMethod === 'credito' || selectedMethod === 'debito') {
+                    if (cardType === selectedMethod) {
+                        option.style.display = '';
+                        if (option.selected) hasValidOptionSelected = true;
+                    } else {
+                        option.style.display = 'none';
+                    }
+                } else {
+                    option.style.display = 'none';
+                }
+            }
+
+            if (!hasValidOptionSelected) {
+                registeredCard.value = "";
+            }
+        }
+
+        paymentMethod.addEventListener('change', filterCards);
+        filterCards();
+    });
+</script>
 
 @endsection

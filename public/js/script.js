@@ -311,25 +311,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 
 /* =========================================================
-   PAGAMENTO - SELEÇÃO DE FORMA DE PAGAMENTO
-========================================================= */
-
-document.addEventListener("DOMContentLoaded", function () {
-    const paymentMethod = document.getElementById("payment_method");
-    const paymentFinishButton = document.getElementById("paymentFinishButton");
-
-    if (paymentMethod && paymentFinishButton) {
-        paymentMethod.addEventListener("change", function () {
-            if (this.value === "pix") {
-                paymentFinishButton.href = "/pagamento-pix";
-            } else {
-                paymentFinishButton.href = "/compra-realizada";
-            }
-        });
-    }
-});
-
-/* =========================================================
    PIX - COPIAR CÓDIGO
 ========================================================= */
 

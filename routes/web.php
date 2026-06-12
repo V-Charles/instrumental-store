@@ -59,9 +59,9 @@ Route::get('/sobre', function () {
     return view('about');
 })->name('about');
 
-Route::get('/dados-compra', function () {
-    return view('payment.index');
-})->name('payment.index');
+Route::get('/dados-compra', [CarrinhoController::class, 'checkout'])
+    ->middleware('auth')
+    ->name('payment.index');
 
 Route::get('/pagamento-pix', function () {
     return view('payment.pix');
