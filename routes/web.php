@@ -77,6 +77,8 @@ Route::get('/cadastro', [AuthController::class, 'registerForm'])->name('register
 
 Route::post('/cadastro', [AuthController::class, 'register'])->name('register.submit');
 
+Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
 /* =========================================================
    LOGIN COM GOOGLE
 ========================================================= */

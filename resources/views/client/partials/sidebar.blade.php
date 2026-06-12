@@ -46,7 +46,10 @@
     </nav>
 
     <div class="client-logout">
-        <a href="#">
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+            @csrf
+        </form>
+        <a href="#" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
             <span class="material-symbols-outlined">logout</span>
             {{ __('messages.logout') }}
         </a>
