@@ -5,9 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Instrumental Store</title>
     
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0..1,0" />
     
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('css/cabecalho.css') }}">
     <link rel="stylesheet" href="{{ asset('css/auth.css') }}">
     <link rel="stylesheet" href="{{ asset('css/client.css') }}">
@@ -27,6 +26,9 @@
             $cartCount += $itemQuantity;
             $cartTotal += $itemPrice * $itemQuantity;
         }
+
+        $favoritosCount = auth()->check() ? \App\Models\Favorito::where('user_id', auth()->id())->count() : 0;
+
     @endphp
 
     <header class="main-header">
@@ -60,7 +62,7 @@
                     </li>
 
                     <li class="mobile-only-link">
-                        <a href="/favoritos" class="{{ request()->is('favoritos') ? 'active' : '' }}">
+                        <a href="{{ route('cliente.favoritos') }}" class="{{ request()->routeIs('cliente.favoritos') ? 'active' : '' }}">
                             {{ __('messages.favorites') }}
                         </a>
                     </li>
@@ -97,8 +99,13 @@
                     <span class="material-symbols-outlined">language</span>
                 </a>
                 
-                <a href="/favoritos" class="desktop-favorites" title="Favoritos">
+                <a href="{{ route('cliente.favoritos') }}" class="desktop-favorites" title="Favoritos" style="position: relative;">
                     <span class="material-symbols-outlined">favorite</span>
+                    @if ($favoritosCount > 0)
+                        <span style="position: absolute; top: -5px; right: -8px; background-color: #b0003a; color: white; border-radius: 50%; padding: 2px 5px; font-size: 10px; font-weight: bold;">
+                            {{ $favoritosCount }}
+                        </span>
+                    @endif
                 </a>
                 
                 <div class="mini-cart-wrapper">

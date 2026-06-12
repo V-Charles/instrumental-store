@@ -125,17 +125,37 @@
                     Comprar
                 </a>
 
-                @auth
-                    <form action="{{ route('cliente.favoritos.store', $produto->id) }}" method="POST">
-                        @csrf
+                @php
+                    $isFavorito = false;
+                    if(auth()->check()){
+                        $isFavorito = \App\Models\Favorito::where('user_id', auth()->id())
+                            ->where('produto_id', $produto->id)
+                            ->exists();
+                    }
+                @endphp
 
-                        <button type="submit" class="product-favorite-icon-button" title="Favoritar">
-                            <span class="material-symbols-outlined">
-                                favorite
-                            </span>
-                        </button>
-                    </form>
-                @endauth
+                @if(auth()->check())
+                    @if($isFavorito)
+                        <form action="{{ route('cliente.favoritos.removerProduto', $produto->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="product-favorite-icon-button" title="Remover dos Favoritos" style="color: #b0003a;">
+                                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                            </button>
+                        </form>
+                    @else
+                        <form action="{{ route('cliente.favoritos.store', $produto->id) }}" method="POST" style="display:inline;">
+                            @csrf
+                            <button type="submit" class="product-favorite-icon-button" title="Adicionar aos Favoritos">
+                                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">favorite</span>
+                            </button>
+                        </form>
+                    @endif
+                @else
+                    <a href="{{ route('login') }}" class="product-favorite-icon-button" title="Faça login para favoritar" style="display: inline-block; text-decoration: none; color: inherit;">
+                        <span class="material-symbols-outlined">favorite</span>
+                    </a>
+                @endif
 
             </div>
 
@@ -197,17 +217,37 @@
                                     Detalhes
                                 </a>
 
-                                @auth
-                                    <form action="{{ route('cliente.favoritos.store', $produtoSimilar->id) }}" method="POST">
-                                        @csrf
+                                @php
+                                    $isFavoritoSimilar = false;
+                                    if(auth()->check()){
+                                        $isFavoritoSimilar = \App\Models\Favorito::where('user_id', auth()->id())
+                                            ->where('produto_id', $produtoSimilar->id)
+                                            ->exists();
+                                    }
+                                @endphp
 
-                                        <button type="submit" class="product-favorite-icon-button" title="Favoritar">
-                                            <span class="material-symbols-outlined">
-                                                favorite
-                                            </span>
-                                        </button>
-                                    </form>
-                                @endauth
+                                @if(auth()->check())
+                                    @if($isFavoritoSimilar)
+                                        <form action="{{ route('cliente.favoritos.removerProduto', $produtoSimilar->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="product-favorite-icon-button" title="Remover dos Favoritos" style="color: #b0003a;">
+                                                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('cliente.favoritos.store', $produtoSimilar->id) }}" method="POST" style="display:inline;">
+                                            @csrf
+                                            <button type="submit" class="product-favorite-icon-button" title="Adicionar aos Favoritos">
+                                                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">favorite</span>
+                                            </button>
+                                        </form>
+                                    @endif
+                                @else
+                                    <a href="{{ route('login') }}" class="product-favorite-icon-button" title="Faça login para favoritar" style="display: inline-flex; align-items: center; text-decoration: none; color: inherit;">
+                                        <span class="material-symbols-outlined">favorite</span>
+                                    </a>
+                                @endif
 
                             </div>
 

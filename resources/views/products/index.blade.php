@@ -103,6 +103,37 @@
                                     {{ __('messages.details') }}
                                 </a>
 
+                                @php
+                                    $isFavCat = false;
+                                    if(auth()->check()){
+                                        $isFavCat = \App\Models\Favorito::where('user_id', auth()->id())
+                                            ->where('produto_id', $produto->id)
+                                            ->exists();
+                                    }
+                                @endphp
+
+                                @if(auth()->check())
+                                    @if($isFavCat)
+                                        <form action="{{ route('cliente.favoritos.removerProduto', $produto->id) }}" method="POST" style="margin: 0;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="product-favorite-icon-button" title="Remover dos Favoritos">
+                                                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
+                                            </button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('cliente.favoritos.store', $produto->id) }}" method="POST" style="margin: 0;">
+                                            @csrf
+                                            <button type="submit" class="product-favorite-icon-button" title="Adicionar aos Favoritos">
+                                                <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">favorite</span>
+                                            </button>
+                                        </form>
+                                    @endif
+                                @else
+                                    <a href="{{ route('login') }}" class="product-favorite-icon-button" title="Faça login para favoritar" style="text-decoration: none;">
+                                        <span class="material-symbols-outlined">favorite</span>
+                                    </a>
+                                @endif
                             </div>
 
                         </div>
