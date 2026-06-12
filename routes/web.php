@@ -184,7 +184,7 @@ Route::prefix('admin')->group(function () {
    ÁREA DO CLIENTE
 ========================================================= */
 
-Route::middleware(['auth', 'verified'])->group(function () {
+Route::middleware(['auth'])->group(function () {
 
     Route::get('/cliente/dados-pessoais', [ClienteDadosController::class, 'index'])
         ->name('cliente.dados');

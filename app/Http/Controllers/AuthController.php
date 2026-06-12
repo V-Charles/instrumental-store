@@ -25,7 +25,7 @@ class AuthController extends Controller
 
             $request->session()->regenerate();
 
-            return redirect()->route('home');
+            return redirect()->intended(route('cliente.dados'));
         }
 
         return back()->withErrors([

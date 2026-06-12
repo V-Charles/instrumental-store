@@ -6,6 +6,17 @@
     <div class="auth-left">
         <h2>{{ __('messages.login') }}</h2>
 
+        @if ($errors->any())
+            <div style="background-color: #f8d7da; color: #721c24; padding: 15px; margin-bottom: 20px; border: 1px solid #f5c6cb; border-radius: 5px;">
+                <strong style="display:block; margin-bottom: 5px;">Ops! Encontramos um problema:</strong>
+                <ul style="margin: 0; padding-left: 20px;">
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
+
         <form method="POST" action="{{ route('login.submit') }}">
             @csrf
 
