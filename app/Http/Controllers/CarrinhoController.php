@@ -21,11 +21,10 @@ class CarrinhoController extends Controller
         return view('cart.index', compact('cart', 'total'));
     }
 
-    public function adicionar($id)
+    public function adicionar(Request $request, $id)
     {
         $produto = Produto::findOrFail($id);
-
-        $cart = session()->get('cart', []);
+        $cart = $request->session()->get('cart', []);
 
         if (isset($cart[$id])) {
             $cart[$id]['quantidade']++;
@@ -39,7 +38,8 @@ class CarrinhoController extends Controller
             ];
         }
 
-        session()->put('cart', $cart);
+        $request->session()->put('cart', $cart);
+        $request->session()->save(); 
 
         return redirect()
             ->back()

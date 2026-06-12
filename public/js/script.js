@@ -355,3 +355,31 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     }
 });
+
+/* =========================================================
+   CARRINHO - ATUALIZAÇÃO DINÂMICA (+ e -)
+========================================================= */
+document.addEventListener("submit", async function (e) {
+    const form = e.target.closest(".cart-quantity form");
+    
+    if (form) {
+        e.preventDefault();
+
+        const btn = form.querySelector("button");
+        if (btn) btn.disabled = true;
+
+        await fetch(form.action, {
+            method: "POST",
+            body: new FormData(form),
+        });
+
+        const response = await fetch(window.location.href);
+        const html = await response.text();
+        const doc = new DOMParser().parseFromString(html, "text/html");
+        const novaTabela = doc.querySelector(".cart-content");
+        const novoCabecalho = doc.querySelector(".mini-cart-wrapper");
+
+        if (novaTabela) document.querySelector(".cart-content").innerHTML = novaTabela.innerHTML;
+        if (novoCabecalho) document.querySelector(".mini-cart-wrapper").innerHTML = novoCabecalho.innerHTML;
+    }
+});

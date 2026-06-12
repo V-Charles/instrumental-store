@@ -136,9 +136,21 @@
                 </strong>
             </div>
 
-            <a href="{{ route('payment.index') }}" class="cart-checkout">
-                {{ __('messages.finish') }}
-            </a>
+            @php
+                if (!auth()->check()) {
+                    session()->put('url.intended', route('cart'));
+                }
+            @endphp
+
+            @auth
+                <a href="{{ route('payment.index') }}" class="cart-checkout">
+                    {{ __('messages.finish') }}
+                </a>
+            @else
+                <a href="{{ route('login') }}" class="cart-checkout">
+                    {{ __('messages.finish') }}
+                </a>
+            @endauth
 
         </aside>
 
