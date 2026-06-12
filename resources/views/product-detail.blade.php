@@ -129,12 +129,10 @@
                     <form action="{{ route('cliente.favoritos.store', $produto->id) }}" method="POST">
                         @csrf
 
-                        <button type="submit" class="product-detail-add">
+                        <button type="submit" class="product-favorite-icon-button" title="Favoritar">
                             <span class="material-symbols-outlined">
                                 favorite
                             </span>
-
-                            Favoritar
                         </button>
                     </form>
                 @endauth
@@ -203,7 +201,7 @@
                                     <form action="{{ route('cliente.favoritos.store', $produtoSimilar->id) }}" method="POST">
                                         @csrf
 
-                                        <button type="submit" class="home-btn home-btn--secondary">
+                                        <button type="submit" class="product-favorite-icon-button" title="Favoritar">
                                             <span class="material-symbols-outlined">
                                                 favorite
                                             </span>

@@ -1382,19 +1382,21 @@ body {
     font-family: inherit;
 }
 
-/* Botões */
+/* Botões do detalhe */
 .product-detail-actions {
     display: flex;
-    gap: 12px;
+    align-items: center;
+    gap: 8px;
 }
 
 .product-detail-actions form {
     margin: 0;
 }
 
+/* Adicionar e comprar com o mesmo tamanho */
 .product-detail-add,
 .product-detail-buy {
-    width: 150px;
+    width: 130px;
     height: 32px;
 
     border-radius: 3px;
@@ -1405,11 +1407,13 @@ body {
     cursor: pointer;
     text-decoration: none;
 
-    display: flex;
+    display: inline-flex;
     align-items: center;
     justify-content: center;
+    gap: 5px;
 
     box-sizing: border-box;
+    font-family: inherit;
 }
 
 .product-detail-add {
@@ -1417,8 +1421,6 @@ body {
     color: #ffffff;
 
     border: 1px solid #b0003a;
-
-    gap: 5px;
 }
 
 .product-detail-buy {
@@ -1430,6 +1432,36 @@ body {
 
 .product-detail-add .material-symbols-outlined {
     font-size: 13px;
+}
+
+/* Botão de favorito apenas com coração */
+.product-favorite-icon-button {
+    width: 32px;
+    height: 32px;
+
+    border: 1px solid #b0003a;
+    background: #ffffff;
+    color: #b0003a;
+
+    border-radius: 3px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: inherit;
+}
+
+.product-favorite-icon-button .material-symbols-outlined {
+    font-size: 17px;
+}
+
+.product-favorite-icon-button:hover {
+    background: #b0003a;
+    color: #ffffff;
 }
 
 /* Produtos similares */
@@ -1518,14 +1550,37 @@ body {
     color: #b0003a;
 }
 
+/* Ações dos produtos similares */
 .product-detail-related .product-page-actions {
     display: flex;
+    align-items: center;
     gap: 8px;
 }
 
 .product-detail-related .product-page-actions form {
-    flex: 1;
     margin: 0;
+}
+
+/* Botões adicionar/detalhes nos similares */
+.product-detail-related .product-page-actions .home-btn {
+    height: 32px;
+
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    box-sizing: border-box;
+}
+
+/* Mantém adicionar e detalhes maiores */
+.product-detail-related .product-page-actions .home-btn--primary,
+.product-detail-related .product-page-actions .home-btn--secondary {
+    min-width: 86px;
+}
+
+/* Mas o formulário do favorito não deve crescer */
+.product-detail-related .product-page-actions form:has(.product-favorite-icon-button) {
+    flex: 0;
 }
 
 /* Botão voltar */
@@ -1616,12 +1671,18 @@ body {
     }
 
     .product-detail-actions {
-        flex-direction: column;
+        flex-direction: row;
+        flex-wrap: wrap;
     }
 
     .product-detail-add,
     .product-detail-buy {
-        width: 100%;
+        width: 120px;
+    }
+
+    .product-favorite-icon-button {
+        width: 32px;
+        height: 32px;
     }
 }
 
