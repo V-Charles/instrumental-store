@@ -9,7 +9,6 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('cpf')->unique()->nullable();
             $table->string('telefone')->nullable();
             $table->string('cargo')->default('operador');
             $table->boolean('ativo')->default(true);
