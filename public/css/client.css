@@ -533,6 +533,23 @@
    CLIENTE - ENDEREÇOS
 ========================================================= */
 
+.client-form-grid-three {
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: 26px;
+    row-gap: 22px;
+}
+
+.client-form-grid-three .client-form-group input,
+.client-form-grid-three .client-form-group select {
+    width: 100%;
+}
+
+@media (max-width: 900px) {
+    .client-form-grid-three {
+        grid-template-columns: 1fr;
+    }
+}
+
 .client-address-page {
     width: 100%;
     max-width: 640px;

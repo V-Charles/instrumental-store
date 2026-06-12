@@ -220,11 +220,23 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/cliente/configuracao/excluir', [ClienteConfiguracaoController::class, 'excluirConta'])
         ->name('cliente.configuracao.excluir');
 
-    Route::get('/cliente/enderecos', [ClienteEnderecoController::class, 'index']);
+    Route::get('/cliente/enderecos', [ClienteEnderecoController::class, 'index'])
+        ->name('cliente.enderecos');
 
-    Route::get('/cliente/enderecos/cadastrar', [ClienteEnderecoController::class, 'create']);
+    Route::get('/cliente/enderecos/cadastrar', [ClienteEnderecoController::class, 'create'])
+        ->name('cliente.enderecos.create');
 
-    Route::get('/cliente/enderecos/editar', [ClienteEnderecoController::class, 'edit']);
+    Route::post('/cliente/enderecos', [ClienteEnderecoController::class, 'store'])
+        ->name('cliente.enderecos.store');
+
+    Route::get('/cliente/enderecos/{id}/editar', [ClienteEnderecoController::class, 'edit'])
+        ->name('cliente.enderecos.edit');
+
+    Route::put('/cliente/enderecos/{id}', [ClienteEnderecoController::class, 'update'])
+        ->name('cliente.enderecos.update');
+
+    Route::delete('/cliente/enderecos/{id}', [ClienteEnderecoController::class, 'destroy'])
+        ->name('cliente.enderecos.destroy');
 
     Route::get('/cliente/cartoes', [ClienteCartaoController::class, 'index']);
 
