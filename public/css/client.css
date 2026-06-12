@@ -577,6 +577,37 @@
    CLIENTE - ENDEREÇOS
 ========================================================= */
 
+/* Remove sublinhado dos botões/links da área de endereços */
+.client-address-edit,
+.client-address-new a,
+.client-btn {
+    text-decoration: none;
+}
+
+/* Botão editar do card de endereço */
+.client-address-edit {
+    min-width: 58px;
+    height: 28px;
+    padding: 0 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #b0003a;
+    color: #ffffff;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.client-address-edit:hover,
+.client-address-new a:hover,
+.client-btn:hover {
+    text-decoration: none;
+}
+
 .client-form-grid-three {
     grid-template-columns: repeat(3, 1fr);
     column-gap: 26px;
