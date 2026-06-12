@@ -28,60 +28,61 @@
 
                 <h2>{{ __('messages.register_new_address') }}</h2>
 
-                <form class="client-profile-form">
+                <form action="{{ route('cliente.enderecos.store') }}" method="POST" class="client-profile-form">
+                    @csrf
 
                     <div class="client-form-grid">
 
                         <div class="client-form-group">
                             <label>{{ __('messages.full_name') }}</label>
-                            <input type="text" name="nome" value="">
+                            <input type="text" name="nome" value="{{ old('nome') }}">
                         </div>
 
                         <div class="client-form-group">
                             <label>{{ __('messages.mobile') }}</label>
-                            <input type="text" name="celular" value="">
+                            <input type="text" name="telefone" value="{{ old('telefone') }}">
                         </div>
 
                         <div class="client-form-group">
                             <label>{{ __('messages.zip_code') }}</label>
-                            <input type="text" name="cep" value="">
+                            <input type="text" name="cep" value="{{ old('cep') }}">
                         </div>
 
                         <div class="client-form-group">
                             <label>{{ __('messages.street') }}</label>
-                            <input type="text" name="rua" value="">
+                            <input type="text" name="rua" value="{{ old('rua') }}">
                         </div>
 
                         <div class="client-form-group">
                             <label>{{ __('messages.number') }}</label>
-                            <input type="text" name="numero" value="">
+                            <input type="text" name="numero" value="{{ old('numero') }}">
                         </div>
 
                         <div class="client-form-group">
                             <label>{{ __('messages.neighborhood') }}</label>
-                            <input type="text" name="bairro" value="">
+                            <input type="text" name="bairro" value="{{ old('bairro') }}">
                         </div>
 
                         <div class="client-form-group">
                             <label>{{ __('messages.city') }}</label>
-                            <input type="text" name="cidade" value="">
+                            <input type="text" name="cidade" value="{{ old('cidade') }}">
                         </div>
 
                         <div class="client-form-group">
                             <label>{{ __('messages.state') }}</label>
-                            <input type="text" name="estado" value="">
+                            <input type="text" name="estado" value="{{ old('estado') }}">
                         </div>
 
                         <div class="client-form-group">
                             <label>{{ __('messages.complement') }}</label>
-                            <input type="text" name="complemento" value="">
+                            <input type="text" name="complemento" value="{{ old('complemento') }}">
                         </div>
 
                     </div>
 
                     <div class="client-profile-actions">
 
-                        <a href="/cliente/enderecos" class="client-btn client-btn-secondary client-btn-link">
+                        <a href="{{ route('cliente.enderecos') }}" class="client-btn client-btn-secondary client-btn-link">
                             {{ __('messages.back') }}
                         </a>
 
