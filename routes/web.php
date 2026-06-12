@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ProdutoController;
 use App\Http\Controllers\AuthController;
+use Illuminate\Foundation\Auth\EmailVerificationRequest;
+use Illuminate\Http\Request;
 use App\Http\Controllers\PedidoController;
 use App\Http\Controllers\PagamentoController;
 use App\Http\Controllers\CarrinhoController;
@@ -82,6 +84,20 @@ Route::get('/cadastro', [AuthController::class, 'registerForm'])->name('register
 Route::post('/cadastro', [AuthController::class, 'register'])->name('register.submit');
 
 Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+
+Route::get('/email/verify', function () {
+    return view('auth.verify-email');
+})->middleware('auth')->name('verification.notice');
+
+Route::get('/email/verify/{id}/{hash}', function (EmailVerificationRequest $request) {
+    $request->fulfill();
+    return redirect()->route('cliente.dados')->with('success', 'E-mail validado com sucesso!');
+})->middleware(['auth', 'signed'])->name('verification.verify');
+
+Route::post('/email/verification-notification', function (Request $request) {
+    $request->user()->sendEmailVerificationNotification();
+    return back()->with('message', 'Link de verificação reenviado para o seu e-mail!');
+})->middleware(['auth', 'throttle:6,1'])->name('verification.send');
 
 /* =========================================================
    LOGIN COM GOOGLE
@@ -184,7 +200,7 @@ Route::prefix('admin')->group(function () {
    ÁREA DO CLIENTE
 ========================================================= */
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 
     Route::get('/cliente/dados-pessoais', [ClienteDadosController::class, 'index'])
         ->name('cliente.dados');

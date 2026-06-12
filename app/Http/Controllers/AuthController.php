@@ -46,17 +46,16 @@ class AuthController extends Controller
             'password' => ['required', 'confirmed', 'min:8'],
         ]);
 
-        User::create([
+        $user = User::create([
             'name' => $request->name,
-            'cpf' => $request->cpf,
-            'username' => $request->username,
             'email' => $request->email,
             'password' => Hash::make($request->password),
         ]);
 
-        return redirect()
-            ->route('login')
-            ->with('success', 'Conta criada com sucesso!');
+        Auth::login($user);
+        event(new \Illuminate\Auth\Events\Registered($user));
+
+        return redirect()->route('verification.notice');
     }
 
     public function logout(Request $request)
