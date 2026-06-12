@@ -94,10 +94,13 @@
 
                             <div class="product-page-actions">
 
-                                <a href="/carrinho" class="home-btn home-btn--primary">
-                                    <span class="material-symbols-outlined">shopping_cart</span>
-                                    {{ __('messages.add') }}
-                                </a>
+                                <form action="{{ route('cart.add', $produto->id) }}" method="POST" style="margin: 0;">
+                                    @csrf
+                                    <button type="submit" class="home-btn home-btn--primary" style="border: none; cursor: pointer; width: 100%;">
+                                        <span class="material-symbols-outlined">shopping_cart</span>
+                                        {{ __('messages.add') }}
+                                    </button>
+                                </form>
 
                                 <a href="{{ route('products.show', $produto->id) }}" class="home-btn home-btn--secondary">
                                     {{ __('messages.details') }}
