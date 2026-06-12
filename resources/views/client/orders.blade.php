@@ -2,6 +2,22 @@
 
 @section('content')
 
+@php
+    $productPlaceholder = asset('images/placeholder-produto.jpg');
+
+    $imagemProdutoUrl = function ($produto) use ($productPlaceholder) {
+        if (!$produto || empty($produto->imagem_principal)) {
+            return $productPlaceholder;
+        }
+
+        if (\Illuminate\Support\Str::startsWith($produto->imagem_principal, ['http://', 'https://'])) {
+            return $produto->imagem_principal;
+        }
+
+        return asset('storage/' . $produto->imagem_principal);
+    };
+@endphp
+
 <div class="client-page">
 
     <input type="checkbox" id="client-menu-toggle">
@@ -78,7 +94,6 @@
 
                                 $nomeProduto = $produto->nome ?? __('messages.product');
                                 $marcaProduto = $produto->marca ?? '';
-                                $imagemProduto = $produto->imagem_principal ?? null;
 
                                 $pedidoId = $pedido->id;
                             @endphp
@@ -88,8 +103,9 @@
                                 <div class="client-order-product">
 
                                     <img 
-                                        src="{{ $imagemProduto ? asset('storage/' . $imagemProduto) : asset('images/placeholder-produto.jpg') }}" 
+                                        src="{{ $imagemProdutoUrl($produto) }}" 
                                         alt="{{ $nomeProduto }}"
+                                        onerror="this.onerror=null; this.src='{{ $productPlaceholder }}';"
                                     >
 
                                     <div>

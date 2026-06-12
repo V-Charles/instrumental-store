@@ -5,6 +5,20 @@
 @php
     $cartItems = $cart ?? session('cart', []);
     $cartTotal = 0;
+
+    $productPlaceholder = asset('images/placeholder-produto.jpg');
+
+    $imagemCarrinhoUrl = function ($imagem) use ($productPlaceholder) {
+        if (empty($imagem)) {
+            return $productPlaceholder;
+        }
+
+        if (\Illuminate\Support\Str::startsWith($imagem, ['http://', 'https://'])) {
+            return $imagem;
+        }
+
+        return asset('storage/' . $imagem);
+    };
 @endphp
 
 <div class="cart-page">
@@ -49,7 +63,11 @@
                         <div class="cart-product-info">
 
                             @if ($itemImage)
-                                <img src="{{ asset('storage/' . $itemImage) }}" alt="{{ $itemName }}">
+                                <img 
+                                    src="{{ $imagemCarrinhoUrl($itemImage) }}" 
+                                    alt="{{ $itemName }}"
+                                    onerror="this.onerror=null; this.src='{{ $productPlaceholder }}';"
+                                >
                             @else
                                 <div class="cart-product-placeholder">
                                     IS

@@ -2,6 +2,22 @@
 
 @section('content')
 
+@php
+    $productPlaceholder = asset('images/placeholder-produto.jpg');
+
+    $imagemProdutoUrl = function ($produto) use ($productPlaceholder) {
+        if (!$produto || empty($produto->imagem_principal)) {
+            return $productPlaceholder;
+        }
+
+        if (\Illuminate\Support\Str::startsWith($produto->imagem_principal, ['http://', 'https://'])) {
+            return $produto->imagem_principal;
+        }
+
+        return asset('storage/' . $produto->imagem_principal);
+    };
+@endphp
+
 <div class="client-page">
 
     <input type="checkbox" id="client-menu-toggle">
@@ -85,7 +101,6 @@
                         $nomeProduto = $produto->nome ?? __('messages.product');
                         $marcaProduto = $produto->marca ?? '';
                         $precoProduto = $produto->preco ?? null;
-                        $imagemProduto = $produto->imagem_principal ?? null;
                         $dataCompra = $pedido->data_compra ?? null;
                     @endphp
 
@@ -93,8 +108,9 @@
 
                         <div class="client-order-detail-image">
                             <img 
-                                src="{{ $imagemProduto ? asset('storage/' . $imagemProduto) : asset('images/placeholder-produto.jpg') }}" 
-                                alt="{{ $nomeProduto }}">
+                                src="{{ $imagemProdutoUrl($produto) }}" 
+                                alt="{{ $nomeProduto }}"
+                                onerror="this.onerror=null; this.src='{{ $productPlaceholder }}';">
                         </div>
 
                         <div class="client-order-detail-info">
@@ -148,19 +164,21 @@
                                 </div>
 
                             </div>
-                                <div style="margin-top:20px;">
 
-                                    <p>
-                                        <strong>Código:</strong>
-                                        {{ $pedido->codigo }}
-                                     </p>
+                            <div style="margin-top:20px;">
 
-                                    <p>
-                                        <strong>Total:</strong>
-                                        R$ {{ number_format($pedido->total, 2, ',', '.') }}
-                                    </p>
+                                <p>
+                                    <strong>Código:</strong>
+                                    {{ $pedido->codigo }}
+                                </p>
+
+                                <p>
+                                    <strong>Total:</strong>
+                                    R$ {{ number_format($pedido->total, 2, ',', '.') }}
+                                </p>
 
                             </div>
+
                             <div class="client-order-detail-status">
 
                                 @if ($pedidoCancelado)
@@ -185,25 +203,25 @@
 
                     <h3>Itens do Pedido</h3>
 
-                        @foreach($pedido->itens as $item)
+                    @foreach($pedido->itens as $item)
 
-                    <div style="margin-bottom:15px;">
+                        <div style="margin-bottom:15px;">
 
-                        <strong>
-                            {{ $item->produto->nome }}
-                        </strong>
+                            <strong>
+                                {{ $item->produto->nome }}
+                            </strong>
 
-                        <br>
+                            <br>
                             Quantidade:
                             {{ $item->quantidade }}
-                        <br>
+                            <br>
 
                             Preço Unitário:
                             R$ {{ number_format($item->preco_unitario, 2, ',', '.') }}
 
-                    </div>
+                        </div>
 
-                @endforeach
+                    @endforeach
                 
                     <div class="client-order-detail-actions">
 

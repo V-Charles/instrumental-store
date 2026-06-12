@@ -3,6 +3,23 @@
 @section('breadcrumb', isset($produto) ? __('messages.edit_product_upper') : __('messages.add_product_upper'))
 
 @section('content')
+
+@php
+    $productPlaceholder = asset('images/placeholder-produto.jpg');
+
+    $imagemProdutoUrl = function ($imagem) use ($productPlaceholder) {
+        if (empty($imagem)) {
+            return $productPlaceholder;
+        }
+
+        if (\Illuminate\Support\Str::startsWith($imagem, ['http://', 'https://'])) {
+            return $imagem;
+        }
+
+        return asset('storage/' . $imagem);
+    };
+@endphp
+
 <div class="admin-page-header">
     <h2>{{ isset($produto) ? __('messages.edit_product') : __('messages.add_new_product') }}</h2>
 </div>
@@ -100,7 +117,11 @@
                     <input type="file" id="imagem_principal" name="imagem_principal" accept="image/*" {{ isset($produto) ? '' : 'required' }}>
                     <div class="upload-placeholder">
                         @if(isset($produto) && $produto->imagem_principal)
-                            <img src="{{ asset('storage/' . $produto->imagem_principal) }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+                            <img 
+                                src="{{ $imagemProdutoUrl($produto->imagem_principal) }}" 
+                                onerror="this.onerror=null; this.src='{{ $productPlaceholder }}';"
+                                style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;"
+                            >
                         @else
                             <span class="material-symbols-outlined">add_photo_alternate</span>
                             <p>{{ __('messages.media_upload_placeholder') }}</p>
@@ -112,7 +133,11 @@
                     @if(isset($produto) && $produto->imagens_extras)
                         @foreach($produto->imagens_extras as $extra)
                             <div class="thumbnail-box" style="border: none;">
-                                <img src="{{ asset('storage/' . $extra) }}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;">
+                                <img 
+                                    src="{{ $imagemProdutoUrl($extra) }}" 
+                                    onerror="this.onerror=null; this.src='{{ $productPlaceholder }}';"
+                                    style="width: 100%; height: 100%; object-fit: cover; border-radius: 6px;"
+                                >
                             </div>
                         @endforeach
                     @endif

@@ -3,6 +3,58 @@
 @section('content')
 
 @php
+    $productPlaceholder = "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='360' viewBox='0 0 600 360'%3E%3Crect width='600' height='360' fill='%23f4f0ec'/%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' fill='%23b0003a' font-family='Arial' font-size='22'%3EInstrumental Store%3C/text%3E%3C/svg%3E";
+
+    $imagemInstrumento = function ($produto) use ($productPlaceholder) {
+        if (!empty($produto->imagem_principal)) {
+            return asset('storage/' . $produto->imagem_principal);
+        }
+
+        $nomeBusca = strtolower(
+            ($produto->nome ?? '') . ' ' .
+            ($produto->categoria ?? '') . ' ' .
+            ($produto->marca ?? '')
+        );
+
+        $termo = 'musical,instrument';
+
+        if (str_contains($nomeBusca, 'violao') || str_contains($nomeBusca, 'violão')) {
+            $termo = 'acoustic,guitar';
+        } elseif (str_contains($nomeBusca, 'guitarra')) {
+            $termo = 'electric,guitar';
+        } elseif (str_contains($nomeBusca, 'baixo')) {
+            $termo = 'bass,guitar';
+        } elseif (str_contains($nomeBusca, 'bateria')) {
+            $termo = 'drum,kit';
+        } elseif (str_contains($nomeBusca, 'teclado')) {
+            $termo = 'music,keyboard';
+        } elseif (str_contains($nomeBusca, 'piano')) {
+            $termo = 'piano';
+        } elseif (str_contains($nomeBusca, 'microfone')) {
+            $termo = 'microphone';
+        } elseif (str_contains($nomeBusca, 'fone')) {
+            $termo = 'headphones';
+        } elseif (str_contains($nomeBusca, 'amplificador') || str_contains($nomeBusca, 'amplifica')) {
+            $termo = 'guitar,amplifier';
+        } elseif (str_contains($nomeBusca, 'caixa')) {
+            $termo = 'audio,speaker';
+        } elseif (str_contains($nomeBusca, 'cabo')) {
+            $termo = 'audio,cable';
+        } elseif (str_contains($nomeBusca, 'pedal')) {
+            $termo = 'guitar,pedal';
+        } elseif (str_contains($nomeBusca, 'palheta')) {
+            $termo = 'guitar,pick';
+        } elseif (str_contains($nomeBusca, 'corda')) {
+            $termo = 'guitar,strings';
+        } elseif (str_contains($nomeBusca, 'suporte')) {
+            $termo = 'music,stand';
+        }
+
+        $lock = $produto->id ?? rand(1, 999);
+
+        return 'https://loremflickr.com/600/400/' . $termo . '?lock=' . $lock;
+    };
+
     $imagensExtras = $produto->imagens_extras ?? [];
 
     if (is_string($imagensExtras)) {
@@ -42,9 +94,10 @@
                     </button>
                 @else
                     <button type="button" class="product-thumb active">
-                        <div class="product-thumb-placeholder">
-                            IS
-                        </div>
+                        <img
+                            src="{{ $imagemInstrumento($produto) }}"
+                            alt="{{ $produto->nome }}"
+                            onerror="this.onerror=null; this.src='{{ $productPlaceholder }}';">
                     </button>
                 @endif
 
@@ -62,16 +115,11 @@
 
             <div class="product-detail-image">
 
-                @if ($produto->imagem_principal)
-                    <img
-                        id="mainProductImage"
-                        src="{{ asset('storage/' . $produto->imagem_principal) }}"
-                        alt="{{ $produto->nome }}">
-                @else
-                    <div class="product-image-placeholder">
-                        Instrumental Store
-                    </div>
-                @endif
+                <img
+                    id="mainProductImage"
+                    src="{{ $imagemInstrumento($produto) }}"
+                    alt="{{ $produto->nome }}"
+                    onerror="this.onerror=null; this.src='{{ $productPlaceholder }}';">
 
             </div>
 
@@ -127,7 +175,8 @@
 
                 @php
                     $isFavorito = false;
-                    if(auth()->check()){
+
+                    if (auth()->check()) {
                         $isFavorito = \App\Models\Favorito::where('user_id', auth()->id())
                             ->where('produto_id', $produto->id)
                             ->exists();
@@ -139,6 +188,7 @@
                         <form action="{{ route('cliente.favoritos.removerProduto', $produto->id) }}" method="POST" style="display:inline;">
                             @csrf
                             @method('DELETE')
+
                             <button type="submit" class="product-favorite-icon-button" title="Remover dos Favoritos" style="color: #b0003a;">
                                 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
                             </button>
@@ -146,6 +196,7 @@
                     @else
                         <form action="{{ route('cliente.favoritos.store', $produto->id) }}" method="POST" style="display:inline;">
                             @csrf
+
                             <button type="submit" class="product-favorite-icon-button" title="Adicionar aos Favoritos">
                                 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">favorite</span>
                             </button>
@@ -175,15 +226,10 @@
 
                     <article class="product-page-card">
 
-                        @if ($produtoSimilar->imagem_principal)
-                            <img
-                                src="{{ asset('storage/' . $produtoSimilar->imagem_principal) }}"
-                                alt="{{ $produtoSimilar->nome }}">
-                        @else
-                            <div class="product-card-placeholder">
-                                Instrumental Store
-                            </div>
-                        @endif
+                        <img
+                            src="{{ $imagemInstrumento($produtoSimilar) }}"
+                            alt="{{ $produtoSimilar->nome }}"
+                            onerror="this.onerror=null; this.src='{{ $productPlaceholder }}';">
 
                         <div class="product-page-info">
 
@@ -219,7 +265,8 @@
 
                                 @php
                                     $isFavoritoSimilar = false;
-                                    if(auth()->check()){
+
+                                    if (auth()->check()) {
                                         $isFavoritoSimilar = \App\Models\Favorito::where('user_id', auth()->id())
                                             ->where('produto_id', $produtoSimilar->id)
                                             ->exists();
@@ -231,6 +278,7 @@
                                         <form action="{{ route('cliente.favoritos.removerProduto', $produtoSimilar->id) }}" method="POST" style="display:inline;">
                                             @csrf
                                             @method('DELETE')
+
                                             <button type="submit" class="product-favorite-icon-button" title="Remover dos Favoritos" style="color: #b0003a;">
                                                 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">favorite</span>
                                             </button>
@@ -238,6 +286,7 @@
                                     @else
                                         <form action="{{ route('cliente.favoritos.store', $produtoSimilar->id) }}" method="POST" style="display:inline;">
                                             @csrf
+
                                             <button type="submit" class="product-favorite-icon-button" title="Adicionar aos Favoritos">
                                                 <span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">favorite</span>
                                             </button>
