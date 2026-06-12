@@ -7,92 +7,86 @@ use Illuminate\Http\Request;
 
 class PedidoController extends Controller
 {
-    public function index(Request $request)
+    /*
+    |--------------------------------------------------------------------------
+    | ADMIN - LISTAGEM DE PEDIDOS
+    |--------------------------------------------------------------------------
+    */
+
+    public function index()
     {
-        $query = Pedido::query();
+        $pedidos = Pedido::with(['itens.produto', 'pagamento'])
+            ->latest()
+            ->get();
 
-        if ($request->filled('search')) {
-            $search = $request->search;
-            $query->where(function ($q) use ($search) {
-                $q->where('codigo', 'like', "%{$search}%")
-                  ->orWhere('cliente_nome', 'like', "%{$search}%")
-                  ->orWhere('cliente_email', 'like', "%{$search}%");
-            });
-        }
-
-        if ($request->filled('status')) {
-            $query->where('status', $request->status);
-        }
-
-        $pedidos = $query->latest()->get();
-        
-        $totalPedidos = Pedido::count();
-        $novosPedidos = Pedido::where('status', 'pendente')->count();
-        $pedidosFinalizados = Pedido::where('status', 'entregue')->count();
-        $pedidosCancelados = Pedido::where('status', 'cancelado')->count();
-
-        if ($request->wantsJson()) {
-            $pedidos->transform(function($pedido) {
-                $pedido->data_formatada = $pedido->created_at->format('d/m/Y H:i');
-                $pedido->total_formatado = number_format($pedido->total, 2, ',', '.');
-                $pedido->status_classe = strtolower($pedido->status);
-                $pedido->status_texto = ucfirst($pedido->status);
-                return $pedido;
-            });
-            return response()->json($pedidos);
-        }
-
-        return view('admin.pedidos.index', compact(
-            'pedidos', 
-            'totalPedidos', 
-            'novosPedidos', 
-            'pedidosFinalizados', 
-            'pedidosCancelados'
-        ));
+        return view('admin.pedidos.index', compact('pedidos'));
     }
+
+    /*
+    |--------------------------------------------------------------------------
+    | ADMIN - DETALHE DO PEDIDO
+    |--------------------------------------------------------------------------
+    */
 
     public function show($id)
     {
-        $pedido = Pedido::with('itens.produto')->findOrFail($id);
-        
+        $pedido = Pedido::with(['itens.produto', 'pagamento', 'devolucao'])
+            ->findOrFail($id);
+
         return view('admin.pedidos.show', compact('pedido'));
     }
 
-public function meusPedidos()
-{
-    $pedidos = Pedido::with('itens.produto')
-        ->latest()
-        ->get();
+    /*
+    |--------------------------------------------------------------------------
+    | ADMIN - ATUALIZAR STATUS DO PEDIDO
+    |--------------------------------------------------------------------------
+    */
 
-    return view(
-        'client.orders',
-        compact('pedidos')
-    );
-}
+    public function atualizarStatus(Request $request, $id)
+    {
+        $request->validate([
+            'status' => 'required|string|max:50',
+        ]);
 
-public function detalheCliente($id)
-{
-    $pedido = Pedido::with('itens.produto')
-        ->findOrFail($id);
+        $pedido = Pedido::findOrFail($id);
 
-    return view('client.order-detail', compact('pedido'));
-}
+        $pedido->status = $request->status;
+        $pedido->save();
 
-public function atualizarStatus(Request $request, $id)
-{
-    $request->validate([
-        'status' => 'required|in:pendente,pago,enviado,entregue'
-    ]);
+        return redirect()
+            ->back()
+            ->with('success', 'Status do pedido atualizado com sucesso!');
+    }
 
-    $pedido = Pedido::findOrFail($id);
+    /*
+    |--------------------------------------------------------------------------
+    | CLIENTE - MEUS PEDIDOS
+    |--------------------------------------------------------------------------
+    */
 
-    $pedido->update([
-        'status' => $request->status
-    ]);
+    public function meusPedidos()
+    {
+        $pedidos = Pedido::with(['itens.produto'])
+            ->where('cliente_email', auth()->user()->email)
+            ->latest()
+            ->get();
 
-    return back()->with(
-        'success',
-        'Status atualizado com sucesso.'
-    );
-}
+        return view('client.orders', compact('pedidos'));
+    }
+
+    /*
+    |--------------------------------------------------------------------------
+    | CLIENTE - DETALHE DO PEDIDO
+    |--------------------------------------------------------------------------
+    */
+
+    public function detalheCliente($id)
+    {
+        $pedido = Pedido::with(['itens.produto'])
+            ->where('cliente_email', auth()->user()->email)
+            ->where('id', $id)
+            ->firstOrFail();
+
+        return view('client.order-detail', compact('pedido'));
+    }
 }

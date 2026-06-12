@@ -26,6 +26,12 @@
 
                 <h2>{{ __('messages.my_orders') }}</h2>
 
+                @if (session('success'))
+                    <p class="success-message">
+                        {{ session('success') }}
+                    </p>
+                @endif
+
                 <div class="client-orders-list">
 
                     @isset($pedidos)
@@ -33,36 +39,30 @@
                         @forelse ($pedidos as $pedido)
 
                             @php
-                                /*
-                                    Status esperados do backend:
-                                    - andamento
-                                    - finalizado
-                                    - cancelado
-
-                                    Etapas esperadas do backend:
-                                    - confirmado
-                                    - preparo
-                                    - envio
-                                    - entregue
-                                */
-
                                 $statusPedido = strtolower($pedido->status ?? 'andamento');
-                                $etapaPedido = strtolower($pedido->status ?? 'confirmado');
 
                                 $pedidoCancelado = $statusPedido === 'cancelado';
                                 $pedidoFinalizado = $statusPedido === 'finalizado';
+
+                                /*
+                                    Como ainda não temos uma coluna separada para etapa,
+                                    vamos usar o próprio status para controlar a barra.
+                                */
+                                $etapaPedido = strtolower($pedido->status ?? 'confirmado');
 
                                 $confirmadoAtivo = true;
 
                                 $preparoAtivo = !$pedidoCancelado && in_array($etapaPedido, [
                                     'preparo',
                                     'envio',
-                                    'entregue'
+                                    'entregue',
+                                    'finalizado'
                                 ]);
 
                                 $envioAtivo = !$pedidoCancelado && in_array($etapaPedido, [
                                     'envio',
-                                    'entregue'
+                                    'entregue',
+                                    'finalizado'
                                 ]);
 
                                 $entregueAtivo = !$pedidoCancelado && (
@@ -80,15 +80,17 @@
                                 $marcaProduto = $produto->marca ?? '';
                                 $imagemProduto = $produto->imagem_principal ?? null;
 
-                                $pedidoId = $pedido->id ?? '';
+                                $pedidoId = $pedido->id;
                             @endphp
 
                             <article class="client-order-card">
 
                                 <div class="client-order-product">
+
                                     <img 
                                         src="{{ $imagemProduto ? asset('storage/' . $imagemProduto) : asset('images/placeholder-produto.jpg') }}" 
-                                        alt="{{ $nomeProduto }}">
+                                        alt="{{ $nomeProduto }}"
+                                    >
 
                                     <div>
                                         <h3>{{ $nomeProduto }}</h3>
@@ -96,7 +98,20 @@
                                         @if ($marcaProduto)
                                             <p>{{ $marcaProduto }}</p>
                                         @endif
+
+                                        @if (!empty($pedido->codigo))
+                                            <p>
+                                                Código: {{ $pedido->codigo }}
+                                            </p>
+                                        @endif
+
+                                        @if (!empty($pedido->total))
+                                            <p>
+                                                Total: R$ {{ number_format($pedido->total, 2, ',', '.') }}
+                                            </p>
+                                        @endif
                                     </div>
+
                                 </div>
 
                                 <div class="client-order-progress">
@@ -140,25 +155,35 @@
                                     @elseif ($pedidoFinalizado)
 
                                         <div class="client-order-status-actions">
+
                                             <span class="client-status-text client-status-finished-text">
                                                 {{ __('messages.order_finished') }}
                                             </span>
 
-                                            <a href="/cliente/pedidos/{{ $pedidoId }}" class="client-status client-status-progress">
+                                            <a 
+                                                href="{{ route('cliente.pedidos.detalhe', $pedidoId) }}" 
+                                                class="client-status client-status-progress"
+                                            >
                                                 {{ __('messages.view') }}
                                             </a>
+
                                         </div>
 
                                     @else
 
                                         <div class="client-order-status-actions">
-                                            <a href="/cliente/pedidos/{{ $pedidoId }}" class="client-status client-status-progress">
+
+                                            <a 
+                                                href="{{ route('cliente.pedidos.detalhe', $pedidoId) }}" 
+                                                class="client-status client-status-progress"
+                                            >
                                                 {{ __('messages.order_in_progress') }}
                                             </a>
 
                                             <button type="button" class="client-status client-status-cancel-action">
                                                 {{ __('messages.cancel_order') }}
                                             </button>
+
                                         </div>
 
                                     @endif

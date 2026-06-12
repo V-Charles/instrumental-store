@@ -156,12 +156,14 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/produtos', [ProdutoController::class, 'index']);
 
-        Route::get('/pedidos', [PedidoController::class, 'index']);
-
         Route::get('/pedidos/{id}', [PedidoController::class, 'show']);
 
         Route::put('/pedidos/{id}/status', [PedidoController::class, 'atualizarStatus'])
             ->name('admin.pedidos.status');
+
+        Route::get('/cliente/pedidos', [PedidoController::class, 'meusPedidos']);
+
+        Route::get('/cliente/pedidos/{id}', [PedidoController::class, 'detalheCliente']);
 
         Route::get('/pagamentos', [PagamentoController::class, 'index']);
 
