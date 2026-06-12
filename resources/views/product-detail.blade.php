@@ -125,6 +125,20 @@
                     Comprar
                 </a>
 
+                @auth
+                    <form action="{{ route('cliente.favoritos.store', $produto->id) }}" method="POST">
+                        @csrf
+
+                        <button type="submit" class="product-detail-add">
+                            <span class="material-symbols-outlined">
+                                favorite
+                            </span>
+
+                            Favoritar
+                        </button>
+                    </form>
+                @endauth
+
             </div>
 
         </div>
@@ -184,6 +198,18 @@
                                 <a href="{{ route('products.show', $produtoSimilar->id) }}" class="home-btn home-btn--secondary">
                                     Detalhes
                                 </a>
+
+                                @auth
+                                    <form action="{{ route('cliente.favoritos.store', $produtoSimilar->id) }}" method="POST">
+                                        @csrf
+
+                                        <button type="submit" class="home-btn home-btn--secondary">
+                                            <span class="material-symbols-outlined">
+                                                favorite
+                                            </span>
+                                        </button>
+                                    </form>
+                                @endauth
 
                             </div>
 

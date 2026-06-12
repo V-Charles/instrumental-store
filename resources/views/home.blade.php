@@ -105,6 +105,18 @@
                                     {{ __('messages.details') }}
                                 </a>
 
+                                @auth
+                                    <form action="{{ route('cliente.favoritos.store', $produto->id) }}" method="POST">
+                                        @csrf
+
+                                        <button type="submit" class="home-btn home-btn--secondary">
+                                            <span class="material-symbols-outlined">
+                                                favorite
+                                            </span>
+                                        </button>
+                                    </form>
+                                @endauth
+
                             </div>
 
                         </div>
@@ -199,6 +211,18 @@
                                 <a href="{{ route('products.show', $produto->id) }}" class="home-btn home-btn--secondary">
                                     {{ __('messages.details') }}
                                 </a>
+
+                                @auth
+                                    <form action="{{ route('cliente.favoritos.store', $produto->id) }}" method="POST">
+                                        @csrf
+
+                                        <button type="submit" class="home-btn home-btn--secondary">
+                                            <span class="material-symbols-outlined">
+                                                favorite
+                                            </span>
+                                        </button>
+                                    </form>
+                                @endauth
 
                             </div>
 

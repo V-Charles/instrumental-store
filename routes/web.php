@@ -258,7 +258,17 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/cliente/cartoes/{id}', [ClienteCartaoController::class, 'destroy'])
         ->name('cliente.cartoes.destroy');
 
-    Route::get('/cliente/desejos', [ClienteFavoritoController::class, 'index']);
+    Route::get('/cliente/desejos', [ClienteFavoritoController::class, 'index'])
+    ->name('cliente.favoritos');
+
+    Route::post('/cliente/desejos/{produtoId}', [ClienteFavoritoController::class, 'store'])
+        ->name('cliente.favoritos.store');
+
+    Route::delete('/cliente/desejos/{id}', [ClienteFavoritoController::class, 'destroy'])
+        ->name('cliente.favoritos.destroy');
+
+    Route::delete('/cliente/desejos/produto/{produtoId}', [ClienteFavoritoController::class, 'removerPorProduto'])
+        ->name('cliente.favoritos.removerProduto');
 
     Route::get('/cliente/pedidos', [PedidoController::class, 'meusPedidos'])
         ->name('cliente.pedidos');

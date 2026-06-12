@@ -26,62 +26,76 @@
 
                 <h2>{{ __('messages.wishlist_title') }}</h2>
 
+                @if (session('success'))
+                    <p class="success-message">
+                        {{ session('success') }}
+                    </p>
+                @endif
+
                 <div class="client-wishlist-list">
 
-                    @isset($favoritos)
+                    @forelse ($favoritos as $favorito)
 
-                        @forelse ($favoritos as $favorito)
+                        @php
+                            $produto = $favorito->produto;
 
-                            @php
-                                $produto = $favorito->produto ?? $favorito;
+                            $produtoId = $produto->id ?? '';
+                            $nomeProduto = $produto->nome ?? __('messages.product');
+                            $descricaoProduto = $produto->descricao ?? '';
+                            $imagemProduto = $produto->imagem_principal ?? null;
+                            $precoProduto = $produto->preco ?? null;
+                        @endphp
 
-                                $produtoId = $produto->id ?? '';
-                                $nomeProduto = $produto->nome ?? __('messages.product');
-                                $descricaoProduto = $produto->descricao ?? '';
-                                $imagemProduto = $produto->imagem_principal ?? null;
-                            @endphp
+                        <article class="client-wishlist-card">
 
-                            <article class="client-wishlist-card">
+                            <form 
+                                action="{{ route('cliente.favoritos.destroy', $favorito->id) }}" 
+                                method="POST"
+                                onsubmit="return confirm('Tem certeza que deseja remover este produto dos favoritos?')"
+                            >
+                                @csrf
+                                @method('DELETE')
 
-                                <button type="button" class="client-wishlist-remove">
+                                <button type="submit" class="client-wishlist-remove">
                                     <span class="material-symbols-outlined">favorite</span>
                                 </button>
+                            </form>
 
-                                <div class="client-wishlist-image">
-                                    <img 
-                                        src="{{ $imagemProduto ? asset('storage/' . $imagemProduto) : asset('images/placeholder-produto.jpg') }}" 
-                                        alt="{{ $nomeProduto }}">
-                                </div>
+                            <div class="client-wishlist-image">
+                                <img 
+                                    src="{{ $imagemProduto ? asset('storage/' . $imagemProduto) : asset('images/placeholder-produto.jpg') }}" 
+                                    alt="{{ $nomeProduto }}">
+                            </div>
 
-                                <div class="client-wishlist-info">
-                                    <h3>{{ $nomeProduto }}</h3>
+                            <div class="client-wishlist-info">
 
-                                    @if ($descricaoProduto)
-                                        <p>{{ $descricaoProduto }}</p>
-                                    @endif
+                                <h3>{{ $nomeProduto }}</h3>
 
-                                    <a href="/produto/{{ $produtoId }}" class="client-wishlist-button">
-                                        {{ __('messages.view_product') }}
-                                    </a>
-                                </div>
+                                @if ($descricaoProduto)
+                                    <p>{{ $descricaoProduto }}</p>
+                                @endif
 
-                            </article>
+                                @if ($precoProduto)
+                                    <p>
+                                        R$ {{ number_format($precoProduto, 2, ',', '.') }}
+                                    </p>
+                                @endif
 
-                        @empty
+                                <a href="{{ route('products.show', $produtoId) }}" class="client-wishlist-button">
+                                    {{ __('messages.view_product') }}
+                                </a>
 
-                            <p class="client-empty-message">
-                                {{ __('messages.no_wishlist_items') }}
-                            </p>
+                            </div>
 
-                        @endforelse
+                        </article>
 
-                    @else
+                    @empty
 
                         <p class="client-empty-message">
-                            {{ __('messages.wishlist_backend_message') }}
+                            {{ __('messages.no_wishlist_items') }}
                         </p>
 
-                    @endisset
+                    @endforelse
 
                 </div>
 
