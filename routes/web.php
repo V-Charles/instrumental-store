@@ -156,6 +156,7 @@ Route::prefix('admin')->group(function () {
 
         Route::get('/produtos', [ProdutoController::class, 'index']);
 
+        Route::get('/pedidos', [PedidoController::class, 'index'])->name('admin.pedidos.index');
         Route::get('/pedidos/{id}', [PedidoController::class, 'show']);
 
         Route::put('/pedidos/{id}/status', [PedidoController::class, 'atualizarStatus'])

@@ -11,15 +11,26 @@ class PedidoController extends Controller
     |--------------------------------------------------------------------------
     | ADMIN - LISTAGEM DE PEDIDOS
     |--------------------------------------------------------------------------
+    |
     */
-
     public function index()
     {
         $pedidos = Pedido::with(['itens.produto', 'pagamento'])
             ->latest()
             ->get();
 
-        return view('admin.pedidos.index', compact('pedidos'));
+        $totalPedidos = $pedidos->count();
+        $novosPedidos = $pedidos->where('status', 'pendente')->count();
+        $pedidosFinalizados = $pedidos->whereIn('status', ['pago', 'finalizado', 'entregue'])->count();
+        $pedidosCancelados = $pedidos->where('status', 'cancelado')->count();
+
+        return view('admin.pedidos.index', compact(
+            'pedidos',
+            'totalPedidos',
+            'novosPedidos',
+            'pedidosFinalizados',
+            'pedidosCancelados'
+        ));
     }
 
     /*
