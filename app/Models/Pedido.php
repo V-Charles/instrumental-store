@@ -13,9 +13,12 @@ class Pedido extends Model
         'codigo',
         'total',
         'status',
+        'transaction_id',
         'forma_pagamento',
+        'pix_copia_cola',
+        'pix_qr_code_base64',
         'cliente_nome',
-        'cliente_email'
+        'cliente_email',
     ];
 
     public function itens()

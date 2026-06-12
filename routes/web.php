@@ -63,9 +63,9 @@ Route::get('/dados-compra', [CarrinhoController::class, 'checkout'])
     ->middleware('auth')
     ->name('payment.index');
 
-Route::get('/pagamento-pix', function () {
-    return view('payment.pix');
-})->name('payment.pix');
+Route::get('/pagamento-pix/{id}', [CarrinhoController::class, 'exibirPix'])
+    ->middleware('auth')
+    ->name('payment.pix');
 
 Route::get('/compra-realizada', function () {
     return view('order.success');

@@ -8,6 +8,7 @@ use App\Models\ItemPedido;
 use Illuminate\Http\Request;
 use App\Models\Cartao;
 use App\Models\Endereco;
+use Illuminate\Support\Facades\Http;
 
 class CarrinhoController extends Controller
 {
@@ -148,12 +149,46 @@ class CarrinhoController extends Controller
             ]);
         }
 
-        session()->forget('cart');
-
         if ($request->payment_method === 'pix') {
-            return redirect()->route('payment.pix');
+            $token = config('services.mercadopago.access_token');
+
+            $response = Http::withToken($token)
+                ->withHeaders(['X-Idempotency-Key' => uniqid()])
+                ->post('https://api.mercadopago.com/v1/payments', [
+                    'transaction_amount' => (float) $total,
+                    'description' => 'Compra Loja - ' . $pedido->codigo,
+                    'payment_method_id' => 'pix',
+                    'payer' => [
+                        'email' => auth()->user()->email,
+                        'first_name' => explode(' ', auth()->user()->name)[0],
+                        'last_name' => str_contains(auth()->user()->name, ' ') ? substr(auth()->user()->name, strpos(auth()->user()->name, ' ') + 1) : 'Silva',
+                    ]
+                ]);
+
+            if ($response->successful()) {
+                $dadosPagamento = $response->json();
+                $pedido->update([
+                    'transaction_id' => $dadosPagamento['id'],
+                    'pix_copia_cola' => $dadosPagamento['point_of_interaction']['transaction_data']['qr_code'],
+                    'pix_qr_code_base64' => $dadosPagamento['point_of_interaction']['transaction_data']['qr_code_base64'],
+                ]);
+
+                session()->forget('cart');
+
+                return redirect()->route('payment.pix', $pedido->id);
+            } else {
+                $pedido->delete();
+                return redirect()->back()->withErrors(['api_error' => 'Falha ao gerar o Pix com o Mercado Pago. Verifique suas credenciais de teste.']);
+            }
         }
 
+        session()->forget('cart');
         return redirect()->route('order.success');
+    }
+
+    public function exibirPix($id)
+    {
+        $pedido = Pedido::where('user_id', auth()->id())->where('id', $id)->firstOrFail();
+        return view('payment.pix', compact('pedido'));
     }
 }

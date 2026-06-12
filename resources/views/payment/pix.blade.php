@@ -2,18 +2,6 @@
 
 @section('content')
 
-@php
-    $cartItems = session('cart', []);
-    $cartTotal = 0;
-
-    foreach ($cartItems as $item) {
-        $itemPrice = $item['preco'] ?? 0;
-        $itemQuantity = $item['quantidade'] ?? 1;
-
-        $cartTotal += $itemPrice * $itemQuantity;
-    }
-@endphp
-
 <div class="pix-page">
 
     <section class="pix-hero">
@@ -34,10 +22,12 @@
                 {{ __('messages.pix_instruction') }}
             </p>
 
-            <div class="pix-qr-code">
-                <span class="material-symbols-outlined">
-                    qr_code_2
-                </span>
+            <div class="pix-qr-code" style="display: flex; justify-content: center; align-items: center; padding: 20px;">
+                @if(!empty($pedido->pix_qr_code_base64))
+                    <img src="data:image/png;base64,{{ $pedido->pix_qr_code_base64 }}" alt="QR Code Pix" style="max-width: 250px; height: auto;">
+                @else
+                    <span class="material-symbols-outlined" style="font-size: 100px;">qr_code_2</span>
+                @endif
             </div>
 
             <div class="pix-copy-area">
@@ -46,10 +36,11 @@
                 </label>
 
                 <div class="pix-copy-row">
+
                     <input
                         type="text"
                         id="pixCode"
-                        value="00020126580014BR.GOV.BCB.PIX0136instrumental-store-pix-exemplo520400005303986540{{ number_format($cartTotal, 2, '', '') }}5802BR5920Instrumental Store6009Sao Paulo62070503***6304ABCD"
+                        value="{{ $pedido->pix_copia_cola }}"
                         readonly>
 
                     <button type="button" id="copyPixButton">
@@ -66,7 +57,7 @@
                 <span>{{ __('messages.total') }}</span>
 
                 <strong>
-                    R$ {{ number_format($cartTotal, 2, ',', '.') }}
+                    R$ {{ number_format($pedido->total, 2, ',', '.') }}
                 </strong>
             </div>
 
