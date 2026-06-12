@@ -205,5 +205,16 @@ Route::middleware(['auth'])->group(function () {
 
     Route::put('/cliente/dados-pessoais', [AreaClienteController::class, 'atualizarPerfil'])
         ->name('cliente.dados.atualizar');
-        Route::get('/cliente/configuracao', [AreaClienteController::class, 'configuracao']);
+    
+    Route::get('/cliente/configuracao', [AreaClienteController::class, 'configuracao'])
+    ->name('cliente.configuracao');
+
+    Route::put('/cliente/configuracao/senha', [AreaClienteController::class, 'atualizarSenha'])
+        ->name('cliente.configuracao.senha');
+
+    Route::put('/cliente/configuracao/idioma', [AreaClienteController::class, 'atualizarIdioma'])
+        ->name('cliente.configuracao.idioma');
+
+    Route::delete('/cliente/configuracao/excluir', [AreaClienteController::class, 'excluirConta'])
+        ->name('cliente.configuracao.excluir');
     });

@@ -2,6 +2,16 @@
 
 @section('content')
 
+@php
+    $idiomaAtual = session('locale', 'pt');
+
+    if ($idiomaAtual === 'en') {
+        $idiomaAtualTexto = 'Inglês';
+    } else {
+        $idiomaAtualTexto = 'Português';
+    }
+@endphp
+
 <div class="client-page">
 
     <input type="checkbox" id="client-menu-toggle">
@@ -13,7 +23,7 @@
 
         <span>{{ __('messages.home') }}</span>
         <span class="client-separator">></span>
-        <span>{{ __('messages.configuration') }}</span>
+        <span>{{ __('messages.account_settings') }}</span>
     </div>
 
     <div class="client-main-container">
@@ -22,162 +32,192 @@
 
         <main class="client-content">
 
-            <section class="client-settings-page">
+            <section class="client-profile-page">
 
                 <h2>{{ __('messages.account_settings') }}</h2>
 
-                <div class="client-settings-tabs">
-                    <span>{{ __('messages.account') }}</span>
+                @if (session('success'))
+                    <p class="success-message">
+                        {{ session('success') }}
+                    </p>
+                @endif
+
+                @if ($errors->any())
+                    <div class="error-message">
+                        <p>Verifique os campos preenchidos.</p>
+                    </div>
+                @endif
+
+                <div class="client-settings-area">
+
+                    <!-- ALTERAR SENHA -->
+                    <div class="client-settings-card">
+
+                        <input type="checkbox" id="show-password-form" class="client-settings-toggle">
+
+                        <h3>Alterar senha</h3>
+
+                        <p>
+                            Altere sua senha de acesso informando a senha atual e cadastrando uma nova senha.
+                        </p>
+
+                        <label for="show-password-form" class="client-btn client-btn-primary client-settings-open-button">
+                            Alterar senha
+                        </label>
+
+                        <form action="{{ route('cliente.configuracao.senha') }}" method="POST" class="client-settings-hidden-area">
+                            @csrf
+                            @method('PUT')
+
+                            <div class="client-form-grid">
+
+                                <div class="client-form-group">
+                                    <label>Senha atual</label>
+                                    <input 
+                                        type="password" 
+                                        name="senha_atual"
+                                        placeholder="Digite sua senha atual"
+                                    >
+
+                                    @error('senha_atual')
+                                        <small class="client-error">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                                <div class="client-form-group">
+                                    <label>Nova senha</label>
+                                    <input 
+                                        type="password" 
+                                        name="nova_senha"
+                                        placeholder="Digite a nova senha"
+                                    >
+
+                                    @error('nova_senha')
+                                        <small class="client-error">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                                <div class="client-form-group">
+                                    <label>Confirmar nova senha</label>
+                                    <input 
+                                        type="password" 
+                                        name="nova_senha_confirmation"
+                                        placeholder="Confirme a nova senha"
+                                    >
+                                </div>
+
+                            </div>
+
+                            <div class="client-profile-actions">
+                                <button type="submit" class="client-btn client-btn-primary">
+                                    Salvar nova senha
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <!-- IDIOMA -->
+                    <div class="client-settings-card">
+
+                        <input type="checkbox" id="show-language-form" class="client-settings-toggle">
+
+                        <h3>Idioma da conta</h3>
+
+                        <p>
+                            Idioma atual: <strong>{{ $idiomaAtualTexto }}</strong>
+                        </p>
+
+                        <label for="show-language-form" class="client-btn client-btn-primary client-settings-open-button">
+                            Alterar idioma
+                        </label>
+
+                        <form action="{{ route('cliente.configuracao.idioma') }}" method="POST" class="client-settings-hidden-area">
+                            @csrf
+                            @method('PUT')
+
+                            <div class="client-form-grid">
+
+                                <div class="client-form-group">
+                                    <label>Escolha o idioma</label>
+
+                                    <select name="idioma">
+                                        <option value="pt" {{ $idiomaAtual === 'pt' ? 'selected' : '' }}>
+                                            Português
+                                        </option>
+
+                                        <option value="en" {{ $idiomaAtual === 'en' ? 'selected' : '' }}>
+                                            Inglês
+                                        </option>
+                                    </select>
+
+                                    @error('idioma')
+                                        <small class="client-error">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                            </div>
+
+                            <div class="client-profile-actions">
+                                <button type="submit" class="client-btn client-btn-primary">
+                                    Salvar idioma
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    <!-- EXCLUIR CONTA -->
+                    <div class="client-settings-card client-danger-card">
+
+                        <input type="checkbox" id="show-delete-form" class="client-settings-toggle">
+
+                        <h3>Excluir conta</h3>
+
+                        <p>
+                            Ao excluir sua conta, seus dados de acesso serão removidos.
+                            Pedidos antigos podem continuar registrados para controle da loja.
+                        </p>
+
+                        <label for="show-delete-form" class="client-btn client-btn-danger client-settings-open-button">
+                            Excluir conta
+                        </label>
+
+                        <form action="{{ route('cliente.configuracao.excluir') }}" method="POST" class="client-settings-hidden-area">
+                            @csrf
+                            @method('DELETE')
+
+                            <div class="client-form-grid">
+
+                                <div class="client-form-group">
+                                    <label>Confirme sua senha</label>
+                                    <input 
+                                        type="password" 
+                                        name="senha_exclusao"
+                                        placeholder="Digite sua senha para confirmar"
+                                    >
+
+                                    @error('senha_exclusao')
+                                        <small class="client-error">{{ $message }}</small>
+                                    @enderror
+                                </div>
+
+                            </div>
+
+                            <div class="client-profile-actions">
+                                <button 
+                                    type="submit" 
+                                    class="client-btn client-btn-danger"
+                                    onclick="return confirm('Tem certeza que deseja excluir sua conta? Essa ação não poderá ser desfeita.')"
+                                >
+                                    Confirmar exclusão
+                                </button>
+                            </div>
+                        </form>
+
+                    </div>
+
                 </div>
-
-                <form class="client-settings-form">
-
-                    <div class="client-settings-content">
-
-                        <div class="client-settings-fields">
-
-                            <div class="client-settings-group">
-                                <label>{{ __('messages.full_name') }}</label>
-                                <input type="text" name="nome_completo" value="{{ $cliente->nome_completo ?? '' }}">
-                            </div>
-
-                            <div class="client-settings-group">
-                                <label>{{ __('messages.birth_date') }}</label>
-                                <input type="date" name="data_nascimento" value="{{ $cliente->data_nascimento ?? '' }}">
-                            </div>
-
-                            <div class="client-settings-group">
-                                <label>{{ __('messages.cpf') }}</label>
-                                <input type="text" name="cpf" value="{{ $cliente->cpf ?? '' }}">
-                            </div>
-
-                            <div class="client-settings-group">
-                                <label>{{ __('messages.email') }}</label>
-                                <input type="email" name="email" value="{{ $cliente->email ?? '' }}">
-                            </div>
-
-                            <div class="client-settings-group">
-                                <label>{{ __('messages.mobile') }}</label>
-                                <input type="text" name="celular" value="{{ $cliente->celular ?? '' }}">
-                            </div>
-
-                            <div class="client-settings-group">
-                                <label>{{ __('messages.gender') }}</label>
-
-                                <select name="sexo">
-                                    <option value="">{{ __('messages.select_option') }}</option>
-
-                                    <option value="feminino" {{ ($cliente->sexo ?? '') === 'feminino' ? 'selected' : '' }}>
-                                        {{ __('messages.female') }}
-                                    </option>
-
-                                    <option value="masculino" {{ ($cliente->sexo ?? '') === 'masculino' ? 'selected' : '' }}>
-                                        {{ __('messages.male') }}
-                                    </option>
-
-                                    <option value="nao_informar" {{ ($cliente->sexo ?? '') === 'nao_informar' ? 'selected' : '' }}>
-                                        {{ __('messages.prefer_not_to_say') }}
-                                    </option>
-                                </select>
-                            </div>
-
-                            <div class="client-settings-group">
-                                <label>{{ __('messages.zip_code') }}</label>
-                                <input type="text" name="cep" value="{{ $cliente->cep ?? '' }}">
-                            </div>
-
-                            <div class="client-settings-group">
-                                <label>{{ __('messages.street') }}</label>
-                                <input type="text" name="rua" value="{{ $cliente->rua ?? '' }}">
-                            </div>
-
-                            <div class="client-settings-group">
-                                <label>{{ __('messages.number') }}</label>
-                                <input type="text" name="numero" value="{{ $cliente->numero ?? '' }}">
-                            </div>
-
-                            <div class="client-settings-group">
-                                <label>{{ __('messages.neighborhood') }}</label>
-                                <input type="text" name="bairro" value="{{ $cliente->bairro ?? '' }}">
-                            </div>
-
-                            <div class="client-settings-group">
-                                <label>{{ __('messages.city') }}</label>
-                                <input type="text" name="cidade" value="{{ $cliente->cidade ?? '' }}">
-                            </div>
-
-                            <div class="client-settings-group">
-                                <label>{{ __('messages.state') }}</label>
-                                <input type="text" name="estado" value="{{ $cliente->estado ?? '' }}">
-                            </div>
-
-                            <div class="client-settings-group">
-                                <label>{{ __('messages.country_code') }}</label>
-
-                                <div class="client-country-code-field">
-                                    <img
-                                        id="country-flag-preview"
-                                        class="client-country-flag"
-                                        src=""
-                                        alt="{{ __('messages.country_flag') }}">
-
-                                    <input
-                                        type="text"
-                                        id="country-code-input"
-                                        name="pais_codigo"
-                                        placeholder="55"
-                                        value="{{ $cliente->pais_codigo ?? '' }}">
-                                </div>
-                            </div>
-
-                        </div>
-
-                        <div class="client-settings-photo-area">
-
-                            <label class="client-settings-photo-label">
-                                {{ __('messages.client_photo') }}
-                            </label>
-
-                            <div class="client-settings-photo-preview">
-                                <img
-                                    src="{{ $cliente->foto ?? asset('images/default-avatar.png') }}"
-                                    alt="{{ __('messages.client_photo') }}">
-
-                                <div class="client-settings-photo-actions">
-                                    <label for="client-photo-upload" class="client-settings-photo-icon">
-                                        <span class="material-symbols-outlined">upload</span>
-                                    </label>
-
-                                    <button type="button" class="client-settings-photo-icon">
-                                        <span class="material-symbols-outlined">delete</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <input
-                                type="file"
-                                id="client-photo-upload"
-                                name="foto"
-                                accept="image/*"
-                                class="client-settings-upload-input">
-
-                        </div>
-
-                    </div>
-
-                    <div class="client-settings-actions">
-
-                        <a href="/cliente/dados-pessoais" class="client-btn client-btn-secondary client-btn-link">
-                            {{ __('messages.back') }}
-                        </a>
-
-                        <button type="submit" class="client-btn client-btn-primary">
-                            {{ __('messages.save') }}
-                        </button>
-
-                    </div>
-
-                </form>
 
             </section>
 
