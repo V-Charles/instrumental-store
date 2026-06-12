@@ -1173,6 +1173,35 @@ button.client-status {
    ÁREA DO CLIENTE - CARTÕES
 ========================================================= */
 
+.client-card-edit,
+.client-card-new a,
+.client-btn {
+    text-decoration: none;
+}
+
+.client-card-edit {
+    min-width: 58px;
+    height: 28px;
+    padding: 0 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #b0003a;
+    color: #ffffff;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 1;
+    text-decoration: none;
+    box-sizing: border-box;
+}
+
+.client-card-edit:hover,
+.client-card-new a:hover,
+.client-btn:hover {
+    text-decoration: none;
+}
+
 .client-cards-page {
     width: 100%;
     max-width: 640px;

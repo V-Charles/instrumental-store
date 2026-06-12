@@ -240,15 +240,29 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::delete('/cliente/enderecos/{id}', [ClienteEnderecoController::class, 'destroy'])
         ->name('cliente.enderecos.destroy');
 
-    Route::get('/cliente/cartoes', [ClienteCartaoController::class, 'index']);
+    Route::get('/cliente/cartoes', [ClienteCartaoController::class, 'index'])
+        ->name('cliente.cartoes');
 
-    Route::get('/cliente/cartoes/cadastrar', [ClienteCartaoController::class, 'create']);
+    Route::get('/cliente/cartoes/cadastrar', [ClienteCartaoController::class, 'create'])
+        ->name('cliente.cartoes.create');
 
-    Route::get('/cliente/cartoes/editar', [ClienteCartaoController::class, 'edit']);
+    Route::post('/cliente/cartoes', [ClienteCartaoController::class, 'store'])
+        ->name('cliente.cartoes.store');
+
+    Route::get('/cliente/cartoes/{id}/editar', [ClienteCartaoController::class, 'edit'])
+        ->name('cliente.cartoes.edit');
+
+    Route::put('/cliente/cartoes/{id}', [ClienteCartaoController::class, 'update'])
+        ->name('cliente.cartoes.update');
+
+    Route::delete('/cliente/cartoes/{id}', [ClienteCartaoController::class, 'destroy'])
+        ->name('cliente.cartoes.destroy');
 
     Route::get('/cliente/desejos', [ClienteFavoritoController::class, 'index']);
 
-    Route::get('/cliente/pedidos', [PedidoController::class, 'meusPedidos']);
+    Route::get('/cliente/pedidos', [PedidoController::class, 'meusPedidos'])
+        ->name('cliente.pedidos');
 
-    Route::get('/cliente/pedidos/{id}', [PedidoController::class, 'detalheCliente']);
+    Route::get('/cliente/pedidos/{id}', [PedidoController::class, 'detalheCliente'])
+        ->name('cliente.pedidos.detalhe');
 });

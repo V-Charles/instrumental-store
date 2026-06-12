@@ -28,13 +28,29 @@
 
                 <h2>{{ __('messages.register_new_card') }}</h2>
 
-                <form class="client-profile-form">
+                @if ($errors->any())
+                    <div class="error-message">
+                        <p>Verifique os campos preenchidos.</p>
+                    </div>
+                @endif
 
-                    <div class="client-form-grid">
+                <form action="{{ route('cliente.cartoes.store') }}" method="POST" class="client-profile-form">
+                    @csrf
+
+                    <div class="client-form-grid client-form-grid-three">
 
                         <div class="client-form-group">
                             <label>{{ __('messages.card_nickname') }}</label>
-                            <input type="text" name="apelido_cartao" value="">
+                            <input 
+                                type="text" 
+                                name="apelido_cartao" 
+                                value="{{ old('apelido_cartao') }}"
+                                placeholder="Meu cartão"
+                            >
+
+                            @error('apelido_cartao')
+                                <small class="client-error">{{ $message }}</small>
+                            @enderror
                         </div>
 
                         <div class="client-form-group">
@@ -42,36 +58,82 @@
 
                             <select name="tipo_cartao">
                                 <option value="">{{ __('messages.select_option') }}</option>
-                                <option value="credito">{{ __('messages.credit_card') }}</option>
-                                <option value="debito">{{ __('messages.debit_card') }}</option>
+
+                                <option value="credito" {{ old('tipo_cartao') === 'credito' ? 'selected' : '' }}>
+                                    {{ __('messages.credit_card') }}
+                                </option>
+
+                                <option value="debito" {{ old('tipo_cartao') === 'debito' ? 'selected' : '' }}>
+                                    {{ __('messages.debit_card') }}
+                                </option>
                             </select>
+
+                            @error('tipo_cartao')
+                                <small class="client-error">{{ $message }}</small>
+                            @enderror
                         </div>
 
                         <div class="client-form-group">
                             <label>{{ __('messages.card_holder_name') }}</label>
-                            <input type="text" name="nome_impresso" value="">
+                            <input 
+                                type="text" 
+                                name="nome_impresso" 
+                                value="{{ old('nome_impresso') }}"
+                                placeholder="NOME IMPRESSO NO CARTÃO"
+                            >
+
+                            @error('nome_impresso')
+                                <small class="client-error">{{ $message }}</small>
+                            @enderror
                         </div>
 
                         <div class="client-form-group">
                             <label>{{ __('messages.card_number') }}</label>
-                            <input type="text" name="numero_cartao" value="">
+                            <input 
+                                type="text" 
+                                name="numero_cartao" 
+                                value="{{ old('numero_cartao') }}"
+                                placeholder="0000 0000 0000 0000"
+                            >
+
+                            @error('numero_cartao')
+                                <small class="client-error">{{ $message }}</small>
+                            @enderror
                         </div>
 
                         <div class="client-form-group">
                             <label>{{ __('messages.expiration_date') }}</label>
-                            <input type="text" name="validade" value="">
+                            <input 
+                                type="text" 
+                                name="validade" 
+                                value="{{ old('validade') }}"
+                                placeholder="MM/AA"
+                            >
+
+                            @error('validade')
+                                <small class="client-error">{{ $message }}</small>
+                            @enderror
                         </div>
 
                         <div class="client-form-group">
                             <label>{{ __('messages.security_code') }}</label>
-                            <input type="text" name="codigo_seguranca" value="">
+                            <input 
+                                type="text" 
+                                name="codigo_seguranca" 
+                                value="{{ old('codigo_seguranca') }}"
+                                placeholder="000"
+                            >
+
+                            @error('codigo_seguranca')
+                                <small class="client-error">{{ $message }}</small>
+                            @enderror
                         </div>
 
                     </div>
 
                     <div class="client-profile-actions">
 
-                        <a href="/cliente/cartoes" class="client-btn client-btn-secondary client-btn-link">
+                        <a href="{{ route('cliente.cartoes') }}" class="client-btn client-btn-secondary client-btn-link">
                             {{ __('messages.back_to_cards') }}
                         </a>
 

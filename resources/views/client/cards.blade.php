@@ -26,64 +26,86 @@
 
                 <h2>{{ __('messages.cards') }}</h2>
 
+                @if (session('success'))
+                    <p class="success-message">
+                        {{ session('success') }}
+                    </p>
+                @endif
+
                 <div class="client-cards-grid">
 
-                    @isset($cartoes)
+                    @forelse ($cartoes as $cartao)
 
-                        @forelse ($cartoes as $cartao)
+                        @php
+                            $numero = preg_replace('/\D/', '', $cartao->numero_cartao ?? '');
+                            $final = strlen($numero) >= 4 ? substr($numero, -4) : '';
 
-                            <article class="client-card-item">
+                            $tipoCartao = $cartao->tipo_cartao === 'credito'
+                                ? __('messages.credit_card')
+                                : __('messages.debit_card');
+                        @endphp
 
-                                <h3>
-                                    {{ $cartao->nome ?? __('messages.card') }}
-                                </h3>
+                        <article class="client-card-item">
 
-                                <p>
-                                    {{ $cartao->bandeira ?? '' }}
-                                    {{ __('messages.card_ending') }}
-                                    {{ $cartao->final ?? '' }}
-                                    <br>
+                            <h3>
+                                {{ $cartao->apelido_cartao ?: __('messages.card') }}
+                            </h3>
 
-                                    {{ __('messages.expiration_date') }}:
-                                    {{ $cartao->validade ?? '' }}
-                                </p>
+                            <p>
+                                {{ $cartao->bandeira ?? 'Cartão' }}
+                                {{ __('messages.card_ending') }}
+                                {{ $final }}
 
-                                <div class="client-card-actions">
+                                <br>
 
-                                    <button type="button" class="client-card-edit">
-                                        {{ __('messages.edit') }}
-                                    </button>
+                                {{ $tipoCartao }}
 
-                                    <button type="button" class="client-card-delete">
-                                        <span class="material-symbols-outlined">delete</span>
-                                    </button>
+                                <br>
 
-                                </div>
-
-                            </article>
-
-                        @empty
-
-                            <p class="client-empty-message">
-                                {{ __('messages.no_cards') }}
+                                {{ __('messages.expiration_date') }}:
+                                {{ $cartao->validade ?? '' }}
                             </p>
 
-                        @endforelse
+                            <div class="client-card-actions">
 
-                    @else
+                                <a 
+                                    href="{{ route('cliente.cartoes.edit', $cartao->id) }}" 
+                                    class="client-card-edit"
+                                >
+                                    {{ __('messages.edit') }}
+                                </a>
+
+                                <form 
+                                    action="{{ route('cliente.cartoes.destroy', $cartao->id) }}" 
+                                    method="POST"
+                                    onsubmit="return confirm('Tem certeza que deseja excluir este cartão?')"
+                                >
+                                    @csrf
+                                    @method('DELETE')
+
+                                    <button type="submit" class="client-card-delete">
+                                        <span class="material-symbols-outlined">delete</span>
+                                    </button>
+                                </form>
+
+                            </div>
+
+                        </article>
+
+                    @empty
 
                         <p class="client-empty-message">
-                            {{ __('messages.cards_backend_message') }}
+                            {{ __('messages.no_cards') }}
                         </p>
 
-                    @endisset
+                    @endforelse
 
                 </div>
 
                 <div class="client-card-new">
-                    <button type="button" class="client-btn client-btn-primary">
+                    <a href="{{ route('cliente.cartoes.create') }}" class="client-btn client-btn-primary">
                         {{ __('messages.register_new_card') }}
-                    </button>
+                    </a>
                 </div>
 
             </section>
