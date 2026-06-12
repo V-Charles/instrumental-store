@@ -165,6 +165,50 @@
 .client-sidebar {
     width: 200px;
     min-height: 100vh;
+    background: #b0003a;
+    color: #ffffff;
+    padding: 26px 0;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.client-sidebar-top {
+    width: 100%;
+}
+
+.client-sidebar-logout-form {
+    padding: 0 18px 26px;
+    margin: 0;
+}
+
+.client-sidebar-logout {
+    border: none;
+    background: transparent;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 700;
+    cursor: pointer;
+    font-family: inherit;
+    padding: 0;
+}
+
+.client-sidebar-logout .material-symbols-outlined {
+    font-size: 18px;
+    color: #ffffff;
+}
+
+.client-sidebar-logout:hover {
+    opacity: 0.8;
+}
+
+.client-sidebar {
+    width: 200px;
+    min-height: 100vh;
 
     background: #b0003a;
     color: #ffffff;
