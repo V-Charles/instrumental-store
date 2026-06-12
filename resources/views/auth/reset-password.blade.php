@@ -9,7 +9,12 @@
         <form method="POST" action="{{ route('password.update') }}">
         @csrf
 
+            @if ($errors->any())
+                <div style="color: red; margin-bottom: 15px;">{{ $errors->first() }}</div>
+            @endif
+
             <input type="hidden" name="token" value="{{ $token }}">
+            <input type="hidden" name="email" value="{{ $email }}">
 
             <label>{{ __('messages.new_password') }}</label>
             <input type="password" name="password" required>

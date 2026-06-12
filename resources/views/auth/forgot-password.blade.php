@@ -6,6 +6,13 @@
     <div class="auth-left">
         <h2>{{ __('messages.forgot_password_title') }}</h2>
 
+        @if (session('success'))
+            <div style="color: green; margin-bottom: 15px;">{{ session('success') }}</div>
+        @endif
+        @if ($errors->any())
+            <div style="color: red; margin-bottom: 15px;">{{ $errors->first() }}</div>
+        @endif
+
         <form method="POST" action="{{ route('password.email') }}">
             @csrf
 
