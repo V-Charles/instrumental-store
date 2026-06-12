@@ -5,51 +5,11 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Storage;
 
-class AreaClienteController extends Controller
+class ClienteConfiguracaoController extends Controller
 {
-    public function perfil()
-    {
-        $cliente = auth()->user();
-
-        return view('client.profile', compact('cliente'));
-    }
-
-    public function atualizarPerfil(Request $request)
-    {
-        $cliente = auth()->user();
-
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'telefone' => 'nullable|string|max:20',
-            'cpf' => 'nullable|string|max:20',
-            'data_nascimento' => 'nullable|date',
-            'sexo' => 'nullable|string|max:30',
-        ]);
-
-        if (isset($cliente->name)) {
-            $cliente->name = $request->name;
-        }
-
-        if (isset($cliente->nome)) {
-            $cliente->nome = $request->name;
-        }
-
-        $cliente->email = $request->email;
-        $cliente->telefone = $request->telefone;
-        $cliente->cpf = $request->cpf;
-        $cliente->data_nascimento = $request->data_nascimento;
-        $cliente->sexo = $request->sexo;
-
-        $cliente->save();
-
-        return redirect()
-            ->route('cliente.dados')
-            ->with('success', 'Dados pessoais atualizados com sucesso!');
-    }
-
-    public function configuracao()
+    public function index()
     {
         return view('client.settings');
     }
@@ -104,6 +64,10 @@ class AreaClienteController extends Controller
                 ->withErrors(['senha_exclusao' => 'A senha informada está incorreta.']);
         }
 
+        if (!empty($cliente->foto)) {
+            Storage::disk('public')->delete($cliente->foto);
+        }
+
         Auth::logout();
 
         $cliente->delete();
@@ -113,40 +77,5 @@ class AreaClienteController extends Controller
 
         return redirect('/')
             ->with('success', 'Conta excluída com sucesso.');
-    }
-
-    public function enderecos()
-    {
-        return view('client.addresses');
-    }
-
-    public function criarEndereco()
-    {
-        return view('client.address-create');
-    }
-
-    public function editarEndereco()
-    {
-        return view('client.address-edit');
-    }
-
-    public function cartoes()
-    {
-        return view('client.cards');
-    }
-
-    public function criarCartao()
-    {
-        return view('client.card-create');
-    }
-
-    public function editarCartao()
-    {
-        return view('client.card-edit');
-    }
-
-    public function favoritos()
-    {
-        return view('client.wishlist');
     }
 }

@@ -15,7 +15,11 @@ use App\Http\Controllers\AdminAuthController;
 use App\Http\Controllers\GoogleController;
 use App\Http\Controllers\ForgotPasswordController;
 use App\Http\Controllers\ResetPasswordController;
-use App\Http\Controllers\AreaClienteController;
+use App\Http\Controllers\ClienteDadosController;
+use App\Http\Controllers\ClienteConfiguracaoController;
+use App\Http\Controllers\ClienteEnderecoController;
+use App\Http\Controllers\ClienteCartaoController;
+use App\Http\Controllers\ClienteFavoritoController;
 
 /* =========================================================
    LOJA - PÁGINAS PÚBLICAS
@@ -180,41 +184,41 @@ Route::prefix('admin')->group(function () {
    ÁREA DO CLIENTE
 ========================================================= */
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'verified'])->group(function () {
 
-    Route::get('/cliente/enderecos', [AreaClienteController::class, 'enderecos']);
+    Route::get('/cliente/dados-pessoais', [ClienteDadosController::class, 'index'])
+        ->name('cliente.dados');
 
-    Route::get('/cliente/enderecos/editar', [AreaClienteController::class, 'editarEndereco']);
+    Route::put('/cliente/dados-pessoais', [ClienteDadosController::class, 'update'])
+        ->name('cliente.dados.atualizar');
 
-    Route::get('/cliente/enderecos/cadastrar', [AreaClienteController::class, 'criarEndereco']);
+    Route::get('/cliente/configuracao', [ClienteConfiguracaoController::class, 'index'])
+        ->name('cliente.configuracao');
+
+    Route::put('/cliente/configuracao/senha', [ClienteConfiguracaoController::class, 'atualizarSenha'])
+        ->name('cliente.configuracao.senha');
+
+    Route::put('/cliente/configuracao/idioma', [ClienteConfiguracaoController::class, 'atualizarIdioma'])
+        ->name('cliente.configuracao.idioma');
+
+    Route::delete('/cliente/configuracao/excluir', [ClienteConfiguracaoController::class, 'excluirConta'])
+        ->name('cliente.configuracao.excluir');
+
+    Route::get('/cliente/enderecos', [ClienteEnderecoController::class, 'index']);
+
+    Route::get('/cliente/enderecos/cadastrar', [ClienteEnderecoController::class, 'create']);
+
+    Route::get('/cliente/enderecos/editar', [ClienteEnderecoController::class, 'edit']);
+
+    Route::get('/cliente/cartoes', [ClienteCartaoController::class, 'index']);
+
+    Route::get('/cliente/cartoes/cadastrar', [ClienteCartaoController::class, 'create']);
+
+    Route::get('/cliente/cartoes/editar', [ClienteCartaoController::class, 'edit']);
+
+    Route::get('/cliente/desejos', [ClienteFavoritoController::class, 'index']);
 
     Route::get('/cliente/pedidos', [PedidoController::class, 'meusPedidos']);
 
     Route::get('/cliente/pedidos/{id}', [PedidoController::class, 'detalheCliente']);
-
-    Route::get('/cliente/cartoes', [AreaClienteController::class, 'cartoes']);
-
-    Route::get('/cliente/cartoes/cadastrar', [AreaClienteController::class, 'criarCartao']);
-
-    Route::get('/cliente/cartoes/editar', [AreaClienteController::class, 'editarCartao']);
-
-    Route::get('/cliente/desejos', [AreaClienteController::class, 'favoritos']);
-
-    Route::get('/cliente/dados-pessoais', [AreaClienteController::class, 'perfil'])
-        ->name('cliente.dados');
-
-    Route::put('/cliente/dados-pessoais', [AreaClienteController::class, 'atualizarPerfil'])
-        ->name('cliente.dados.atualizar');
-    
-    Route::get('/cliente/configuracao', [AreaClienteController::class, 'configuracao'])
-    ->name('cliente.configuracao');
-
-    Route::put('/cliente/configuracao/senha', [AreaClienteController::class, 'atualizarSenha'])
-        ->name('cliente.configuracao.senha');
-
-    Route::put('/cliente/configuracao/idioma', [AreaClienteController::class, 'atualizarIdioma'])
-        ->name('cliente.configuracao.idioma');
-
-    Route::delete('/cliente/configuracao/excluir', [AreaClienteController::class, 'excluirConta'])
-        ->name('cliente.configuracao.excluir');
-    });
+});
