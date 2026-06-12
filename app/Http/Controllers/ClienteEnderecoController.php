@@ -46,6 +46,7 @@ class ClienteEnderecoController extends Controller
             'cidade' => $request->cidade,
             'estado' => strtoupper($request->estado),
             'complemento' => $request->complemento,
+            'principal' => false,
         ]);
 
         return redirect()
