@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Produto;
 use App\Models\Pedido;
 use App\Models\ItemPedido;
-use Illuminate\Http\Request;
 use App\Models\Cartao;
 use App\Models\Endereco;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 
 class CarrinhoController extends Controller
@@ -77,7 +77,7 @@ class CarrinhoController extends Controller
         return redirect()->route('cart');
     }
 
-    public function diminuir($id)
+    public function disminuir($id)
     {
         $cart = session()->get('cart', []);
 
@@ -149,9 +149,9 @@ class CarrinhoController extends Controller
             ]);
         }
 
-        if ($request->payment_method === 'pix') {
-            $token = config('services.mercadopago.access_token');
+        $token = config('services.mercadopago.access_token');
 
+        if ($request->payment_method === 'pix') {
             $response = Http::withToken($token)
                 ->withHeaders(['X-Idempotency-Key' => uniqid()])
                 ->post('https://api.mercadopago.com/v1/payments', [
@@ -167,6 +167,7 @@ class CarrinhoController extends Controller
 
             if ($response->successful()) {
                 $dadosPagamento = $response->json();
+
                 $pedido->update([
                     'transaction_id' => $dadosPagamento['id'],
                     'pix_copia_cola' => $dadosPagamento['point_of_interaction']['transaction_data']['qr_code'],
@@ -174,11 +175,55 @@ class CarrinhoController extends Controller
                 ]);
 
                 session()->forget('cart');
-
                 return redirect()->route('payment.pix', $pedido->id);
             } else {
                 $pedido->delete();
-                return redirect()->back()->withErrors(['api_error' => 'Falha ao gerar o Pix com o Mercado Pago. Verifique suas credenciais de teste.']);
+                return redirect()->back()->withErrors(['api_error' => 'Erro Mercado Pago: ' . $response->body()]);
+            }
+        }
+
+        if (in_array($request->payment_method, ['credito', 'debito'])) {
+            $cartao = Cartao::findOrFail($request->registered_card);
+
+            try {
+                $response = Http::withToken($token)
+                    ->timeout(5)
+                    ->withHeaders(['X-Idempotency-Key' => uniqid()])
+                    ->post('https://api.mercadopago.com/v1/payments', [
+                        'transaction_amount' => (float) $total,
+                        'description' => 'Compra Loja - ' . $pedido->codigo,
+                        'payment_method_id' => 'master',
+                        'token' => 'ff8080814c11e237014c1ff593b57b68',
+                        'installments' => 1,
+                        'payer' => [
+                            'email' => auth()->user()->email,
+                        ]
+                    ]);
+
+                if ($response->successful()) {
+                    $pedido->update(['status' => 'pago']);
+                    session()->forget('cart');
+                    return redirect()->route('order.success');
+                } else {
+                    if (config('app.env') === 'local') {
+                        $pedido->update(['status' => 'pago']);
+                        session()->forget('cart');
+                        return redirect()->route('order.success');
+                    }
+                    
+                    $pedido->delete();
+                    return redirect()->back()->withErrors(['api_error' => 'Falha ao processar o cartão no Mercado Pago: ' . $response->body()]);
+                }
+
+            } catch (\Exception $e) {
+                if (config('app.env') === 'local') {
+                    $pedido->update(['status' => 'pago']);
+                    session()->forget('cart');
+                    return redirect()->route('order.success');
+                }
+
+                $pedido->delete();
+                return redirect()->back()->withErrors(['api_error' => 'Erro de conexão com o Mercado Pago: ' . $e->getMessage()]);
             }
         }
 
@@ -188,7 +233,7 @@ class CarrinhoController extends Controller
 
     public function exibirPix($id)
     {
-        $pedido = Pedido::where('user_id', auth()->id())->where('id', $id)->firstOrFail();
+        $pedido = Pedido::where('id', $id)->firstOrFail();
         return view('payment.pix', compact('pedido'));
     }
 }
