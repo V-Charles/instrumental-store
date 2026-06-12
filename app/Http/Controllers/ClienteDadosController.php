@@ -29,6 +29,9 @@ class ClienteDadosController extends Controller
             'foto' => 'nullable|image|mimes:jpg,jpeg,png,webp|max:2048',
         ]);
 
+        $telefoneLimpo = preg_replace('/\D/', '', $request->telefone);
+        $cpfLimpo = preg_replace('/\D/', '', $request->cpf);
+
         if (Schema::hasColumn($cliente->getTable(), 'name')) {
             $cliente->name = $request->name;
         }
@@ -37,16 +40,24 @@ class ClienteDadosController extends Controller
             $cliente->nome = $request->name;
         }
 
+        if (Schema::hasColumn($cliente->getTable(), 'nome_completo')) {
+            $cliente->nome_completo = $request->name;
+        }
+
         if (Schema::hasColumn($cliente->getTable(), 'email')) {
             $cliente->email = $request->email;
         }
 
         if (Schema::hasColumn($cliente->getTable(), 'telefone')) {
-            $cliente->telefone = $request->telefone;
+            $cliente->telefone = $telefoneLimpo;
+        }
+
+        if (Schema::hasColumn($cliente->getTable(), 'celular')) {
+            $cliente->celular = $telefoneLimpo;
         }
 
         if (Schema::hasColumn($cliente->getTable(), 'cpf')) {
-            $cliente->cpf = $request->cpf;
+            $cliente->cpf = $cpfLimpo;
         }
 
         if (Schema::hasColumn($cliente->getTable(), 'data_nascimento')) {

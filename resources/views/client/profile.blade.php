@@ -50,13 +50,66 @@
                                 $dataNascimento = $cliente->data_nascimento;
                             }
                         }
+
+                        $fotoCliente = !empty($cliente->foto)
+                            ? asset('storage/' . $cliente->foto)
+                            : asset('images/default-avatar.png');
+
+                        $telefone = $cliente->telefone ?? $cliente->celular ?? '';
+                        $telefoneNumeros = preg_replace('/\D/', '', $telefone);
+
+                        if (strlen($telefoneNumeros) === 11) {
+                            $telefoneFormatado = '(' . substr($telefoneNumeros, 0, 2) . ') ' . substr($telefoneNumeros, 2, 5) . '-' . substr($telefoneNumeros, 7, 4);
+                        } elseif (strlen($telefoneNumeros) === 10) {
+                            $telefoneFormatado = '(' . substr($telefoneNumeros, 0, 2) . ') ' . substr($telefoneNumeros, 2, 4) . '-' . substr($telefoneNumeros, 6, 4);
+                        } else {
+                            $telefoneFormatado = $telefone;
+                        }
+
+                        $cpf = $cliente->cpf ?? '';
+                        $cpfNumeros = preg_replace('/\D/', '', $cpf);
+
+                        if (strlen($cpfNumeros) === 11) {
+                            $cpfFormatado = substr($cpfNumeros, 0, 3) . '.' .
+                                            substr($cpfNumeros, 3, 3) . '.' .
+                                            substr($cpfNumeros, 6, 3) . '-' .
+                                            substr($cpfNumeros, 9, 2);
+                        } else {
+                            $cpfFormatado = $cpf;
+                        }
                     @endphp
 
-                    <form action="{{ route('cliente.dados.atualizar') }}" method="POST">
+                    <form action="{{ route('cliente.dados.atualizar') }}" method="POST" enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
-                        <div class="client-form-grid">
+                        <div class="client-photo-area">
+
+                            <div class="client-photo-preview">
+                                <img src="{{ $fotoCliente }}" alt="Foto do cliente">
+                            </div>
+
+                            <div class="client-photo-field">
+                                <label>Foto de perfil</label>
+
+                                <input 
+                                    type="file" 
+                                    name="foto"
+                                    accept="image/png, image/jpeg, image/jpg, image/webp"
+                                >
+
+                                <small>
+                                    Formatos aceitos: JPG, PNG ou WEBP. Tamanho máximo: 2MB.
+                                </small>
+
+                                @error('foto')
+                                    <small class="client-error">{{ $message }}</small>
+                                @enderror
+                            </div>
+
+                        </div>
+
+                        <div class="client-form-grid client-form-grid-two">
 
                             <div class="client-form-group">
                                 <label>{{ __('messages.full_name') }}</label>
@@ -89,7 +142,8 @@
                                 <input 
                                     type="text" 
                                     name="cpf"
-                                    value="{{ old('cpf', $cliente->cpf ?? '') }}"
+                                    value="{{ old('cpf', $cpfFormatado) }}"
+                                    placeholder="000.000.000-00"
                                 >
 
                                 @error('cpf')
@@ -115,7 +169,8 @@
                                 <input 
                                     type="text" 
                                     name="telefone"
-                                    value="{{ old('telefone', $cliente->telefone ?? $cliente->celular ?? '') }}"
+                                    value="{{ old('telefone', $telefoneFormatado) }}"
+                                    placeholder="(11) 99999-9999"
                                 >
 
                                 @error('telefone')
@@ -145,82 +200,6 @@
                                 @error('sexo')
                                     <small class="client-error">{{ $message }}</small>
                                 @enderror
-                            </div>
-
-                            <div class="client-form-group">
-                                <label>Nova senha</label>
-                                <input 
-                                    type="password" 
-                                    name="senha"
-                                    placeholder="Preencha apenas se quiser alterar"
-                                >
-
-                                @error('senha')
-                                    <small class="client-error">{{ $message }}</small>
-                                @enderror
-                            </div>
-
-                            <div class="client-form-group">
-                                <label>{{ __('messages.zip_code') }}</label>
-                                <input 
-                                    type="text" 
-                                    value="{{ $cliente->cep ?? '' }}" 
-                                    readonly
-                                >
-                            </div>
-
-                            <div class="client-form-group">
-                                <label>{{ __('messages.street') }}</label>
-                                <input 
-                                    type="text" 
-                                    value="{{ $cliente->rua ?? '' }}" 
-                                    readonly
-                                >
-                            </div>
-
-                            <div class="client-form-group">
-                                <label>{{ __('messages.number') }}</label>
-                                <input 
-                                    type="text" 
-                                    value="{{ $cliente->numero ?? '' }}" 
-                                    readonly
-                                >
-                            </div>
-
-                            <div class="client-form-group">
-                                <label>{{ __('messages.neighborhood') }}</label>
-                                <input 
-                                    type="text" 
-                                    value="{{ $cliente->bairro ?? '' }}" 
-                                    readonly
-                                >
-                            </div>
-
-                            <div class="client-form-group">
-                                <label>{{ __('messages.city') }}</label>
-                                <input 
-                                    type="text" 
-                                    value="{{ $cliente->cidade ?? '' }}" 
-                                    readonly
-                                >
-                            </div>
-
-                            <div class="client-form-group">
-                                <label>{{ __('messages.state') }}</label>
-                                <input 
-                                    type="text" 
-                                    value="{{ $cliente->estado ?? '' }}" 
-                                    readonly
-                                >
-                            </div>
-
-                            <div class="client-form-group">
-                                <label>{{ __('messages.country') }}</label>
-                                <input 
-                                    type="text" 
-                                    value="{{ $cliente->pais ?? '' }}" 
-                                    readonly
-                                >
                             </div>
 
                         </div>

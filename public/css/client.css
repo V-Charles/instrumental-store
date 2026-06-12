@@ -24,6 +24,85 @@
     display: none;
 }
 
+.client-photo-area {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+
+    margin-bottom: 32px;
+}
+
+.client-photo-preview {
+    width: 110px;
+    height: 110px;
+
+    border-radius: 8px;
+
+    overflow: hidden;
+
+    background: #f4f0ec;
+
+    border: 2px solid #b0003a;
+
+    flex-shrink: 0;
+}
+
+.client-photo-preview img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    display: block;
+}
+
+.client-photo-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.client-photo-field label {
+    color: #222222;
+
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.client-photo-field input {
+    font-family: inherit;
+    font-size: 12px;
+}
+
+.client-photo-field small {
+    color: #777777;
+    font-size: 11px;
+}
+
+@media (max-width: 600px) {
+    .client-photo-area {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+.client-form-grid-two {
+    grid-template-columns: repeat(2, 1fr);
+    column-gap: 26px;
+    row-gap: 22px;
+}
+
+.client-form-grid-two .client-form-group input,
+.client-form-grid-two .client-form-group select {
+    width: 100%;
+}
+
+@media (max-width: 700px) {
+    .client-form-grid-two {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* =========================================================
    BREADCRUMB
 ========================================================= */
@@ -80,111 +159,99 @@
 }
 
 /* =========================================================
-   SIDEBAR CLIENTE
+   SIDEBAR ÁREA DO CLIENTE
 ========================================================= */
 
 .client-sidebar {
-    width: 260px;
+    width: 200px;
+    min-height: 100vh;
 
-    background-color: #a60a33;
+    background: #b0003a;
     color: #ffffff;
 
-    display: flex;
-    flex-direction: column;
+    padding: 26px 0;
 
-    min-height: calc(100vh - 120px);
-
-    padding: 2rem 1rem;
-
-    transition: transform 0.3s ease, width 0.3s ease;
-    z-index: 80;
+    box-sizing: border-box;
 }
 
-.client-user-profile {
+.client-sidebar-header {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 
-    margin-bottom: 4rem;
-    padding-left: 0.5rem;
+    padding: 0 18px;
+    margin-bottom: 46px;
 }
 
-.client-user-avatar {
-    width: 55px;
-    height: 55px;
+.client-sidebar-avatar {
+    width: 44px;
+    height: 44px;
 
     border-radius: 50%;
-    object-fit: cover;
+    overflow: hidden;
 
-    background-color: #cf6b7e;
     border: 2px solid #ffffff;
+    background: #f4f0ec;
 
     flex-shrink: 0;
 }
 
-.client-user-name {
-    font-weight: bold;
-    font-size: 1.1rem;
-    line-height: 1.2;
-    color: #ffffff;
+.client-sidebar-avatar img {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+    display: block;
 }
 
-.client-nav {
+.client-sidebar-welcome strong {
+    color: #ffffff;
+
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.client-sidebar-nav {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
+    gap: 10px;
+
+    padding: 0 12px;
 }
 
-.client-nav a {
-    color: #ffffff;
-    text-decoration: none;
+.client-sidebar-link {
+    width: 100%;
+    min-height: 38px;
+
+    padding: 0 14px;
 
     display: flex;
     align-items: center;
-    gap: 1rem;
+    gap: 10px;
 
-    padding: 0.8rem 1rem;
-
-    border-radius: 25px;
-
-    font-size: 0.95rem;
-    font-weight: bold;
-
-    transition: background-color 0.3s;
-}
-
-.client-nav a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-}
-
-.client-nav a.active {
-    background-color: #cf6b7e;
-    color: #ffffff;
-}
-
-.client-nav .material-symbols-outlined {
-    font-size: 22px;
-}
-
-.client-logout {
-    margin-top: auto;
-    padding: 1rem 0.5rem 0;
-}
-
-.client-logout a {
     color: #ffffff;
     text-decoration: none;
 
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
+    font-size: 13px;
+    font-weight: 700;
 
-    font-size: 0.9rem;
-    font-weight: bold;
+    border-radius: 22px;
+
+    box-sizing: border-box;
 }
 
-.client-logout .material-symbols-outlined {
-    font-size: 22px;
+.client-sidebar-link .material-symbols-outlined {
+    color: #ffffff;
+    font-size: 19px;
+}
+
+.client-sidebar-link.active {
+    background: rgba(255, 255, 255, 0.35);
+}
+
+.client-sidebar-link:hover {
+    background: rgba(255, 255, 255, 0.22);
 }
 
 /* =========================================================
@@ -302,7 +369,7 @@
 }
 
 /* =========================================================
-   NOTEBOOKS E TELAS MÉDIAS
+ RESPONSIVIDADE
 ========================================================= */
 
 @media (min-width: 1025px) and (max-width: 1300px) {
@@ -326,10 +393,6 @@
         gap: 1.3rem 1.5rem;
     }
 }
-
-/* =========================================================
-   TABLET / IPAD
-========================================================= */
 
 @media (max-width: 1024px) {
     .client-breadcrumb-bar {
@@ -376,10 +439,6 @@
         grid-template-columns: repeat(2, 1fr);
     }
 }
-
-/* =========================================================
-   CELULAR
-========================================================= */
 
 @media (max-width: 768px) {
     .client-breadcrumb-bar {
@@ -437,10 +496,6 @@
         width: 100%;
     }
 }
-
-/* =========================================================
-   CELULARES PEQUENOS
-========================================================= */
 
 @media (max-width: 380px) {
     .client-sidebar {
